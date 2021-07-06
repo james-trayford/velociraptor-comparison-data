@@ -1,4 +1,4 @@
-Galaxy log(MHI) el_MHI eu_MHI log(Mstar) el_Mstar eu_Mstar SFR*10^3 el_SFR eu_SFR
+#Galaxy log(MHI) el_MHI eu_MHI log(Mstar) el_Mstar eu_Mstar SFR*10^3 el_SFR eu_SFR
 AGC110482 7.28 0.03 0.03 7.4 0.21 0.25 5.72 3.66 2.69
 AGC111164 6.6 0.03 0.03 6.54 0.14 0.12 0.39 0.21 0.21
 AGC111946 7.16 0.03 0.03 6.81 0.24 0.2 2.17 1.19 0.66
