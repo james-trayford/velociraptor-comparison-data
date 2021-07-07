@@ -21,7 +21,7 @@ if not os.path.exists(output_directory):
 
 # Read the data
 raw = np.loadtxt(input_filename)
-M_star = pow(10.0, raw[:, 0]) * unyt.Solar_Mass
+M_star = pow(10.0, raw[:, 0]) * unyt.Solar_Mass * kroupa_to_chabrier_mass
 M_HI = pow(10.0, raw[:, 1]) * unyt.Solar_Mass
 MHI_per_Mstar = M_HI / M_star
 
