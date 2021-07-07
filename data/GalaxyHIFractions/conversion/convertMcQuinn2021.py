@@ -21,14 +21,14 @@ if not os.path.exists(output_directory):
 
 # Read the data
 raw = np.loadtxt(input_filename, usecols=(1, 2, 3, 4, 5, 6))
-M_star = pow(10.0, raw[:, 3]) * unyt.Solar_Mass
+M_star = pow(10.0, raw[:, 3]) * unyt.Solar_Mass * kroupa_to_chabrier_mass
 M_HI = pow(10.0, raw[:, 0]) * unyt.Solar_Mass
 MHI_per_Mstar = M_HI / M_star
 
 MHI_hi = pow(10.0, raw[:, 0] + raw[:, 2]) * unyt.Solar_Mass
 MHI_lo = pow(10.0, raw[:, 0] - raw[:, 1]) * unyt.Solar_Mass
-Mstar_hi = pow(10.0, raw[:, 3] + raw[:, 5]) * unyt.Solar_Mass
-Mstar_lo = pow(10.0, raw[:, 3] - raw[:, 4]) * unyt.Solar_Mass
+Mstar_hi = pow(10.0, raw[:, 3] + raw[:, 5]) * unyt.Solar_Mass * kroupa_to_chabrier_mass 
+Mstar_lo = pow(10.0, raw[:, 3] - raw[:, 4]) * unyt.Solar_Mass * kroupa_to_chabrier_mass
 
 y_scatter = (
     unyt.unyt_array(
