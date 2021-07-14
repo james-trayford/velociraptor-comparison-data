@@ -27,7 +27,7 @@ MHI_per_Mstar = M_HI / M_star
 
 MHI_hi = pow(10.0, raw[:, 0] + raw[:, 2]) * unyt.Solar_Mass
 MHI_lo = pow(10.0, raw[:, 0] - raw[:, 1]) * unyt.Solar_Mass
-Mstar_hi = pow(10.0, raw[:, 3] + raw[:, 5]) * unyt.Solar_Mass * kroupa_to_chabrier_mass 
+Mstar_hi = pow(10.0, raw[:, 3] + raw[:, 5]) * unyt.Solar_Mass * kroupa_to_chabrier_mass
 Mstar_lo = pow(10.0, raw[:, 3] - raw[:, 4]) * unyt.Solar_Mass * kroupa_to_chabrier_mass
 
 y_scatter = (
@@ -49,6 +49,8 @@ comment = (
     "Stellar Masses obtained assuming a Kroupa (2001) IMF. "
     "local measurements decoupled from the Hubble flow (no h)."
     "HI measurements via 21cm emission in the SHIELD sample."
+    f"A correction of {kroupa_to_chabrier_mass} on the stellar "
+    "masses has been applied to convert from Kroupa to the Chabrier IMF."
 )
 
 citation = "McQuinn et al 2021 (SHIELD)"
