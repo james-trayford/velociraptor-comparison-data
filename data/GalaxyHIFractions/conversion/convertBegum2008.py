@@ -30,6 +30,8 @@ comment = (
     "Stellar Masses obtained assuming a Kroupa (2001) IMF. "
     "local measurements decoupled from the Hubble flow (no h)."
     "HI measurements via 21cm emission in the FIGGS sample."
+    f"A correction of {kroupa_to_chabrier_mass} on the stellar "
+    "masses has been applied to convert from Kroupa to the Chabrier IMF."
 )
 
 citation = "Begum et al 2008 (FIGGS)"

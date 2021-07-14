@@ -30,7 +30,9 @@ comment = (
     "Stellar Masses obtained assuming a Kroupa (2001) IMF. "
     "local measurements decoupled from the Hubble flow (no h)."
     "HI measurements via 21cm emission in the VLA-ANGST sample,"
-    "a radio follow up of local dwarfs."
+    "a radio follow up of local dwarfs. A correction of "
+    f"{kroupa_to_chabrier_mass} on the stellar masses has been "
+    "applied to convert from Kroupa to the Chabrier IMF."
 )
 
 citation = "Ott et al 2012 (FIGGS)"
