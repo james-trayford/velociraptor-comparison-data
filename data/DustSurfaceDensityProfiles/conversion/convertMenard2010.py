@@ -26,7 +26,7 @@ Sigma_dust = pow(10.0, raw[:, 1]) * unyt.Solar_Mass * pow(unyt.pc, -2)
 Sigma_dust_lo = pow(10.0, raw[:, 2]) * unyt.Solar_Mass * pow(unyt.pc, -2)
 Sigma_dust_hi = pow(10.0, raw[:, 3]) * unyt.Solar_Mass * pow(unyt.pc, -2)
 
-y_scatter = (Sigma_dust_hi - Sigma_dust, Sigma_dust - Sigma_dust_lo)
+y_scatter = unyt.unyt_array([Sigma_dust_hi - Sigma_dust, Sigma_dust - Sigma_dust_lo])
 
 
 # Meta-data
@@ -42,10 +42,10 @@ h = h_sim
 # Write everything
 processed = ObservationalData()
 processed.associate_x(
-    M_star, scatter=None, comoving=True, description="Projected Radius"
+    R_proj, scatter=None, comoving=True, description="Projected Radius"
 )
 processed.associate_y(
-    MHI_per_Mstar, scatter=y_scatter, comoving=True, description="Dust Surface Density",
+    Sigma_dust, scatter=y_scatter, comoving=True, description="Dust Surface Density",
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)

@@ -37,10 +37,10 @@ h = h_sim
 # Write everything
 processed = ObservationalData()
 processed.associate_x(
-    M_star, scatter=None, comoving=True, description="Projected Radius"
+    R_proj, scatter=None, comoving=True, description="Projected Radius"
 )
 processed.associate_y(
-    MHI_per_Mstar, scatter=None, comoving=True, description="Dust Surface Density",
+    Sigma_dust, scatter=None, comoving=True, description="Dust Surface Density",
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
