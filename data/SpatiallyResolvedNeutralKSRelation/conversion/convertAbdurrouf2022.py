@@ -50,9 +50,9 @@ if array_of_interest[0] > minimum_surface_density:
 
 Sigma_Hn, Sigma_SFR = np.genfromtxt(input_filename, unpack=True)
 
-Sigma_SFR = 10 ** (Sigma_SFR) 
+Sigma_SFR = 10 ** (Sigma_SFR)
 
-Sigma_Hn = ( 10 ** (Sigma_Hn - 6.0) )/1.36
+Sigma_Hn = (10 ** (Sigma_Hn - 6.0)) / 1.36
 
 binned_data = bin_data_general(
     np.log10(Sigma_Hn), np.log10(Sigma_SFR), array_of_interest
