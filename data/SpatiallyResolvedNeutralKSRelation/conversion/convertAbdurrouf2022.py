@@ -40,7 +40,7 @@ bibcode = "2022arXiv220708382A"
 name = "Spatially-resolved $\\Sigma_{\\rm HI+H_2}$ vs $\\Sigma_{\\rm SFR}$"
 plot_as = "points"
 
-# Reading the Ellison 2020 data
+# Reading the Abdurro'uf 2022 data
 
 array_of_interest = np.arange(-1, 3, 0.25)
 minimum_surface_density = 0.5  # in their paper this seems to be the limit they can observe, however they do not say anything about this
@@ -58,7 +58,7 @@ binned_data = bin_data_general(
     np.log10(Sigma_Hn), np.log10(Sigma_SFR), array_of_interest
 )
 
-SigmaH2 = unyt.unyt_array(10 ** binned_data[0], units="Msun/pc**2")
+SigmaHn = unyt.unyt_array(10 ** binned_data[0], units="Msun/pc**2")
 
 SigmaSFR = unyt.unyt_array(10 ** binned_data[1], units="Msun/yr/kpc**2")
 
@@ -73,7 +73,7 @@ SigmaSFR_err = unyt.unyt_array(
 array_x_bin_std_up = array_of_interest[1:] - binned_data[0]
 array_x_bin_std_down = binned_data[0] - array_of_interest[:-1]
 
-SigmaH2_err = unyt.unyt_array(
+SigmaHn_err = unyt.unyt_array(
     [
         10 ** (binned_data[0]) - 10 ** (binned_data[0] - array_x_bin_std_down),
         10 ** (binned_data[0] + array_x_bin_std_up) - 10 ** (binned_data[0]),
@@ -82,7 +82,7 @@ SigmaH2_err = unyt.unyt_array(
 )
 
 processed.associate_x(
-    SigmaH2, scatter=SigmaH2_err, comoving=False, description="$\\Sigma_{\\rm H_2}$"
+    SigmaHn, scatter=SigmaHn_err, comoving=False, description="$\\Sigma_{\\rm HI+H_2}$"
 )
 
 processed.associate_y(

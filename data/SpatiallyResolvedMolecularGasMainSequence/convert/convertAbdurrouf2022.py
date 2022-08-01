@@ -40,7 +40,7 @@ bibcode = "2022arXiv220708382A"
 name = "Spatially-resolved $\\Sigma_{\\star}$ vs $\\Sigma_{\\rm H_2}$"
 plot_as = "points"
 
-# Reading the Ellison 2020 data
+# Reading the Abdurro'uf 2022 data
 
 array_of_interest = np.arange(-1, 4, 0.25)
 minimum_surface_density = 1.0  # in their paper this seems to be the limit they can observe, however they do not say anything about this
@@ -82,11 +82,11 @@ Sigmastar_err = unyt.unyt_array(
 )
 
 processed.associate_x(
-    Sigmastar, scatter=Sigmastar_err, comoving=False, description="$\\Sigma_{\\rm H_2}$"
+    Sigmastar, scatter=Sigmastar_err, comoving=False, description="$\\Sigma_{\\star}$"
 )
 
 processed.associate_y(
-    SigmaH2, scatter=SigmaH2_err, comoving=False, description="$\\Sigma_{\\rm SFR}$"
+    SigmaH2, scatter=SigmaH2_err, comoving=False, description="$\\Sigma_{\\rm H_2}$"
 )
 
 processed.associate_citation(citation, bibcode)

@@ -40,7 +40,7 @@ bibcode = "2022arXiv220708382A"
 name = "Spatially-resolved $\\Sigma_{\\rm H_2}$ vs $\\Sigma_{\\rm SFR}$"
 plot_as = "points"
 
-# Reading the Ellison 2020 data
+# Reading the Abdurro'uf 2022 data
 
 array_of_interest = np.arange(-1, 3, 0.25)
 minimum_surface_density = 0.5  # in their paper this seems to be the limit they can observe, however they do not say anything about this

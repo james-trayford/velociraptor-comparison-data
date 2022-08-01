@@ -82,7 +82,7 @@ Sigmastar_err = unyt.unyt_array(
 )
 
 processed.associate_x(
-    Sigmastar, scatter=Sigmastar_err, comoving=False, description="$\\Sigma_{\\rm H_2}$"
+    Sigmastar, scatter=Sigmastar_err, comoving=False, description="$\\Sigma_{\\star}$"
 )
 
 processed.associate_y(
