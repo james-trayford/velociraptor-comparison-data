@@ -42,8 +42,8 @@ plot_as = "points"
 
 # Reading the Ellison 2020 data
 
-array_of_interest = np.arange(-1, 4, 0.25)
-minimum_surface_density = 1.0  # in their paper this seems to be the limit they can observe, however they do not say anything about this
+array_of_interest = np.arange(-1, 4, 0.25)+6.
+minimum_surface_density = 7.0  # in their paper this seems to be the limit they can observe, however they do not say anything about this
 array_of_interest = array_of_interest[array_of_interest >= minimum_surface_density]
 if array_of_interest[0] > minimum_surface_density:
     array_of_interest = np.append([minimum_surface_density], array_of_interest)
