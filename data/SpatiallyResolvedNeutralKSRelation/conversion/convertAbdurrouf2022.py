@@ -52,13 +52,13 @@ Sigma_Hn, Sigma_SFR = np.genfromtxt(input_filename, unpack=True)
 
 Sigma_SFR = 10 ** (Sigma_SFR)
 
-Sigma_Hn = (10 ** (Sigma_Hn - 6.0)) / 1.36
+Sigma_Hn = (10 ** (Sigma_Hn)) / 1.36  # factor 1.36 to correct for heavy elements
 
 binned_data = bin_data_general(
     np.log10(Sigma_Hn), np.log10(Sigma_SFR), array_of_interest
 )
 
-SigmaHn = unyt.unyt_array(10 ** binned_data[0], units="Msun/pc**2")
+SigmaHn = unyt.unyt_array(10 ** binned_data[0], units="Msun/kpc**2")
 
 SigmaSFR = unyt.unyt_array(10 ** binned_data[1], units="Msun/yr/kpc**2")
 
@@ -78,7 +78,7 @@ SigmaHn_err = unyt.unyt_array(
         10 ** (binned_data[0]) - 10 ** (binned_data[0] - array_x_bin_std_down),
         10 ** (binned_data[0] + array_x_bin_std_up) - 10 ** (binned_data[0]),
     ],
-    units="Msun/pc**2",
+    units="Msun/kpc**2",
 )
 
 processed.associate_x(

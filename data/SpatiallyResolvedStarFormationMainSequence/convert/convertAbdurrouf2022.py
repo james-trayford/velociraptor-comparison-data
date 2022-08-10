@@ -52,13 +52,13 @@ Sigma_star, Sigma_SFR = np.genfromtxt(input_filename, unpack=True)
 
 Sigma_SFR = 10 ** (Sigma_SFR) 
 
-Sigma_star = ( 10 ** (Sigma_star - 6.0) )
+Sigma_star = ( 10 ** (Sigma_star) )
 
 binned_data = bin_data_general(
     np.log10(Sigma_star), np.log10(Sigma_SFR), array_of_interest
 )
 
-Sigmastar = unyt.unyt_array(10 ** binned_data[0], units="Msun/pc**2")
+Sigmastar = unyt.unyt_array(10 ** binned_data[0], units="Msun/kpc**2")
 
 SigmaSFR = unyt.unyt_array(10 ** binned_data[1], units="Msun/yr/kpc**2")
 
@@ -78,7 +78,7 @@ Sigmastar_err = unyt.unyt_array(
         10 ** (binned_data[0]) - 10 ** (binned_data[0] - array_x_bin_std_down),
         10 ** (binned_data[0] + array_x_bin_std_up) - 10 ** (binned_data[0]),
     ],
-    units="Msun/pc**2",
+    units="Msun/kpc**2",
 )
 
 processed.associate_x(

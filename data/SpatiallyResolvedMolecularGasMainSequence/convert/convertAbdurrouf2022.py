@@ -50,24 +50,24 @@ if array_of_interest[0] > minimum_surface_density:
 
 Sigma_star, Sigma_H2 = np.genfromtxt(input_filename, unpack=True)
 
-Sigma_H2 = 10 ** (Sigma_H2-6.0) 
+Sigma_H2 = 10 ** (Sigma_H2) 
 
-Sigma_star = ( 10 ** (Sigma_star - 6.0) )
+Sigma_star = ( 10 ** (Sigma_star) )
 
 binned_data = bin_data_general(
     np.log10(Sigma_star), np.log10(Sigma_H2), array_of_interest
 )
 
-Sigmastar = unyt.unyt_array(10 ** binned_data[0], units="Msun/pc**2")
+Sigmastar = unyt.unyt_array(10 ** binned_data[0], units="Msun/kpc**2")
 
-SigmaH2 = unyt.unyt_array(10 ** binned_data[1], units="Msun/pc**2")
+SigmaH2 = unyt.unyt_array(10 ** binned_data[1], units="Msun/kpc**2")
 
 SigmaH2_err = unyt.unyt_array(
     [
         np.abs(10 ** (binned_data[1]) - 10 ** (binned_data[1] - binned_data[2])),
         np.abs(10 ** (binned_data[1] + binned_data[3]) - 10 ** (binned_data[1])),
     ],
-    units="Msun/pc**2",
+    units="Msun/kpc**2",
 )
 
 array_x_bin_std_up = array_of_interest[1:] - binned_data[0]
@@ -78,7 +78,7 @@ Sigmastar_err = unyt.unyt_array(
         10 ** (binned_data[0]) - 10 ** (binned_data[0] - array_x_bin_std_down),
         10 ** (binned_data[0] + array_x_bin_std_up) - 10 ** (binned_data[0]),
     ],
-    units="Msun/pc**2",
+    units="Msun/kpc**2",
 )
 
 processed.associate_x(
