@@ -2,8 +2,10 @@
 Conversion script for the parameter searching values.
 """
 
-from velociraptor.observations.objects import ObservationalData
-from velociraptor.tools.lines import binned_median_line
+from velociraptor.observations.objects import (
+    ObservationalData,
+    MultiRedshiftObservationalData,
+)
 
 import unyt
 import numpy as np
@@ -23,27 +25,38 @@ if not os.path.exists(output_directory):
 apertures = [30, 50, 100]
 box_sizes = [25, 100]
 redshifts = [0.0, 0.1, 0.3, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
-redshift_tags = ["0p0", "0p1", "0p3", "0p5", "1p0", "1p5", "2p0", "2p5", "3p0"]
+
+citation = "Schaye et al. (2015)"
+bibcode = "2015MNRAS.446..521S"
+name = "Galaxy Stellar Mass Function"
+plot_as = "line"
+h_obs = 0.6777
+h = cosmology.h
 
 for aperture in apertures:
     for box_size in box_sizes:
-        for z, tag in zip(redshifts, redshift_tags):
+
+        comment = (
+            f"EAGLE GSMF at redshifts {min(redshifts)}<z{max(redshifts)}, "
+            "calculated out of the SUBFIND catalogues. "
+            "h-free. Cosmology from Planck 2013; O_M = 0.307, O_L = 0.693. "
+            "More information is available in Schaye et al. 2015. This file "
+            f"is for box-size {box_size} Mpc and aperture {aperture} kpc."
+        )
+
+        multi_z = MultiRedshiftObservationalData()
+        multi_z.associate_citation(citation, bibcode)
+        multi_z.associate_name(name)
+        multi_z.associate_comment(comment)
+        multi_z.associate_cosmology(cosmology)
+        multi_z.associate_maximum_number_of_returns(1)
+
+        for z in redshifts:
+            tag = str(z).replace(".", "p")
+
             processed = ObservationalData()
 
-            comment = (
-                f"EAGLE GSMF at z={z}, calculated out of the SUBFIND catalogues. "
-                "h-free. Cosmology from Planck 2013; O_M = 0.307, O_L = 0.693. "
-                "More information is available in Schaye et al. 2015. This file "
-                f"is for box-size {box_size} Mpc and aperture {aperture} kpc."
-            )
-            citation = "Schaye et al. (2015)"
-            bibcode = "2015MNRAS.446..521S"
-            name = "Galaxy Stellar Mass Function"
-            plot_as = "points"
             redshift = z
-            h_obs = 0.6777
-            h = cosmology.h
-
             raw_filename = f"../raw/Schaye2015_{box_size}_{aperture}kpc_z{tag}.txt"
 
             M, N, sigma = np.loadtxt(raw_filename, skiprows=3, delimiter=" ").T
@@ -65,20 +78,17 @@ for aperture in apertures:
                 comoving=True,
                 description="Galaxy Stellar Mass Function",
             )
-            processed.associate_citation(citation, bibcode)
-            processed.associate_name(name)
-            processed.associate_comment(comment)
+
             processed.associate_redshift(
-                redshift, redshift_lower=redshift, redshift_upper=0.1
+                redshift, redshift_lower=redshift - 0.25, redshift_upper=redshift + 0.25
             )
             processed.associate_plot_as(plot_as)
-            processed.associate_cosmology(cosmology)
 
-            output_path = (
-                f"{output_directory}/Schaye2015_{box_size}_{aperture}kpc_z{tag}.hdf5"
-            )
+            multi_z.associate_dataset(processed)
 
-            if os.path.exists(output_path):
-                os.remove(output_path)
+        output_path = f"{output_directory}/Schaye2015_{box_size}_{aperture}kpc.hdf5"
 
-            processed.write(filename=output_path)
+        if os.path.exists(output_path):
+            os.remove(output_path)
+
+        multi_z.write(filename=output_path)
