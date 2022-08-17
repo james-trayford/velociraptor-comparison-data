@@ -80,15 +80,13 @@ for aperture in apertures:
             )
 
             processed.associate_redshift(
-                redshift, redshift_lower=redshift-0.25, redshift_upper=redshift+0.25
+                redshift, redshift_lower=redshift - 0.25, redshift_upper=redshift + 0.25
             )
             processed.associate_plot_as(plot_as)
 
             multi_z.associate_dataset(processed)
 
-        output_path = (
-            f"{output_directory}/Schaye2015_{box_size}_{aperture}kpc.hdf5"
-        )
+        output_path = f"{output_directory}/Schaye2015_{box_size}_{aperture}kpc.hdf5"
 
         if os.path.exists(output_path):
             os.remove(output_path)
