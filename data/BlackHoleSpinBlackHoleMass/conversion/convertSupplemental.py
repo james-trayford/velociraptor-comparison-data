@@ -1,5 +1,4 @@
 from velociraptor.observations.objects import ObservationalData
-from astropy.cosmology import WMAP7 as cosmology
 
 import unyt
 import numpy as np
@@ -7,8 +6,8 @@ import os
 import sys
 
 # Exec the master cosmology file passed as first argument
-#with open(sys.argv[1], "r") as handle:
-#    exec(handle.read())
+with open(sys.argv[1], "r") as handle:
+    exec(handle.read())
 
 input_filename = "../raw/Supplemental.txt"
 delimiter = None
@@ -38,20 +37,21 @@ a_BH_high = (raw[:, 3] + raw[:, 4]) * unyt.dimensionless
 x_scatter = unyt.unyt_array((M_BH - M_BH_low, M_BH_high - M_BH))
 y_scatter = unyt.unyt_array((a_BH - a_BH_low, a_BH_high - a_BH))
 
-comment = (" Masses are obtained mostly from X-ray reverberation."
-           "Spins are obtained using X-ray reflection methods, with the exception of"
-           "the last two objects."
-           "The papers used for the spin values are the following:"
-           "W2013 Walton et al. (2013); 2013MNRAS.428.2901W,"
-           "V2016 Vasudevan et al. (2016); 2016MNRAS.458.2012V,"
-           "J2019 Jiang et al. (2019); 2019MNRAS.489.3436J,"
-           "W2021 Walton et al. (2021); 2021arXiv210710278W,"
-           "G2021 Ghosh et al. (2021); 2021ApJ...908..198G,"
-           "B2021 Bambi et al. (2021); 2021SSRv..217...65B,"
-           "SR2022 Sisk-Reynes et al. (2022); 2022MNRAS.514.2568S,"
-           "A2019 Akiyama et al. (2019); 2019ApJ...875L...5E,"
-           "V2016 Valtonen et al. (2016); 2016ApJ...819L..37V,"
-           "L2020 Laine et al. (2020); 2020ApJ...894L...1L."
+comment = (
+    " Masses are obtained mostly from X-ray reverberation."
+    "Spins are obtained using X-ray reflection methods, with the exception of"
+    "the last two objects."
+    "The papers used for the spin values are the following:"
+    "W2013 Walton et al. (2013); 2013MNRAS.428.2901W,"
+    "V2016 Vasudevan et al. (2016); 2016MNRAS.458.2012V,"
+    "J2019 Jiang et al. (2019); 2019MNRAS.489.3436J,"
+    "W2021 Walton et al. (2021); 2021arXiv210710278W,"
+    "G2021 Ghosh et al. (2021); 2021ApJ...908..198G,"
+    "B2021 Bambi et al. (2021); 2021SSRv..217...65B,"
+    "SR2022 Sisk-Reynes et al. (2022); 2022MNRAS.514.2568S,"
+    "A2019 Akiyama et al. (2019); 2019ApJ...875L...5E,"
+    "V2016 Valtonen et al. (2016); 2016ApJ...819L..37V,"
+    "L2020 Laine et al. (2020); 2020ApJ...894L...1L."
 )
 citation = "Supplemental data"
 bibcode = "various, see comments"

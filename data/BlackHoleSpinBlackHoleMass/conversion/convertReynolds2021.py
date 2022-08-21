@@ -1,5 +1,4 @@
 from velociraptor.observations.objects import ObservationalData
-from astropy.cosmology import WMAP7 as cosmology
 
 import unyt
 import numpy as np
@@ -7,8 +6,8 @@ import os
 import sys
 
 # Exec the master cosmology file passed as first argument
-#with open(sys.argv[1], "r") as handle:
-#    exec(handle.read())
+with open(sys.argv[1], "r") as handle:
+    exec(handle.read())
 
 input_filename = "../raw/Reynolds2021.txt"
 delimiter = None
@@ -38,16 +37,17 @@ a_BH_high = (raw[:, 3] + raw[:, 4]) * unyt.dimensionless
 x_scatter = unyt.unyt_array((M_BH - M_BH_low, M_BH_high - M_BH))
 y_scatter = unyt.unyt_array((a_BH - a_BH_low, a_BH_high - a_BH))
 
-comment = (" Masses are obtained mostly from X-ray reverberation. "
-           " Spins are obtained using X-ray reflection methods."
-           " The mass data for the last four objects were obtained from:"
-           " Bambi et al. (2021); 2021SSRv..217...65B,"
-           " Bennert et al. (2006); 2006A&A...459...55B,"
-           " Campitiello et al. (2020); 2020A&A...640A..39C,"
-           " respectively, with the first work providing mass data for the"
-           " first two objects. The mass of Swift J2127.4+5654 has been"
-           " reduced by a factor of 10 to correct a typo in the original work."
-           " The objects are listed in the same order as in Reynolds (2021)."
+comment = (
+    " Masses are obtained mostly from X-ray reverberation. "
+    " Spins are obtained using X-ray reflection methods."
+    " The mass data for the last four objects were obtained from:"
+    " Bambi et al. (2021); 2021SSRv..217...65B,"
+    " Bennert et al. (2006); 2006A&A...459...55B,"
+    " Campitiello et al. (2020); 2020A&A...640A..39C,"
+    " respectively, with the first work providing mass data for the"
+    " first two objects. The mass of Swift J2127.4+5654 has been"
+    " reduced by a factor of 10 to correct a typo in the original work."
+    " The objects are listed in the same order as in Reynolds (2021)."
 )
 citation = "Reynolds (2021)"
 bibcode = "2021ARA&A..59..117R"

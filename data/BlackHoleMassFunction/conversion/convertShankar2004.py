@@ -1,5 +1,4 @@
 from velociraptor.observations.objects import ObservationalData
-from astropy.cosmology import WMAP7 as cosmology
 
 import unyt
 import numpy as np
@@ -7,8 +6,8 @@ import os
 import sys
 
 # Exec the master cosmology file passed as first argument
-#with open(sys.argv[1], "r") as handle:
-#    exec(handle.read())
+with open(sys.argv[1], "r") as handle:
+    exec(handle.read())
 
 input_filename = "../raw/Shankar2004.txt"
 delimiter = None
@@ -26,24 +25,25 @@ processed = ObservationalData()
 # Read the data (only those columns we need here)
 raw = np.loadtxt(input_filename, delimiter=delimiter, usecols=(0, 1, 2, 3, 4, 5))
 
-M_BH = 10**raw[:, 0] * unyt.dimensionless
-M_BH_low = 10**(raw[:, 0] -raw[:, 2]) * unyt.dimensionless
-M_BH_high = 10**(raw[:, 0] + raw[:, 1]) * unyt.dimensionless
+M_BH = 10 ** raw[:, 0] * unyt.Solar_Mass
+M_BH_low = 10 ** (raw[:, 0] - raw[:, 2]) * unyt.Solar_Mass
+M_BH_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Solar_Mass
 
-Phi = 10**raw[:, 3] * unyt.dimensionless
-Phi_low = 10**(raw[:, 5])* unyt.dimensionless
-Phi_high = 10**(raw[:, 4]) * unyt.dimensionless
+Phi = 10 ** raw[:, 3] * unyt.Mpc ** -3
+Phi_low = 10 ** (raw[:, 5]) * unyt.Mpc ** -3
+Phi_high = 10 ** (raw[:, 4]) * unyt.Mpc ** -3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((M_BH - M_BH_low, M_BH_high - M_BH))
 y_scatter = unyt.unyt_array((Phi - Phi_low, Phi_high - Phi))
 
-comment = (" The black hole mass function estimate taken from Shankar et al. (2004):"
-           " 2004MNRAS.354.1020S"
-           " These estimates are based on convolving the observed relation between"
-           " black hole mass and the luminosity function. "
-           " The units of black hole masses are Msol. The units of the black hole mass"
-           " function are Mpc^-3 dex^-1."
+comment = (
+    " The black hole mass function estimate taken from Shankar et al. (2004):"
+    " 2004MNRAS.354.1020S"
+    " These estimates are based on convolving the observed relation between"
+    " black hole mass and the luminosity function. "
+    " The units of black hole masses are Msol. The units of the black hole mass"
+    " function are Mpc^-3 dex^-1."
 )
 citation = "Shankar et al. (2004)"
 bibcode = "2004MNRAS.354.1020S"
