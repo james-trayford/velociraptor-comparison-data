@@ -11,8 +11,6 @@ with open(sys.argv[1], "r") as handle:
 
 input_filename = "../raw/Reynolds2021.txt"
 delimiter = None
-half_mass = 1
-log_mass = 0
 
 output_filename = "Reynolds2021_Data.hdf5"
 output_directory = "../"
@@ -54,7 +52,6 @@ bibcode = "2021ARA&A..59..117R"
 name = "Black Hole Mass - Black Hole Spin"
 plot_as = "points"
 redshift = 0.0
-h = cosmology.h
 
 processed.associate_x(
     M_BH, scatter=x_scatter, comoving=False, description="Black hole mass"

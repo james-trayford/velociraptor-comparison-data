@@ -11,8 +11,6 @@ with open(sys.argv[1], "r") as handle:
 
 input_filename = "../raw/Shankar2009.txt"
 delimiter = None
-half_mass = 1
-log_mass = 0
 
 output_filename = "Shankar2009_Data.hdf5"
 output_directory = "../"
@@ -29,9 +27,9 @@ M_BH = 10 ** raw[:, 0] * unyt.Solar_Mass
 M_BH_low = 10 ** (raw[:, 0] - raw[:, 2]) * unyt.Solar_Mass
 M_BH_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Solar_Mass
 
-Phi = 10 ** raw[:, 3] / M_BH * unyt.Mpc ** -3
-Phi_low = 10 ** (raw[:, 5]) / M_BH * unyt.Mpc ** -3
-Phi_high = 10 ** (raw[:, 4]) / M_BH * unyt.Mpc ** -3
+Phi = 10 ** raw[:, 3] / M_BH / unyt.Mpc ** 3
+Phi_low = 10 ** (raw[:, 5]) / M_BH / unyt.Mpc ** 3
+Phi_high = 10 ** (raw[:, 4]) / M_BH / unyt.Mpc ** 3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((M_BH - M_BH_low, M_BH_high - M_BH))
@@ -54,7 +52,6 @@ bibcode = "2009ApJ...690...20S"
 name = "Black Hole Mass Function"
 plot_as = "points"
 redshift = 0.0
-h = cosmology.h
 
 processed.associate_x(
     M_BH, scatter=x_scatter, comoving=False, description="Black hole mass"

@@ -11,8 +11,6 @@ with open(sys.argv[1], "r") as handle:
 
 input_filename = "../raw/Supplemental.txt"
 delimiter = None
-half_mass = 1
-log_mass = 0
 
 output_filename = "Supplemental_Data.hdf5"
 output_directory = "../"
@@ -58,7 +56,6 @@ bibcode = "various, see comments"
 name = "Black Hole Mass - Black Hole Spin"
 plot_as = "points"
 redshift = 0.0
-h = cosmology.h
 
 processed.associate_x(
     M_BH, scatter=x_scatter, comoving=False, description="Black hole mass"

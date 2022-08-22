@@ -11,8 +11,6 @@ with open(sys.argv[1], "r") as handle:
 
 input_filename = "../raw/BestHeckmann2012.txt"
 delimiter = None
-half_mass = 1
-log_mass = 0
 
 output_filename = "BestHeckmann2012_Data.hdf5"
 output_directory = "../"
@@ -29,9 +27,9 @@ L1_4 = 10 ** raw[:, 0] * unyt.Watt / unyt.Hertz
 L1_4_low = 10 ** (raw[:, 0] - raw[:, 2]) * unyt.Watt / unyt.Hertz
 L1_4_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Watt / unyt.Hertz
 
-Phi = 10 ** raw[:, 3] * unyt.Mpc ** -3
-Phi_low = 10 ** (raw[:, 3] - raw[:, 5]) * unyt.Mpc ** -3
-Phi_high = 10 ** (raw[:, 3] + raw[:, 4]) * unyt.Mpc ** -3
+Phi = 10 ** raw[:, 3] / unyt.Mpc ** 3
+Phi_low = 10 ** (raw[:, 3] - raw[:, 5]) / unyt.Mpc ** 3
+Phi_high = 10 ** (raw[:, 3] + raw[:, 4]) / unyt.Mpc ** 3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((L1_4 - L1_4_low, L1_4_high - L1_4))
@@ -46,7 +44,8 @@ bibcode = "2012MNRAS.421.1569B"
 name = "AGN Radio Luminosity Function"
 plot_as = "points"
 redshift = 0.1
-h = cosmology.h
+redshift_high = 0.3
+redshift_low = 0.0
 
 processed.associate_x(
     L1_4,
@@ -63,7 +62,7 @@ processed.associate_y(
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
 processed.associate_comment(comment)
-processed.associate_redshift(redshift)
+processed.associate_redshift(redshift, redshift_high, redshift_low)
 processed.associate_plot_as(plot_as)
 processed.associate_cosmology(cosmology)
 
