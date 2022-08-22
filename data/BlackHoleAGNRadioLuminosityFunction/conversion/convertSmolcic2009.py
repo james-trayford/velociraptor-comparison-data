@@ -23,13 +23,13 @@ processed = ObservationalData()
 # Read the data (only those columns we need here)
 raw = np.loadtxt(input_filename, delimiter=delimiter, usecols=(0, 1, 2, 3, 4, 5))
 
-L1_4 = raw[:, 0] * (float(1e21) * unyt.Watt / unyt.Hertz)
-L1_4_low = (raw[:, 0] - raw[:, 2]) * (float(1e21) * unyt.Watt / unyt.Hertz)
-L1_4_high = (raw[:, 0] + raw[:, 1]) * (float(1e21) * unyt.Watt / unyt.Hertz)
+L1_4 = raw[:, 0] * (1e21 * unyt.Watt / unyt.Hertz)
+L1_4_low = (raw[:, 0] - raw[:, 2]) * (1e21 * unyt.Watt / unyt.Hertz)
+L1_4_high = (raw[:, 0] + raw[:, 1]) * (1e21 * unyt.Watt / unyt.Hertz)
 
-Phi = raw[:, 3] * (float(1e-4) / unyt.Mpc ** 3)
-Phi_low = (raw[:, 3] - raw[:, 5]) * (float(1e-4) / unyt.Mpc ** 3)
-Phi_high = (raw[:, 3] + raw[:, 4]) * (float(1e-4) / unyt.Mpc ** 3)
+Phi = raw[:, 3] * (1e-4 / unyt.Mpc ** 3)
+Phi_low = (raw[:, 3] - raw[:, 5]) * (1e-4 / unyt.Mpc ** 3)
+Phi_high = (raw[:, 3] + raw[:, 4]) * (1e-4 / unyt.Mpc ** 3)
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((L1_4 - L1_4_low, L1_4_high - L1_4))

@@ -27,9 +27,13 @@ L1_4 = 10 ** raw[:, 0] * unyt.Watt / unyt.Hertz
 L1_4_low = 10 ** (raw[:, 0] - raw[:, 2]) * unyt.Watt / unyt.Hertz
 L1_4_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Watt / unyt.Hertz
 
-Phi = 2.51 * 10 ** raw[:, 3] / unyt.Mpc ** 3
-Phi_low = 2.51 * 10 ** (raw[:, 3] - raw[:, 5]) / unyt.Mpc ** 3
-Phi_high = 2.51 * 10 ** (raw[:, 3] + raw[:, 4]) / unyt.Mpc ** 3
+# Sadler et al. (2002) define their luminosity function using the natural logarithm.
+# We convert to the usual definition, using dex, by multiplying with a conversion
+# factor that is equal to ln(10).
+logarithmic_conversion_factor = np.log(10)
+Phi = logarithmic_conversion_factor * 10 ** raw[:, 3] / unyt.Mpc ** 3
+Phi_low = logarithmic_conversion_factor * 10 ** (raw[:, 3] - raw[:, 5]) / unyt.Mpc ** 3
+Phi_high = logarithmic_conversion_factor * 10 ** (raw[:, 3] + raw[:, 4]) / unyt.Mpc ** 3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((L1_4 - L1_4_low, L1_4_high - L1_4))

@@ -23,9 +23,10 @@ processed = ObservationalData()
 # Read the data (only those columns we need here)
 raw = np.loadtxt(input_filename, delimiter=delimiter, usecols=(2, 3, 4, 5, 6, 7))
 
-M_BH = 10 ** 6 * raw[:, 0] * unyt.Solar_Mass
-M_BH_low = 10 ** 6 * (raw[:, 0] - raw[:, 2]) * unyt.Solar_Mass
-M_BH_high = 10 ** 6 * (raw[:, 0] + raw[:, 1]) * unyt.Solar_Mass
+# We multiply by 1e6 since the raw data is given in units of 1e6 Msol.
+M_BH = 1e6 * raw[:, 0] * unyt.Solar_Mass
+M_BH_low = 1e6 * (raw[:, 0] - raw[:, 2]) * unyt.Solar_Mass
+M_BH_high = 1e6 * (raw[:, 0] + raw[:, 1]) * unyt.Solar_Mass
 
 a_BH = raw[:, 3] * unyt.dimensionless
 a_BH_low = (raw[:, 3] - raw[:, 5]) * unyt.dimensionless

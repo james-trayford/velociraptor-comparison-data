@@ -27,6 +27,8 @@ M_BH = 10 ** raw[:, 0] * unyt.Solar_Mass
 M_BH_low = 10 ** (raw[:, 0] - raw[:, 2]) * unyt.Solar_Mass
 M_BH_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Solar_Mass
 
+# We multiply by 1e-4 and h**3 to convert from data given in Vika et al. (2009)
+# to the usually defined mass function.
 h = cosmology.h
 Phi = (1e-4 * h ** 3 * raw[:, 3]) / unyt.Mpc ** 3
 Phi_low = (1e-4 * h ** 3 * (raw[:, 3] - raw[:, 5])) / unyt.Mpc ** 3

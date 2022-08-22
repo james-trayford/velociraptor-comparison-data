@@ -1,7 +1,7 @@
 # AGN radio luminosity data, taken from Best & Heckmann (2012):
 # 2012MNRAS.421.1569B
 # Units of the luminosity are W Hz^-1. Units of the luminosity 
-# function are W Hz^-1 Mpc^-3 dex^-1
+# function are Mpc^-3 dex^-1
 #
 # log10(L1.4)   log10(L1.4)_err_pos   log10(L1.4)_err_neg    log10(Phi)   log10(Phi)_err_pos   log10(Phi)_err_neg
 22.15                   0.                    0.               -4.44              0.15                 0.23

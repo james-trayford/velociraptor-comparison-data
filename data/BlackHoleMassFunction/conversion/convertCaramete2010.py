@@ -33,12 +33,11 @@ Phi_high = 10 ** (raw[:, 4]) / unyt.Mpc ** 3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((M_BH - M_BH_low, M_BH_high - M_BH))
-y_scatter = unyt.unyt_array(
-    (
-        -(10 ** (2 * np.log10(Phi) - np.log10(Phi_high))) / unyt.Mpc ** 3 + Phi,
-        Phi_high - Phi,
-    )
-)
+
+# We calculate the lower error bar from the higher one (and the mean) by assuming
+# that the error is symmetric in logarithmic space.
+y_scatter_low = Phi - Phi * 10 ** (np.log10(Phi) - np.log10(Phi_high))
+y_scatter = unyt.unyt_array((y_scatter_low, Phi_high - Phi))
 
 comment = (
     " The black hole mass function estimate taken from Caramete et al. (2010):"
