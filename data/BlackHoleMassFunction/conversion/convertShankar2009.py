@@ -29,9 +29,9 @@ M_BH_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Solar_Mass
 
 # We divide by black hole mass since the data given in Shankar et al. (2009) is not
 # in the form of the usual mass function.
-Phi = 10 ** raw[:, 3] / M_BH / unyt.Mpc ** 3
-Phi_low = 10 ** (raw[:, 5]) / M_BH / unyt.Mpc ** 3
-Phi_high = 10 ** (raw[:, 4]) / M_BH / unyt.Mpc ** 3
+Phi = 10 ** raw[:, 3] / (M_BH / unyt.Solar_Mass) / unyt.Mpc ** 3
+Phi_low = 10 ** (raw[:, 5]) / (M_BH / unyt.Solar_Mass) / unyt.Mpc ** 3
+Phi_high = 10 ** (raw[:, 4]) / (M_BH / unyt.Solar_Mass) / unyt.Mpc ** 3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((M_BH - M_BH_low, M_BH_high - M_BH))
