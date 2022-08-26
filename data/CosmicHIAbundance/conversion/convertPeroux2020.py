@@ -13,7 +13,12 @@ input_filename = "../raw/Peroux2020_OmegaHI.txt"
 
 processed = ObservationalData()
 
-comment = "Based on a fit."
+comment = (
+    "Based on a fit. "
+    "The data was corrected to our cosmology. "
+    "We undid the correction from HI density to total mass density by "
+    "multiplying with 0.76."
+)
 citation = "Peroux & Howk (2020)"
 bibcode = "2020ARA&A..58..363P"
 name = "HI Mass Cosmic History"
@@ -36,9 +41,15 @@ rhoHI = fitting_formula(zgrid, *raw[0])
 rhoHI_low = fitting_formula(zgrid, *raw[1])
 rhoHI_high = fitting_formula(zgrid, *raw[2])
 
+# convert from the cosmology assumed by Peroux & Howk
+# (Omega_m = 0.3, Omega_lambda = 0.7, h = 0.7)
+# to our cosmology
 cosmology_correction = (
     np.sqrt(cosmology.Om0 * (1.0 + zgrid) ** 3 + cosmology.Ode0) / cosmology.h
 ) / (np.sqrt(0.3 * (1.0 + zgrid) ** 3 + 0.7) / 0.7)
+# Peroux & Howk converted the HI density into a total mass density
+# assuming an H abundance of 0.76
+# Undo this correction
 rhoHI *= 0.76 * cosmology_correction
 rhoHI_low *= 0.76 * cosmology_correction
 rhoHI_high *= 0.76 * cosmology_correction
