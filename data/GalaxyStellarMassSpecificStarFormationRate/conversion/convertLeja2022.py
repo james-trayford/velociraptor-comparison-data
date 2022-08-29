@@ -18,7 +18,7 @@ comment = (
 citation = f"Leja et al. (2022)"
 bibcode = "2021arXiv211004314L"
 name = f"Galaxy Stellar Mass - Galaxy sSFR"
-plot_as = "points"
+plot_as = "line"
 
 multi_z = MultiRedshiftObservationalData()
 multi_z.associate_citation(citation, bibcode)
@@ -41,8 +41,8 @@ for z, zname in [
 
     Mstar = 10.0 ** raw[:, 0]
     SFR = 10.0 ** raw[:, 1]
-    SFR_low = 10.0 ** raw[:, 2]
-    SFR_high = 10.0 ** raw[:, 3]
+    SFR_low = 10.0 ** raw[:, 3]
+    SFR_high = 10.0 ** raw[:, 2]
     sSFR = SFR / Mstar
     sSFR_low = SFR_low / Mstar
     sSFR_high = SFR_high / Mstar
@@ -61,7 +61,7 @@ for z, zname in [
         comoving=False,
         description="Specific Star Formation Rate (sSFR)",
     )
-    processed.associate_redshift(z)
+    processed.associate_redshift(z, redshift_lower=z - 0.35, redshift_upper=z + 0.35)
     processed.associate_plot_as(plot_as)
 
     multi_z.associate_dataset(processed)
