@@ -13,7 +13,9 @@ with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
 comment = (
-    "Based on a Prospector SED fit to the COSMOS-2015 and 3D-HST UV-IR catalogues."
+    "Based on a Prospector SED fit to the COSMOS-2015 and 3D-HST UV-IR catalogues. "
+    "The data corresponds to the median and 16/84 percentile for all galaxies in the sample, "
+    "including both star-forming and quiescent galaxies."
 )
 citation = f"Leja et al. (2022)"
 bibcode = "2021arXiv211004314L"
@@ -53,12 +55,13 @@ for z, zname in [
     )
     sSFR = unyt.unyt_array(sSFR, units=1.0 / unyt.yr)
 
+    # slice the data to avoid overcrowding in pipeline plots
     processed.associate_x(
-        Mstar, scatter=None, comoving=False, description="Galaxy Stellar Mass"
+        Mstar[::20], scatter=None, comoving=False, description="Galaxy Stellar Mass"
     )
     processed.associate_y(
-        sSFR,
-        scatter=sSFR_scatter,
+        sSFR[::20],
+        scatter=sSFR_scatter[:, ::20],
         comoving=False,
         description="Specific Star Formation Rate (sSFR)",
     )

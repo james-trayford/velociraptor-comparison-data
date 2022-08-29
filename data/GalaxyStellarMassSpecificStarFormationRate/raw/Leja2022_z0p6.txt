@@ -1,20 +1,4 @@
 # logM* log10_ridge log10_mean log10_median log10_q84 log10_q16
-8.600,nan,nan,nan,nan,nan
-8.614,nan,nan,nan,nan,nan
-8.627,nan,nan,nan,nan,nan
-8.641,nan,nan,nan,nan,nan
-8.654,nan,nan,nan,nan,nan
-8.668,nan,nan,nan,nan,nan
-8.681,nan,nan,nan,nan,nan
-8.695,nan,nan,nan,nan,nan
-8.709,nan,nan,nan,nan,nan
-8.722,nan,nan,nan,nan,nan
-8.736,nan,nan,nan,nan,nan
-8.749,nan,nan,nan,nan,nan
-8.763,nan,nan,nan,nan,nan
-8.776,nan,nan,nan,nan,nan
-8.790,nan,nan,nan,nan,nan
-8.804,nan,nan,nan,nan,nan
 8.817,-0.500,-0.262,-0.556,-0.065,-1.169
 8.831,-0.497,-0.260,-0.553,-0.064,-1.167
 8.844,-0.494,-0.259,-0.551,-0.062,-1.165
