@@ -25,6 +25,7 @@ multi_z.associate_citation(citation, bibcode)
 multi_z.associate_name(name)
 multi_z.associate_comment(comment)
 multi_z.associate_cosmology(cosmology)
+multi_z.associate_maximum_number_of_returns(1)
 
 for z, zname in [
     (0.3, "0p3"),
