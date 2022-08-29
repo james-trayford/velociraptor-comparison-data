@@ -28,19 +28,19 @@ redshift = np.array([1.9, 3.1])
 M_star = unyt.unyt_array(np.logspace(9.0, 11.3, 20), units="Msun")
 
 models = {
-    "OH": {"alpha": (8.35, 0.02), "beta": (0.14, 0.05), "label": "12+log10(O/H)"},
-    "NH": {"alpha": (7.07, 0.03), "beta": (0.29, 0.07), "label": "12+log10(N/H)"},
+    "FeH": {"alpha": (-0.69, 0.02), "beta": (0.17, 0.05), "label": "[Fe/H]"},
 }
 
 
 def fitcurve(M, alpha, beta):
-    return alpha + beta * (np.log10(M / unyt.Msun) - 10.0)
+    # we convert from [Fe/H] to Z
+    return 10.0 ** (alpha + beta * (np.log10(M / unyt.Msun) - 10.0))
 
 
 for model in models:
     label = models[model]["label"]
 
-    name = f"Stellar mass - Gas phase metallicity relation ({label})"
+    name = f"Stellar mass - Stellar metallicity relation ({label})"
     output_filename = f"Strom2022_{model}.hdf5"
 
     alpha, alpha_err = models[model]["alpha"]
@@ -66,7 +66,7 @@ for model in models:
         Z,
         scatter=Z_scatter,
         comoving=False,
-        description=f"Gas phase metallicity ({label})",
+        description=f"Stellar metallicity ({label})",
     )
     processed.associate_citation(citation, bibcode)
     processed.associate_name(name)
