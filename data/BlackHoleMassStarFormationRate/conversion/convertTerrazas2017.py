@@ -43,7 +43,7 @@ limits = data[:, 2]
 
 # Meta-data
 comment = (
-    "Data obtained assuming the total stellar mass is the same as the bulge mass. "
+    "Selection of local galaxies with masses > 10^10 Msun. "
     f"No cosmology correction needed."
 )
 citation = f"Terrazas (2017) "
