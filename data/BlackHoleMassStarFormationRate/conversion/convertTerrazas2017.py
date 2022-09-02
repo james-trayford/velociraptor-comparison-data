@@ -30,13 +30,13 @@ Mstar = unyt.unyt_array(10 ** data[:, 0], units="Solar_Mass")
 BH_mass = unyt.unyt_array(10 ** data[:, 3], units="Solar_Mass")
 BH_mass_hi = unyt.unyt_array(10 ** (data[:, 3] + data[:, 4]), units="Solar_Mass")
 BH_mass_lo = unyt.unyt_array(10 ** (data[:, 3] - data[:, 4]), units="Solar_Mass")
-BH_mass_scatter = unyt.unyt_array([BH_mass_lo, BH_mass_hi])
+BH_mass_scatter = unyt.unyt_array([BH_mass - BH_mass_lo, BH_mass_hi - BH_mass])
 
 # Star formation rates (uncertainty taken from Sec. 2)
 SFR = unyt.unyt_array(10 ** data[:, 1], units="Solar_Mass / year")
 SFR_hi = unyt.unyt_array(10 ** (data[:, 1] + 0.3), units="Solar_Mass / year")
 SFR_lo = unyt.unyt_array(10 ** (data[:, 1] - 0.3), units="Solar_Mass / year")
-SFR_scatter = unyt.unyt_array([SFR_lo, SFR_hi])
+SFR_scatter = unyt.unyt_array([SFR - SFR_lo, SFR_hi - SFR])
 
 # Upper limits
 limits = data[:, 2]
