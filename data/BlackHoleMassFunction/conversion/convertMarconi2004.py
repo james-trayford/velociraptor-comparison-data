@@ -21,23 +21,19 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 
 # Read the data (only those columns we need here)
-raw = np.loadtxt(input_filename, delimiter=delimiter, usecols=(0, 1, 2, 3, 4, 5))
+raw = np.loadtxt(input_filename, delimiter=delimiter, usecols=(0, 1, 2, 3, 4))
 
 M_BH = 10 ** raw[:, 0] * unyt.Solar_Mass
 M_BH_low = 10 ** (raw[:, 0] - raw[:, 2]) * unyt.Solar_Mass
 M_BH_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Solar_Mass
 
 Phi = 10 ** raw[:, 3] / unyt.Mpc ** 3
-Phi_low = 10 ** (raw[:, 5]) / unyt.Mpc ** 3
-Phi_high = 10 ** (raw[:, 4]) / unyt.Mpc ** 3
+Phi_low = 10 ** (raw[:, 3] - raw[:, 4]) / unyt.Mpc ** 3
+Phi_high = 10 ** (raw[:, 3] + raw[:, 4]) / unyt.Mpc ** 3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((M_BH - M_BH_low, M_BH_high - M_BH))
-
-# We calculate the lower error bar from the higher one (and the mean) by assuming
-# that the error is symmetric in logarithmic space.
-y_scatter_low = Phi - Phi * 10 ** (np.log10(Phi) - np.log10(Phi_high))
-y_scatter = unyt.unyt_array((y_scatter_low, Phi_high - Phi))
+y_scatter = unyt.unyt_array((Phi - Phi_low, Phi_high - Phi))
 
 comment = (
     " The black hole mass function estimate taken from Marconi et al. (2004):"

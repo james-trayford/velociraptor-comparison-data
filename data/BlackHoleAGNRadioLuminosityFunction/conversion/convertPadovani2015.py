@@ -29,15 +29,11 @@ L1_4_high = 10 ** (raw[:, 0] + raw[:, 1]) * unyt.Watt / unyt.Hertz
 
 # Padovani et al. (2015) define their luminosity function using the natural logarithm.
 # We convert to the usual definition, using dex, by multiplying with a conversion factor
-# that is equal to ln(10). We also multiply by 1e-9 to convert from units of Gpc^-3 to Mpc^-3.
+# that is equal to ln(10).
 logarithmic_conversion_factor = np.log(10)
-Phi = logarithmic_conversion_factor * 1e-9 * 10 ** raw[:, 3] / unyt.Mpc ** 3
-Phi_low = (
-    logarithmic_conversion_factor * 1e-9 * 10 ** (raw[:, 3] - raw[:, 5]) / unyt.Mpc ** 3
-)
-Phi_high = (
-    logarithmic_conversion_factor * 1e-9 * 10 ** (raw[:, 3] + raw[:, 4]) / unyt.Mpc ** 3
-)
+Phi = logarithmic_conversion_factor * 10 ** raw[:, 3] / unyt.Gpc ** 3
+Phi_low = logarithmic_conversion_factor * 10 ** (raw[:, 3] - raw[:, 5]) / unyt.Gpc ** 3
+Phi_high = logarithmic_conversion_factor * 10 ** (raw[:, 3] + raw[:, 4]) / unyt.Gpc ** 3
 
 # Define the scatter as offset from the mean value
 x_scatter = unyt.unyt_array((L1_4 - L1_4_low, L1_4_high - L1_4))
