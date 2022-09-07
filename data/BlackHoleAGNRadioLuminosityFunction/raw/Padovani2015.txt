@@ -1,0 +1,15 @@
+# AGN radio luminosity data, taken from Padovani et al. (2015):
+# 2015MNRAS.452.1263P.
+# Units of the luminosity are W Hz^-1. Units of the luminosity 
+# function are Gpc^-3 dex^-1, but in logarithmic space using the
+# natural logarithm, and not base 10.
+#
+# log10(L1.4)   log10(L1.4)_err_pos   log10(L1.4)_err_neg    log10(Phi)   log10(Phi)_err_pos   log10(Phi)_err_neg
+21.33                   0.                    0.                5.85              0.26                 0.3
+21.83                   0.                    0.                4.99              0.26                 0.32
+22.33                   0.                    0.                4.58              0.23                 0.3
+22.83                   0.                    0.                4.22              0.25                 0.35
+23.33                   0.                    0.                3.93              0.37                 0.56
+23.83                   0.                    0.                3.62              0.52                 1.04
+24.33                   0.                    0.                3.62              0.52                 1.04
+25.33                   0.                    0.                3.62              0.52                 1.04

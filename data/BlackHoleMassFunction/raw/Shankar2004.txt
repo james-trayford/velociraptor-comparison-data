@@ -1,0 +1,31 @@
+# The black hole mass function estimate taken from Shankar et al. (2004):
+# 2004MNRAS.354.1020S
+# These estimates are based on convolving the observed relation between
+# black hole mass and luminosity with the luminosity function.
+# The units of black hole masses are Msol. The units of the black hole mass 
+# function are Mpc^-3 dex^-1.
+#
+# log10(M_BH)   log10(M_BH)_err_pos   log10(M_BH)_err_neg    log10(Phi)      log10(Phi)_high      log10(Phi)_low
+6.02                    0.                    0.               -2.00               -1.93                -2.07
+6.27                    0.                    0.               -2.01               -1.95                -2.05
+6.49                    0.                    0.               -2.06               -1.98                -2.14
+6.70                    0.                    0.               -2.11               -2.05                -2.17
+6.94                    0.                    0.               -2.17               -2.11                -2.23
+7.20                    0.                    0.               -2.25               -2.19                -2.31
+7.45                    0.                    0.               -2.36               -2.28                -2.44
+7.70                    0.                    0.               -2.49               -2.41                -2.57
+7.93                    0.                    0.               -2.62               -2.51                -2.73
+8.11                    0.                    0.               -2.75               -2.65                -2.85
+8.29                    0.                    0.               -2.90               -2.81                -2.99
+8.47                    0.                    0.               -3.10               -2.96                -3.24
+8.66                    0.                    0.               -3.33               -3.20                -3.46
+8.83                    0.                    0.               -3.58               -3.45                -3.71
+8.96                    0.                    0.               -3.80               -3.65                -3.95
+9.08                    0.                    0.               -4.08               -3.87                -4.27
+9.21                    0.                    0.               -4.37               -4.10                -4.64
+9.36                    0.                    0.               -4.73               -4.46                -5.00
+9.50                    0.                    0.               -5.18               -4.81                -5.55
+9.62                    0.                    0.               -5.58               -5.11                -6.05
+9.74                    0.                    0.               -6.04               -5.51                -6.57
+9.84                    0.                    0.               -6.41               -5.75                -7.07
+9.93                    0.                    0.               -6.80               -6.08                -7.52

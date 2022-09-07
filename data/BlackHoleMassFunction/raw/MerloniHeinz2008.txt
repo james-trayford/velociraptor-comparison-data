@@ -1,0 +1,30 @@
+# The black hole mass function estimate taken from Merloni & Heinz (2008):
+# 2008MNRAS.388.1011M.
+# These estimates are based on convolving the observed relation between
+# black hole mass and luminosity with the luminosity function.
+# The units of black hole masses are Msol. The units of the black hole mass 
+# function are Mpc^-3 dex^-1.
+#
+# log10(M_BH)   log10(M_BH)_err_pos   log10(M_BH)_err_neg    log10(Phi)       log10(Phi)_err
+6.22                    0.                    0.               -2.32               0.06
+6.46                    0.                    0.               -2.32               0.06
+6.72                    0.                    0.               -2.33               0.04
+6.97                    0.                    0.               -2.37               0.04
+7.31                    0.                    0.               -2.43               0.04
+7.63                    0.                    0.               -2.53               0.04
+7.95                    0.                    0.               -2.66               0.03
+8.18                    0.                    0.               -2.82               0.04
+8.37                    0.                    0.               -2.97               0.04
+8.60                    0.                    0.               -3.20               0.05
+8.77                    0.                    0.               -3.42               0.06
+8.89                    0.                    0.               -3.62               0.04
+9.01                    0.                    0.               -3.87               0.04
+9.14                    0.                    0.               -4.14               0.07
+9.26                    0.                    0.               -4.39               0.05
+9.36                    0.                    0.               -4.67               0.05
+9.45                    0.                    0.               -4.97               0.08
+9.51                    0.                    0.               -5.15               0.04
+9.58                    0.                    0.               -5.38               0.06
+9.65                    0.                    0.               -5.67               0.07
+9.72                    0.                    0.               -5.85               0.08
+9.78                    0.                    0.               -6.11               0.06

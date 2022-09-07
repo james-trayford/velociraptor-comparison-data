@@ -1,0 +1,14 @@
+# AGN radio luminosity data, taken from Smolcic et al. (2009):
+# 2009ApJ...696...24S.
+# Units of the luminosity are 10^21 W Hz^-1. Units of the luminosity 
+# function are 10^-4 Mpc^-3 dex^-1
+#
+# L1.4            L1.4_err_pos           L1.4_err_neg          Phi            Phi_err_pos         Phi_err_neg
+4.47                   0.                      0.              5.08              2.25                2.25
+14.1                   0.                      0.              2.54              0.66                0.66
+44.7                   0.                      0.              2.22              0.4                 0.4
+158                    0.                      0.              0.454             0.157               0.157
+562                    0.                      0.              0.121             0.07                0.07
+1780                   0.                      0.              0.166             0.088               0.088
+5620                   0.                      0.              0.0790            0.0559              0.0559
+17800                  0.                      0.              0.146             0.084               0.084
