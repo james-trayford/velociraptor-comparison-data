@@ -23,30 +23,23 @@ if not os.path.exists(output_directory):
 # Read the data
 data = np.loadtxt(input_filename)
 
-# Stellar masses (uncertainty taken from Sec. 2)
+# Stellar masses
 Mstar = unyt.unyt_array(10 ** data[:, 0], units="Solar_Mass")
-Mstar_hi = unyt.unyt_array(10 ** (data[:, 0] + 0.15), units="Solar_Mass")
-Mstar_lo = unyt.unyt_array(10 ** (data[:, 0] - 0.15), units="Solar_Mass")
-Mstar_scatter = unyt.unyt_array([Mstar - Mstar_lo, Mstar_hi - Mstar])
+
+# Star formation rates
+SFR = unyt.unyt_array(10 ** data[:, 1], units="Solar_Mass / year")
+
+# Specific Star formation rates  (uncertainty taken from Sec. 2)
+sSFR = SFR / Mstar
+sSFR_hi = unyt.unyt_array(10 ** (np.log10(sSFR) + 0.45), units="year**-1")
+sSFR_lo = unyt.unyt_array(10 ** (np.log10(sSFR) - 0.45), units="year**-1")
+sSFR_scatter = unyt.unyt_array([sSFR - sSFR_lo, sSFR_hi - sSFR])
 
 # Black Hole Masses
 BH_mass = unyt.unyt_array(10 ** data[:, 3], units="Solar_Mass")
 BH_mass_hi = unyt.unyt_array(10 ** (data[:, 3] + data[:, 4]), units="Solar_Mass")
 BH_mass_lo = unyt.unyt_array(10 ** (data[:, 3] - data[:, 4]), units="Solar_Mass")
 BH_mass_scatter = unyt.unyt_array([BH_mass - BH_mass_lo, BH_mass_hi - BH_mass])
-
-# Star formation rates (uncertainty taken from Sec. 2)
-SFR = unyt.unyt_array(10 ** data[:, 1], units="Solar_Mass / year")
-SFR_hi = unyt.unyt_array(10 ** (data[:, 1] + 0.3), units="Solar_Mass / year")
-SFR_lo = unyt.unyt_array(10 ** (data[:, 1] - 0.3), units="Solar_Mass / year")
-SFR_scatter = unyt.unyt_array([SFR - SFR_lo, SFR_hi - SFR])
-
-# Specific Star formation rates
-sSFR = SFR / Mstar
-sSFR_hi = unyt.unyt_array(10 ** (np.log10(sSFR) + 0.45), units="year**-1")
-sSFR_lo = unyt.unyt_array(10 ** (np.log10(sSFR) - 0.45), units="year**-1")
-sSFR_scatter = unyt.unyt_array([sSFR - sSFR_lo, sSFR_hi - sSFR])
-
 
 # Upper limits
 limits = data[:, 2]
