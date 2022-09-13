@@ -51,8 +51,8 @@ h_obs = 0.6777
 h = cosmology.h
 
 comment = (
-    f"GSMF at redshifts {min(redshifts)}<z{max(redshifts)}, "
-    "from the DEVILS suvery (D10-COSMOS field)."
+    f"GSMF at redshifts {min(redshifts)}<z<{max(redshifts)}, "
+    "from the DEVILS survey (D10-COSMOS field)."
     "Raw data re-binned by the authors in bins of 0.2dex."
     "h-free. Cosmology from Planck 2013; O_M = 0.307, O_L = 0.693. "
     "Chabrier IMF, masses obtained via the PROSPECT code. Consistent with GAMA."
@@ -70,12 +70,11 @@ for z in redshifts:
 
     processed = ObservationalData()
 
-    redshift = z
     raw_filename = f"../raw/Thorne2021_z{tag}.txt"
 
     M, N, sigma = np.loadtxt(raw_filename, delimiter=" ").T
 
-    mass = unyt.unyt_array(M, units=unyt.Solar_Mass)
+    mass = unyt.unyt_array(10 ** M, units=unyt.Solar_Mass)
     smf = unyt.unyt_array(10 ** N, units=1 / unyt.Mpc ** 3)
     smf_lo = unyt.unyt_array(10 ** (N - sigma), units=1 / unyt.Mpc ** 3)
     smf_hi = unyt.unyt_array(10 ** (N + sigma), units=1 / unyt.Mpc ** 3)
@@ -94,9 +93,7 @@ for z in redshifts:
         description="Galaxy Stellar Mass Function",
     )
 
-    processed.associate_redshift(
-        redshift, redshift_lower=redshift - 0.25, redshift_upper=redshift + 0.25
-    )
+    processed.associate_redshift(z, redshift_lower=z - 0.25, redshift_upper=z + 0.25)
     processed.associate_plot_as(plot_as)
 
     multi_z.associate_dataset(processed)
