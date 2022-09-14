@@ -24,9 +24,9 @@ if not os.path.exists(output_directory):
 
 redshifts = np.array(
     [
-        0.064,
-        0.12,
-        0.18,
+        #        0.064,
+        #        0.12,
+        #        0.18,
         0.25,
         0.32,
         0.41,
