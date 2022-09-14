@@ -47,6 +47,7 @@ redshifts = np.array(
 
 redshifts_lo = np.zeros(np.size(redshifts))
 redshifts_hi = np.zeros(np.size(redshifts))
+redshifts_lo[0] = 0.2
 redshifts_lo[1:] = (redshifts[:-1] - redshifts[1:]) / 2 + redshifts[1:]
 redshifts_hi[:-1] = redshifts_lo[1:]
 redshifts_hi[-1] = 4.5
