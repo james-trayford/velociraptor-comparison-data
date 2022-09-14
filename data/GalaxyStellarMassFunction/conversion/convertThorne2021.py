@@ -22,26 +22,34 @@ if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
 
-redshifts = [
-    0.064,
-    0.12,
-    0.18,
-    0.25,
-    0.32,
-    0.41,
-    0.51,
-    0.63,
-    0.76,
-    0.92,
-    1.1,
-    1.3,
-    1.6,
-    2.0,
-    2.4,
-    3.0,
-    3.5,
-    4.0,
-]
+redshifts = np.array(
+    [
+        0.064,
+        0.12,
+        0.18,
+        0.25,
+        0.32,
+        0.41,
+        0.51,
+        0.63,
+        0.76,
+        0.92,
+        1.1,
+        1.3,
+        1.6,
+        2.0,
+        2.4,
+        3.0,
+        3.5,
+        4.0,
+    ]
+)
+
+redshifts_lo = np.zeros(np.size(redshifts))
+redshifts_hi = np.zeros(np.size(redshifts))
+redshifts_lo[1:] = (redshifts[:-1] - redshifts[1:]) / 2 + redshifts[1:]
+redshifts_hi[:-1] = redshifts_lo[1:]
+redshifts_hi[-1] = 4.5
 
 citation = "Thorne et al. (2021)"
 bibcode = "2021MNRAS.505..540T"
@@ -65,7 +73,7 @@ multi_z.associate_comment(comment)
 multi_z.associate_cosmology(cosmology)
 multi_z.associate_maximum_number_of_returns(1)
 
-for z in redshifts:
+for z_lo, z, z_hi in zip(redshifts_lo, redshifts, redshifts_hi):
     tag = str(z).replace(".", "p")
 
     processed = ObservationalData()
@@ -93,7 +101,7 @@ for z in redshifts:
         description="Galaxy Stellar Mass Function",
     )
 
-    processed.associate_redshift(z, redshift_lower=z - 0.25, redshift_upper=z + 0.25)
+    processed.associate_redshift(z, redshift_lower=z_lo, redshift_upper=z_hi)
     processed.associate_plot_as(plot_as)
 
     multi_z.associate_dataset(processed)
