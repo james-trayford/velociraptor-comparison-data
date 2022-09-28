@@ -92,7 +92,10 @@ for dx in [100, 500, 1000]:
     )
 
     processed.associate_y(
-        SigmaSFR, scatter=SigmaSFR_err, comoving=False, description="$\\Sigma_{\\rm SFR}$"
+        SigmaSFR,
+        scatter=SigmaSFR_err,
+        comoving=False,
+        description="$\\Sigma_{\\rm SFR}$",
     )
 
     processed.associate_citation(citation, bibcode)
