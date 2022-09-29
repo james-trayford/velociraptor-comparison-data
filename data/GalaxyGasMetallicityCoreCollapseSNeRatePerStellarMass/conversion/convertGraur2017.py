@@ -1,4 +1,5 @@
 from velociraptor.observations.objects import ObservationalData
+
 # coding=utf8
 import unyt
 import numpy as np
@@ -29,13 +30,13 @@ redshift = 0.2
 h_obs = 0.7
 h = cosmology.h
 
-gasZ =  unyt.unyt_array(raw.T[0],units="dimensionless")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+gasZ = unyt.unyt_array(raw.T[0], units="dimensionless")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        raw.T[4]*1e-12,
-        raw.T[5]*1e-12,
+        raw.T[4] * 1e-12,
+        raw.T[5] * 1e-12,
     ],
     units="yr**(-1) * Msun**(-1)",
 )
@@ -48,7 +49,9 @@ gasZ_err = unyt.unyt_array(
     units="dimensionless",
 )
 
-processed.associate_x(gasZ, scatter=gasZ_err, comoving=False, description="SF Gas 12+log(O/H) from Z")
+processed.associate_x(
+    gasZ, scatter=gasZ_err, comoving=False, description="SF Gas 12+log(O/H) from Z"
+)
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SE SNe rate per stellar mass"
 )
@@ -77,13 +80,13 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-gasZ =  unyt.unyt_array(raw.T[0],units="dimensionless")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+gasZ = unyt.unyt_array(raw.T[0], units="dimensionless")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        raw.T[4]*1e-12,
-        raw.T[5]*1e-12,
+        raw.T[4] * 1e-12,
+        raw.T[5] * 1e-12,
     ],
     units="yr**(-1) * Msun**(-1)",
 )
@@ -96,7 +99,9 @@ gasZ_err = unyt.unyt_array(
     units="dimensionless",
 )
 
-processed.associate_x(gasZ, scatter=gasZ_err, comoving=False, description="SF Gas 12+log(O/H) from Z")
+processed.associate_x(
+    gasZ, scatter=gasZ_err, comoving=False, description="SF Gas 12+log(O/H) from Z"
+)
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SNII rate per stellar mass"
 )
