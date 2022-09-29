@@ -29,29 +29,29 @@ redshift = 0.2
 h_obs = 0.7
 h = cosmology.h
 
-Mstar =  unyt.unyt_array(1e10*raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12 * (1e10 * raw.T[0]), units="yr**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        raw.T[4]*1e-12,
-        raw.T[5]*1e-12,
+        raw.T[4] * 1e-12 * (1e10 * raw.T[0]),
+        raw.T[5] * 1e-12 * (1e10 * raw.T[0]),
     ],
-    units="yr**(-1) * Msun**(-1)",
+    units="yr**(-1)",
 )
 
 Mstar_err = unyt.unyt_array(
     [
-        1e10*raw.T[1],
-        1e10*raw.T[2],
+        1e10 * raw.T[1],
+        1e10 * raw.T[2],
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass")
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
 )
+processed.associate_y(SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate")
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
 processed.associate_comment(comment)
@@ -79,29 +79,29 @@ raw = np.loadtxt(input_filename)
 
 comment = "LOSS [$z \\approx 0.2$, passive only]"
 
-Mstar =  unyt.unyt_array(1e10*raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12 * (1e10 * raw.T[0]), units="yr**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        raw.T[4]*1e-12,
-        raw.T[5]*1e-12,
+        raw.T[4] * 1e-12 * (1e10 * raw.T[0]),
+        raw.T[5] * 1e-12 * (1e10 * raw.T[0]),
     ],
-    units="yr**(-1) * Msun**(-1)",
+    units="yr**(-1)",
 )
 
 Mstar_err = unyt.unyt_array(
     [
-        1e10*raw.T[1],
-        1e10*raw.T[2],
+        1e10 * raw.T[1],
+        1e10 * raw.T[2],
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass")
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
 )
+processed.associate_y(SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate")
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
 processed.associate_comment(comment)
@@ -129,29 +129,29 @@ raw = np.loadtxt(input_filename)
 
 comment = "LOSS [$z \\approx 0.2$, active only]"
 
-Mstar =  unyt.unyt_array(1e10*raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12 * (1e10 * raw.T[0]), units="yr**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        raw.T[4]*1e-12,
-        raw.T[5]*1e-12,
+        raw.T[4] * 1e-12 * (1e10 * raw.T[0]),
+        raw.T[5] * 1e-12 * (1e10 * raw.T[0]),
     ],
-    units="yr**(-1) * Msun**(-1)",
+    units="yr**(-1)",
 )
 
 Mstar_err = unyt.unyt_array(
     [
-        1e10*raw.T[1],
-        1e10*raw.T[2],
+        1e10 * raw.T[1],
+        1e10 * raw.T[2],
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass")
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
 )
+processed.associate_y(SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate")
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
 processed.associate_comment(comment)
@@ -165,4 +165,3 @@ if os.path.exists(output_path):
     os.remove(output_path)
 
 processed.write(filename=output_path)
-

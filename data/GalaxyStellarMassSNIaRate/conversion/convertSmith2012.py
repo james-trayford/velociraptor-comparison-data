@@ -29,32 +29,31 @@ redshift = 0.15
 h_obs = 0.7
 h = cosmology.h
 
-Mstar =  unyt.unyt_array(10**raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(10**raw.T[1]/10**raw.T[0],units="yr**(-1) * Msun**(-1)")
-
+Mstar = unyt.unyt_array(10 ** raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(10 ** raw.T[1], units="yr**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        (10**raw.T[1] - 10**raw.T[2])/10**raw.T[0],
-        (10**raw.T[3] - 10**raw.T[1])/10**raw.T[0],
+        10 ** raw.T[1] - 10 ** raw.T[2],
+        10 ** raw.T[3] - 10 ** raw.T[1],
     ],
-    units="yr**(-1) * Msun**(-1)",
+    units="yr**(-1)",
 )
 
-dMstar = 0.45/2.
+dMstar = 0.45 / 2.0
 
 Mstar_err = unyt.unyt_array(
     [
-        10 ** (raw.T[0]) - 10**(raw.T[0]-dMstar),
+        10 ** (raw.T[0]) - 10 ** (raw.T[0] - dMstar),
         10 ** (raw.T[0] + dMstar) - 10 ** (raw.T[0]),
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Stellar mass")
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per Stellar Mass"
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Stellar mass"
 )
+processed.associate_y(SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate")
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
 processed.associate_comment(comment)
@@ -79,31 +78,31 @@ raw = np.loadtxt(input_filename)
 
 comment = "SDSS-II SN Survey [$0.05<z<0.25$, passive only]"
 
-Mstar =  unyt.unyt_array(10**raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(10**raw.T[1]/10**raw.T[0],units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(10 ** raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(10 ** raw.T[1], units="yr**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        (10**raw.T[1] - 10**raw.T[2])/10**raw.T[0],
-        (10**raw.T[3] - 10**raw.T[1])/10**raw.T[0],
+        10 ** raw.T[1] - 10 ** raw.T[2],
+        10 ** raw.T[3] - 10 ** raw.T[1],
     ],
-    units="yr**(-1) * Msun**(-1)",
+    units="yr**(-1)",
 )
 
-dMstar = 0.45/2.
+dMstar = 0.45 / 2.0
 
 Mstar_err = unyt.unyt_array(
     [
-        10 ** (raw.T[0]) - 10**(raw.T[0]-dMstar),
+        10 ** (raw.T[0]) - 10 ** (raw.T[0] - dMstar),
         10 ** (raw.T[0] + dMstar) - 10 ** (raw.T[0]),
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Stellar mass")
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate"
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Stellar mass"
 )
+processed.associate_y(SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate")
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
 processed.associate_comment(comment)

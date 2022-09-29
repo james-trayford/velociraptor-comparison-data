@@ -1,5 +1,6 @@
 from velociraptor.observations.objects import ObservationalData
 
+# coding=utf8
 import unyt
 import numpy as np
 import os
@@ -9,7 +10,7 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename = "../raw/SNIa_rate_vs_SFR_Graur_2017.txt"
+input_filename = "../raw/SNIa_rate_vs_gas_metallicity_Graur_2017.txt"
 
 output_filename = "Graur2017.hdf5"
 output_directory = "../"
@@ -23,32 +24,34 @@ raw = np.loadtxt(input_filename)
 comment = "LOSS [$z \\approx 0.2$]"
 citation = "Graur et al. (2017)"
 bibcode = "2017ApJ...837..120G"
-name = "Star Formation Rates-SNIa Rate per Stellar Mass"
+name = "Gas metallicity - SNIa Rate per Stellar Mass"
 plot_as = "points"
 redshift = 0.2
 h_obs = 0.7
 h = cosmology.h
 
-SFR =  unyt.unyt_array(10**raw.T[0],units="Msun/year")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+gasZ = unyt.unyt_array(raw.T[0], units="dimensionless")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        raw.T[4]*1e-12,
-        raw.T[5]*1e-12,
+        raw.T[4] * 1e-12,
+        raw.T[5] * 1e-12,
     ],
     units="yr**(-1) * Msun**(-1)",
 )
 
-SFR_err = unyt.unyt_array(
+gasZ_err = unyt.unyt_array(
     [
-        10 ** (raw.T[0]) - 10**(raw.T[0]-raw.T[1]),
-        10 ** (raw.T[0] + raw.T[2]) - 10 ** (raw.T[0]),
+        raw.T[1],
+        raw.T[2],
     ],
-    units="Msun/year",
+    units="dimensionless",
 )
 
-processed.associate_x(SFR, scatter=SFR_err, comoving=True, description="Star Formation rate")
+processed.associate_x(
+    gasZ, scatter=gasZ_err, comoving=False, description="SF Gas 12+log(O/H) from Z"
+)
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
 )

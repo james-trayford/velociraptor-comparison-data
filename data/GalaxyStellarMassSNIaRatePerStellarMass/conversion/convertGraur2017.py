@@ -9,9 +9,9 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename = "../raw/Graur_2015_all.txt"
+input_filename = "../raw/Graur_2017_all.txt"
 
-output_filename = "Graur2015.hdf5"
+output_filename = "Graur2017.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -20,35 +20,37 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-comment = "LOSS [$z \\approx 0.075$]"
-citation = "Graur et al. (2015)"
-bibcode = "2015MNRAS.450..905G"
+comment = "LOSS [$z \\approx 0.2$]"
+citation = "Graur et al. (2017)"
+bibcode = "2017ApJ...837..120G"
 name = "Stellar mass-SNIa Rate per Stellar Mass"
 plot_as = "points"
-redshift = 0.075
+redshift = 0.2
 h_obs = 0.7
 h = cosmology.h
 
-Mstar =  unyt.unyt_array(1e10*raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        np.sqrt(raw.T[4]**2 + raw.T[5]**2)*1e-12,
-        np.sqrt(raw.T[6]**2 + raw.T[7]**2)*1e-12,
+        raw.T[4] * 1e-12,
+        raw.T[5] * 1e-12,
     ],
     units="yr**(-1) * Msun**(-1)",
 )
 
 Mstar_err = unyt.unyt_array(
     [
-        1e10*raw.T[1],
-        1e10*raw.T[2],
+        1e10 * raw.T[1],
+        1e10 * raw.T[2],
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass")
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
+)
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
 )
@@ -66,9 +68,9 @@ if os.path.exists(output_path):
 
 processed.write(filename=output_path)
 
-input_filename = "../raw/Graur_2015_SF.txt"
+input_filename = "../raw/Graur_2017_passive.txt"
 
-output_filename = "Graur2015_SF.hdf5"
+output_filename = "Graur2017_passive.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -77,28 +79,30 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-comment = "LOSS [$z \\approx 0.075$, SF galaxies]"
+comment = "LOSS [$z \\approx 0.2$, passive only]"
 
-Mstar =  unyt.unyt_array(1e10*raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        np.sqrt(raw.T[4]**2 + raw.T[5]**2)*1e-12,
-        np.sqrt(raw.T[6]**2 + raw.T[7]**2)*1e-12,
+        raw.T[4] * 1e-12,
+        raw.T[5] * 1e-12,
     ],
     units="yr**(-1) * Msun**(-1)",
 )
 
 Mstar_err = unyt.unyt_array(
     [
-        1e10*raw.T[1],
-        1e10*raw.T[2],
+        1e10 * raw.T[1],
+        1e10 * raw.T[2],
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass")
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
+)
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
 )
@@ -116,9 +120,9 @@ if os.path.exists(output_path):
 
 processed.write(filename=output_path)
 
-input_filename = "../raw/Graur_2015_passive.txt"
+input_filename = "../raw/Graur_2017_active.txt"
 
-output_filename = "Graur2015_passive.hdf5"
+output_filename = "Graur2017_active.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -127,28 +131,30 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-comment = "LOSS [$z \\approx 0.075$, passive galaxies]"
+comment = "LOSS [$z \\approx 0.2$, active only]"
 
-Mstar =  unyt.unyt_array(1e10*raw.T[0],units="Msun")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        np.sqrt(raw.T[4]**2 + raw.T[5]**2)*1e-12,
-        np.sqrt(raw.T[6]**2 + raw.T[7]**2)*1e-12,
+        raw.T[4] * 1e-12,
+        raw.T[5] * 1e-12,
     ],
     units="yr**(-1) * Msun**(-1)",
 )
 
 Mstar_err = unyt.unyt_array(
     [
-        1e10*raw.T[1],
-        1e10*raw.T[2],
+        1e10 * raw.T[1],
+        1e10 * raw.T[2],
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass")
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
+)
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
 )

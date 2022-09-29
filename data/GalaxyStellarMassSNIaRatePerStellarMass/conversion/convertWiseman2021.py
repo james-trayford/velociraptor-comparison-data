@@ -29,27 +29,29 @@ redshift = 0.5
 h_obs = 0.7
 h = cosmology.h
 
-Mstar =  unyt.unyt_array(10**raw.T[0],units="Msun")
-SNIa_rate = unyt.unyt_array(10**raw.T[1],units="yr**(-1) * Msun**(-1)")
+Mstar = unyt.unyt_array(10 ** raw.T[0], units="Msun")
+SNIa_rate = unyt.unyt_array(10 ** raw.T[1], units="yr**(-1) * Msun**(-1)")
 
 SNIa_log_err = raw.T[2]
 SNIa_err = unyt.unyt_array(
     [
-        10**raw.T[1]-10**(raw.T[1]-SNIa_log_err),
-        10**(raw.T[1]+SNIa_log_err)-10**raw.T[1],
+        10 ** raw.T[1] - 10 ** (raw.T[1] - SNIa_log_err),
+        10 ** (raw.T[1] + SNIa_log_err) - 10 ** raw.T[1],
     ],
     units="yr**(-1) * Msun**(-1)",
 )
-dMstar = 0.25/2.
+dMstar = 0.25 / 2.0
 Mstar_err = unyt.unyt_array(
     [
-        10 ** (raw.T[0]) - 10**(raw.T[0]-dMstar),
+        10 ** (raw.T[0]) - 10 ** (raw.T[0] - dMstar),
         10 ** (raw.T[0] + dMstar) - 10 ** (raw.T[0]),
     ],
     units="Msun",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy Stellar Mass")
+processed.associate_x(
+    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy Stellar Mass"
+)
 processed.associate_y(
     SNIa_rate, scatter=SNIa_err, comoving=False, description="SNIa rate"
 )

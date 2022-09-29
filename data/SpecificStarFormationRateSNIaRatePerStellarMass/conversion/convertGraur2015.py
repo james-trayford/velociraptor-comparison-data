@@ -9,9 +9,9 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename = "../raw/Wiseman2021.txt"
+input_filename = "../raw/SNIa_rate_vs_sSFR_Graur_2015.txt"
 
-output_filename = "Wiseman2021.hdf5"
+output_filename = "Graur2015.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -20,38 +20,39 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-comment = "DES [$0.2 <z <0.6$]"
-citation = "Wiseman et al. (2021)"
-bibcode = "2021MNRAS.506.3330W"
-name = "Galaxy Stellar Mass-SNIa rate"
+comment = "LOSS [$z \\approx 0.075$]"
+citation = "Graur et al. (2015)"
+bibcode = "2015MNRAS.450..905G"
+name = "Specific Star Formation Rates-SNIa Rate per Stellar Mass"
 plot_as = "points"
-redshift = 0.5
+redshift = 0.075
 h_obs = 0.7
 h = cosmology.h
 
-Mstar =  unyt.unyt_array(10**raw.T[0],units="Msun")
-SNIa_rate = unyt.unyt_array(10**raw.T[1],units="yr**(-1)")
+SFR = unyt.unyt_array(1e-3 * raw.T[0], units="1/gigayear")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
-SNIa_log_err = raw.T[2]
-SNIa_err = unyt.unyt_array(
+SNuM_err = unyt.unyt_array(
     [
-        10**raw.T[1]-10**(raw.T[1]-SNIa_log_err),
-        10**(raw.T[1]+SNIa_log_err)-10**raw.T[1],
+        np.sqrt(raw.T[4] ** 2 + raw.T[5] ** 2) * 1e-12,
+        np.sqrt(raw.T[6] ** 2 + raw.T[7] ** 2) * 1e-12,
     ],
-    units="yr**(-1)",
-)
-dMstar = 0.25/2.
-Mstar_err = unyt.unyt_array(
-    [
-        10 ** (raw.T[0]) - 10**(raw.T[0]-dMstar),
-        10 ** (raw.T[0] + dMstar) - 10 ** (raw.T[0]),
-    ],
-    units="Msun",
+    units="yr**(-1) * Msun**(-1)",
 )
 
-processed.associate_x(Mstar, scatter=Mstar_err, comoving=True, description="Galaxy Stellar Mass")
+SFR_err = unyt.unyt_array(
+    [
+        1e-3 * raw.T[1],
+        1e-3 * raw.T[2],
+    ],
+    units="1/gigayear",
+)
+
+processed.associate_x(
+    SFR, scatter=SFR_err, comoving=True, description="Specific Star Formation rate"
+)
 processed.associate_y(
-    SNIa_rate, scatter=SNIa_err, comoving=False, description="SNIa rate"
+    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)

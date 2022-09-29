@@ -29,26 +29,28 @@ redshift = 0.2
 h_obs = 0.7
 h = cosmology.h
 
-SFR =  unyt.unyt_array(10**raw.T[0],units="1/year")
-SNuM = unyt.unyt_array(raw.T[3]*1e-12,units="yr**(-1) * Msun**(-1)")
+SFR = unyt.unyt_array(10 ** raw.T[0], units="1/year")
+SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        raw.T[4]*1e-12,
-        raw.T[5]*1e-12,
+        raw.T[4] * 1e-12,
+        raw.T[5] * 1e-12,
     ],
     units="yr**(-1) * Msun**(-1)",
 )
 
 SFR_err = unyt.unyt_array(
     [
-        10 ** (raw.T[0]) - 10**(raw.T[0]-raw.T[1]),
+        10 ** (raw.T[0]) - 10 ** (raw.T[0] - raw.T[1]),
         10 ** (raw.T[0] + raw.T[2]) - 10 ** (raw.T[0]),
     ],
     units="1/year",
 )
 
-processed.associate_x(SFR, scatter=SFR_err, comoving=True, description="Specific Star Formation rate")
+processed.associate_x(
+    SFR, scatter=SFR_err, comoving=True, description="Specific Star Formation rate"
+)
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
 )
