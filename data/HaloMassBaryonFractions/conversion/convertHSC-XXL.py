@@ -47,9 +47,38 @@ def def_fgas_Aki(M500, z):
     return fgas, fgas_err
 
 
+# Create a function for the fit from the paper
+def def_fstar_Aki(M500, z):
+    # Cosmology correct M500 to cited cosmology
+    M500_cc = M500 * (h_sim / 0.70) ** (1.0)
+    # Convert to scale free
+    M500_cc_e = M500_cc * FLATCDM.efunc(z)
+    # Calculate ration with the pivot
+    Z = np.log(M500_cc_e / 1e14)
+    # Calculate the term in the exponent
+    exp_term = 0.76 + 0.85 * Z
+    # Calculate Mstar*E(z)
+    Mstar_e = np.exp(exp_term) * 1e12
+    # Convert it to Mstar
+    Mstar = Mstar_e / FLATCDM.efunc(z)
+    # Calculate fgas and cosmology correct it
+    fstar = Mstar * (h_sim / 0.70) ** (-1.5) / M500_cc
+    # Error in the exponent
+    err_on_exp = np.sqrt(0.09 ** 2 + (0.12) ** 2 * Z ** 2)
+    # Convert to linear error
+    lin_err = np.abs(err_on_exp * np.exp(0.76 + 0.85 * Z) * 1e12)
+    # Apply cosmology correction terms
+    fstar_err = lin_err * (h_sim / 0.70) ** (-1.5) / (M500_cc * FLATCDM.efunc(z))
+    return fstar, fstar_err
+
+
 # Read the data
 M_500 = np.array([10 ** (13.5), 10 ** (14.5)])
-fb_500, error_fb_500_p = def_fgas_Aki(M_500, 0.3)
+fs_500, error_fs_500_p = def_fstar_Aki(M_500, 0.3)
+fg_500, error_fg_500_p = def_fgas_Aki(M_500, 0.3)
+
+fb_500 = fs_500 + fg_500
+error_fb_500_p = np.sqrt(error_fs_500_p ** 2 + error_fg_500_p ** 2)
 
 # Convert to proper units
 M_500 = unyt.unyt_array(M_500, units="Msun")
