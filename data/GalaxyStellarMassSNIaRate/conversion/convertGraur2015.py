@@ -10,14 +10,14 @@ with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
 input_filename_array = [
-    "../raw/Graur_2017_all.txt",
-    "../raw/Graur_2017_passive.txt",
-    "../raw/Graur_2017_active.txt",
+    "../raw/Graur_2015_all.txt",
+    "../raw/Graur_2015_passive.txt",
+    "../raw/Graur_2015_active.txt",
 ]
 output_filename_array = [
-    "Graur2017.hdf5",
-    "Graur2017_passive.hdf5",
-    "Graur2017_active.hdf5",
+    "Graur2015.hdf5",
+    "Graur2015_passive.hdf5",
+    "Graur2015_active.hdf5",
 ]
 
 for i in range(0, len(input_filename_array)):
@@ -33,16 +33,16 @@ for i in range(0, len(input_filename_array)):
     processed = ObservationalData()
     raw = np.loadtxt(input_filename)
 
-    comment = "LOSS [$z \\approx 0.2$]"
-    if i==1:
-        comment = "LOSS [$z \\approx 0.2$, passive only]"
-    elif i==2:
-        comment = "LOSS [$z \\approx 0.2$, active only]"
-    citation = "Graur et al. (2017)"
-    bibcode = "2017ApJ...837..120G"
+    comment = "LOSS [$z \\approx 0.075$]"
+    if i == 1:
+        comment = "LOSS [$z \\approx 0.075$, passive only]"
+    elif i == 2:
+        comment = "LOSS [$z \\approx 0.075$, active only]"
+    citation = "Graur et al. (2015)"
+    bibcode = "2015MNRAS.450..905G"
     name = "Stellar mass-SNIa Rate"
     plot_as = "points"
-    redshift = 0.2
+    redshift = 0.075
     h_obs = 0.7
     h = cosmology.h
 
