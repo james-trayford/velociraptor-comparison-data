@@ -48,7 +48,6 @@ redshift = 0.0
 h = h_sim
 
 for mask, text in zip([no_limits, upper_limits], ["without", "only"]):
-    print(text)
 
     BH_mass_masked = BH_mass[mask]
     BH_mass_scatter_masked = unyt.unyt_array(
