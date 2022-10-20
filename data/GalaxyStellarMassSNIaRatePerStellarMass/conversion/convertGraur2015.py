@@ -9,165 +9,67 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename = "../raw/Graur_2015_all.txt"
+input_filename_array = ["../raw/Graur_2015_all.txt", "../raw/Graur_2015_passive.txt", "../raw/Graur_2015_SF.txt"]
+output_filename_array = ["Graur2015.hdf5", "Graur2015_passive.hdf5", "Graur2015_active.hdf5"]
 
-output_filename = "Graur2015.hdf5"
-output_directory = "../"
+for i in range(0,len(input_filename_array)):
 
-if not os.path.exists(output_directory):
-    os.mkdir(output_directory)
+    input_filename = input_filename_array[i]
 
-processed = ObservationalData()
-raw = np.loadtxt(input_filename)
+    output_filename = output_filename_array[i]
+    output_directory = "../"
 
-comment = "LOSS [$z \\approx 0.075$]"
-citation = "Graur et al. (2015)"
-bibcode = "2015MNRAS.450..905G"
-name = "Stellar mass-SNIa Rate per Stellar Mass"
-plot_as = "points"
-redshift = 0.075
-h_obs = 0.7
-h = cosmology.h
+    if not os.path.exists(output_directory):
+        os.mkdir(output_directory)
 
-Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
-SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
+    processed = ObservationalData()
+    raw = np.loadtxt(input_filename)
 
-SNuM_err = unyt.unyt_array(
-    [
-        np.sqrt(raw.T[4] ** 2 + raw.T[5] ** 2) * 1e-12,
-        np.sqrt(raw.T[6] ** 2 + raw.T[7] ** 2) * 1e-12,
-    ],
-    units="yr**(-1) * Msun**(-1)",
-)
+    comment = "LOSS [$z \\approx 0.075$]"
+    citation = "Graur et al. (2015)"
+    bibcode = "2015MNRAS.450..905G"
+    name = "Stellar mass-SNIa Rate per Stellar Mass"
+    plot_as = "points"
+    redshift = 0.075
+    h_obs = 0.7
+    h = cosmology.h
 
-Mstar_err = unyt.unyt_array(
-    [
-        1e10 * raw.T[1],
-        1e10 * raw.T[2],
-    ],
-    units="Msun",
-)
+    Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
+    SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
 
-processed.associate_x(
-    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
-)
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
-)
-processed.associate_citation(citation, bibcode)
-processed.associate_name(name)
-processed.associate_comment(comment)
-processed.associate_redshift(redshift)
-processed.associate_plot_as(plot_as)
-processed.associate_cosmology(cosmology)
+    SNuM_err = unyt.unyt_array(
+        [
+            np.sqrt(raw.T[4] ** 2 + raw.T[5] ** 2) * 1e-12,
+            np.sqrt(raw.T[6] ** 2 + raw.T[7] ** 2) * 1e-12,
+        ],
+        units="yr**(-1) * Msun**(-1)",
+    )
 
-output_path = f"{output_directory}/{output_filename}"
+    Mstar_err = unyt.unyt_array(
+        [
+            1e10 * raw.T[1],
+            1e10 * raw.T[2],
+        ],
+        units="Msun",
+    )
 
-if os.path.exists(output_path):
-    os.remove(output_path)
+    processed.associate_x(
+        Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
+    )
+    processed.associate_y(
+        SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
+    )
+    processed.associate_citation(citation, bibcode)
+    processed.associate_name(name)
+    processed.associate_comment(comment)
+    processed.associate_redshift(redshift)
+    processed.associate_plot_as(plot_as)
+    processed.associate_cosmology(cosmology)
 
-processed.write(filename=output_path)
+    output_path = f"{output_directory}/{output_filename}"
 
-input_filename = "../raw/Graur_2015_SF.txt"
+    if os.path.exists(output_path):
+        os.remove(output_path)
 
-output_filename = "Graur2015_SF.hdf5"
-output_directory = "../"
+    processed.write(filename=output_path)
 
-if not os.path.exists(output_directory):
-    os.mkdir(output_directory)
-
-processed = ObservationalData()
-raw = np.loadtxt(input_filename)
-
-comment = "LOSS [$z \\approx 0.075$, SF galaxies]"
-
-Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
-SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
-
-SNuM_err = unyt.unyt_array(
-    [
-        np.sqrt(raw.T[4] ** 2 + raw.T[5] ** 2) * 1e-12,
-        np.sqrt(raw.T[6] ** 2 + raw.T[7] ** 2) * 1e-12,
-    ],
-    units="yr**(-1) * Msun**(-1)",
-)
-
-Mstar_err = unyt.unyt_array(
-    [
-        1e10 * raw.T[1],
-        1e10 * raw.T[2],
-    ],
-    units="Msun",
-)
-
-processed.associate_x(
-    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
-)
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
-)
-processed.associate_citation(citation, bibcode)
-processed.associate_name(name)
-processed.associate_comment(comment)
-processed.associate_redshift(redshift)
-processed.associate_plot_as(plot_as)
-processed.associate_cosmology(cosmology)
-
-output_path = f"{output_directory}/{output_filename}"
-
-if os.path.exists(output_path):
-    os.remove(output_path)
-
-processed.write(filename=output_path)
-
-input_filename = "../raw/Graur_2015_passive.txt"
-
-output_filename = "Graur2015_passive.hdf5"
-output_directory = "../"
-
-if not os.path.exists(output_directory):
-    os.mkdir(output_directory)
-
-processed = ObservationalData()
-raw = np.loadtxt(input_filename)
-
-comment = "LOSS [$z \\approx 0.075$, passive galaxies]"
-
-Mstar = unyt.unyt_array(1e10 * raw.T[0], units="Msun")
-SNuM = unyt.unyt_array(raw.T[3] * 1e-12, units="yr**(-1) * Msun**(-1)")
-
-SNuM_err = unyt.unyt_array(
-    [
-        np.sqrt(raw.T[4] ** 2 + raw.T[5] ** 2) * 1e-12,
-        np.sqrt(raw.T[6] ** 2 + raw.T[7] ** 2) * 1e-12,
-    ],
-    units="yr**(-1) * Msun**(-1)",
-)
-
-Mstar_err = unyt.unyt_array(
-    [
-        1e10 * raw.T[1],
-        1e10 * raw.T[2],
-    ],
-    units="Msun",
-)
-
-processed.associate_x(
-    Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
-)
-processed.associate_y(
-    SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
-)
-processed.associate_citation(citation, bibcode)
-processed.associate_name(name)
-processed.associate_comment(comment)
-processed.associate_redshift(redshift)
-processed.associate_plot_as(plot_as)
-processed.associate_cosmology(cosmology)
-
-output_path = f"{output_directory}/{output_filename}"
-
-if os.path.exists(output_path):
-    os.remove(output_path)
-
-processed.write(filename=output_path)
