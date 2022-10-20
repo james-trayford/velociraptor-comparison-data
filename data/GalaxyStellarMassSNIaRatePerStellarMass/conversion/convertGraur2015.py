@@ -9,10 +9,18 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename_array = ["../raw/Graur_2015_all.txt", "../raw/Graur_2015_passive.txt", "../raw/Graur_2015_SF.txt"]
-output_filename_array = ["Graur2015.hdf5", "Graur2015_passive.hdf5", "Graur2015_active.hdf5"]
+input_filename_array = [
+    "../raw/Graur_2015_all.txt",
+    "../raw/Graur_2015_passive.txt",
+    "../raw/Graur_2015_SF.txt",
+]
+output_filename_array = [
+    "Graur2015.hdf5",
+    "Graur2015_passive.hdf5",
+    "Graur2015_active.hdf5",
+]
 
-for i in range(0,len(input_filename_array)):
+for i in range(0, len(input_filename_array)):
 
     input_filename = input_filename_array[i]
 
@@ -26,6 +34,10 @@ for i in range(0,len(input_filename_array)):
     raw = np.loadtxt(input_filename)
 
     comment = "LOSS [$z \\approx 0.075$]"
+    if i == 1:
+        comment = "LOSS [$z \\approx 0.075$, passive only]"
+    elif i == 2:
+        comment = "LOSS [$z \\approx 0.075$, active only]"
     citation = "Graur et al. (2015)"
     bibcode = "2015MNRAS.450..905G"
     name = "Stellar mass-SNIa Rate per Stellar Mass"
@@ -72,4 +84,3 @@ for i in range(0,len(input_filename_array)):
         os.remove(output_path)
 
     processed.write(filename=output_path)
-
