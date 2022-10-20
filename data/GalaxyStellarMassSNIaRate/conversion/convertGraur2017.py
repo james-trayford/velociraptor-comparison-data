@@ -34,9 +34,9 @@ for i in range(0, len(input_filename_array)):
     raw = np.loadtxt(input_filename)
 
     comment = "LOSS [$z \\approx 0.2$]"
-    if i==1:
+    if i == 1:
         comment = "LOSS [$z \\approx 0.2$, passive only]"
-    elif i==2:
+    elif i == 2:
         comment = "LOSS [$z \\approx 0.2$, active only]"
     citation = "Graur et al. (2017)"
     bibcode = "2017ApJ...837..120G"
@@ -68,7 +68,9 @@ for i in range(0, len(input_filename_array)):
     processed.associate_x(
         Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
     )
-    processed.associate_y(SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate")
+    processed.associate_y(
+        SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate"
+    )
     processed.associate_citation(citation, bibcode)
     processed.associate_name(name)
     processed.associate_comment(comment)
@@ -82,4 +84,3 @@ for i in range(0, len(input_filename_array)):
         os.remove(output_path)
 
     processed.write(filename=output_path)
-
