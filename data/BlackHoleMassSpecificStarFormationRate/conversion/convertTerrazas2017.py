@@ -35,30 +35,10 @@ BH_mass_hi = unyt.unyt_array(10 ** (data[:, 3] + data[:, 4]), units="Solar_Mass"
 BH_mass_lo = unyt.unyt_array(10 ** (data[:, 3] - data[:, 4]), units="Solar_Mass")
 BH_mass_scatter = unyt.unyt_array([BH_mass - BH_mass_lo, BH_mass_hi - BH_mass])
 
-# Upper limits
+# Masks
 upper_limits = np.array(data[:, 2], dtype=bool)
-print(upper_limits)
 no_limits = np.logical_not(upper_limits)
 
-print(no_limits)
-
-# First, data without upper limits #########################
-BH_mass_no_limit = BH_mass[no_limits]
-BH_mass_scatter_no_limit = unyt.unyt_array(
-    [BH_mass_scatter[0][no_limits], BH_mass_scatter[1][no_limits]]
-)
-sSFR_no_limit = sSFR[no_limits]
-sSFR_scatter_no_limit = unyt.unyt_array(
-    [sSFR_scatter[0][no_limits], sSFR_scatter[1][no_limits]]
-)
-
-# Meta-data
-comment = (
-    "Selection of local galaxies with masses > 10^10 Msun. "
-    "Data with upper limits removed. "
-    f"No cosmology correction needed."
-)
-citation = f"Terrazas (2017) "
 bibcode = "2017ApJ...844..170T"
 name = "Black hole mass - Specific Star Formation Rate relation"
 plot_as = "points"
@@ -67,95 +47,53 @@ redshift_lower, redshift_upper = -0.1, 3.1
 redshift = 0.0
 h = h_sim
 
-# Write everything
-processed = ObservationalData()
-processed.associate_x(
-    BH_mass_no_limit,
-    scatter=BH_mass_scatter_no_limit,
-    comoving=True,
-    description="Black Hole Mass",
-)
-processed.associate_y(
-    sSFR_no_limit,
-    scatter=sSFR_scatter_no_limit,
-    comoving=True,
-    description="Specific Star Formation Rate",
-)
-processed.associate_citation(citation, bibcode)
-processed.associate_name(name)
-processed.associate_comment(comment)
-processed.associate_redshift(redshift, redshift_lower, redshift_upper)
-processed.associate_plot_as(plot_as)
-processed.associate_cosmology(cosmology)
+for mask, text in zip([no_limits, upper_limits], ["without", "only"]):
+    print(text)
 
-output_filename = "Terrazas2017.hdf5"
-output_directory = "../"
+    BH_mass_masked = BH_mass[mask]
+    BH_mass_scatter_masked = unyt.unyt_array(
+        [BH_mass_scatter[0][mask], BH_mass_scatter[1][mask]]
+    )
+    sSFR_masked = sSFR[mask]
+    sSFR_scatter_masked = unyt.unyt_array(
+        [sSFR_scatter[0][mask], sSFR_scatter[1][mask]]
+    )
 
-if not os.path.exists(output_directory):
-    os.mkdir(output_directory)
+    comment = (
+        f"Selection of local galaxies with masses > 10^10 Msun. "
+        f"Data, {text} upper limits. "
+        f"No cosmology correction needed."
+    )
+    citation = f"Terrazas (2017) ({text} upper limits)"
 
-output_path = f"{output_directory}/{output_filename}"
+    # Write everything
+    processed = ObservationalData()
+    processed.associate_citation(citation, bibcode)
+    processed.associate_name(name)
+    processed.associate_comment(comment)
+    processed.associate_redshift(redshift, redshift_lower, redshift_upper)
+    processed.associate_plot_as(plot_as)
+    processed.associate_cosmology(cosmology)
 
-if os.path.exists(output_path):
-    os.remove(output_path)
+    processed.associate_x(
+        BH_mass_masked,
+        scatter=BH_mass_scatter_masked,
+        comoving=True,
+        description="Black Hole Mass",
+    )
+    processed.associate_y(
+        sSFR_masked,
+        scatter=sSFR_scatter_masked,
+        comoving=True,
+        description="Specific Star Formation Rate",
+    )
 
-processed.write(filename=output_path)
+    output_filename = f"Terrazas2017_{text}_upper_limits.hdf5"
+    output_directory = "../"
 
-# Second, data with upper limits #########################
-BH_mass_upper_limit = BH_mass[upper_limits]
-BH_mass_scatter_upper_limit = unyt.unyt_array(
-    [BH_mass_scatter[0][upper_limits], BH_mass_scatter[1][upper_limits]]
-)
-sSFR_upper_limit = sSFR[upper_limits]
-sSFR_scatter_upper_limit = unyt.unyt_array(
-    [sSFR_scatter[0][upper_limits], sSFR_scatter[1][upper_limits]]
-)
+    output_path = f"{output_directory}/{output_filename}"
 
-# Meta-data
-comment = (
-    "Selection of local galaxies with masses > 10^10 Msun. "
-    "Only upper limits considered. "
-    f"No cosmology correction needed."
-)
-citation = f"Terrazas (2017) - upper limits"
-bibcode = "2017ApJ...844..170T"
-name = "Black hole mass - Specific Star Formation Rate relation"
-plot_as = "points"
-# We purposely make this data show up not only a z=0 but also at higher z
-redshift_lower, redshift_upper = -0.1, 3.1
-redshift = 0.0
-h = h_sim
+    if os.path.exists(output_path):
+        os.remove(output_path)
 
-# Write everything
-processed = ObservationalData()
-processed.associate_x(
-    BH_mass_upper_limit,
-    scatter=BH_mass_scatter_upper_limit,
-    comoving=True,
-    description="Black Hole Mass",
-)
-processed.associate_y(
-    sSFR_upper_limit,
-    scatter=None,
-    comoving=True,
-    description="Specific Star Formation Rate",
-)
-processed.associate_citation(citation, bibcode)
-processed.associate_name(name)
-processed.associate_comment(comment)
-processed.associate_redshift(redshift, redshift_lower, redshift_upper)
-processed.associate_plot_as(plot_as)
-processed.associate_cosmology(cosmology)
-
-output_filename = "Terrazas2017_upper_limits.hdf5"
-output_directory = "../"
-
-if not os.path.exists(output_directory):
-    os.mkdir(output_directory)
-
-output_path = f"{output_directory}/{output_filename}"
-
-if os.path.exists(output_path):
-    os.remove(output_path)
-
-processed.write(filename=output_path)
+    processed.write(filename=output_path)
