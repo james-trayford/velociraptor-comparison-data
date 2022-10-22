@@ -54,9 +54,17 @@ for mask, text in zip([no_limits, upper_limits], ["without", "only"]):
         [BH_mass_scatter[0][mask], BH_mass_scatter[1][mask]]
     )
     sSFR_masked = sSFR[mask]
-    sSFR_scatter_masked = unyt.unyt_array(
-        [sSFR_scatter[0][mask], sSFR_scatter[1][mask]]
-    )
+
+    # No upper limits
+    if text == "without":
+        sSFR_scatter_masked = unyt.unyt_array(
+            [sSFR_scatter[0][mask], sSFR_scatter[1][mask]]
+        )
+    # Upper limits
+    else:
+        sSFR_scatter_masked = unyt.unyt_array(
+            [sSFR_scatter[0][mask], np.zeros_like(sSFR[mask])]
+        )
 
     comment = (
         f"Selection of local galaxies with masses > 10^10 Msun. "
