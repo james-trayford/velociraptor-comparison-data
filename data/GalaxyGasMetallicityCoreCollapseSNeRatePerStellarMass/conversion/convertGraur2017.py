@@ -66,12 +66,20 @@ for i in range(0, len(input_filename_array)):
     processed.associate_x(
         gasZ, scatter=gasZ_err, comoving=False, description="SF Gas 12+log(O/H) from Z"
     )
-    processed.associate_y(
-        SNuM,
-        scatter=SNuM_err,
-        comoving=False,
-        description="SE SNe rate per stellar mass",
-    )
+    if i == 0:
+        processed.associate_y(
+            SNuM,
+            scatter=SNuM_err,
+            comoving=False,
+            description="SE SNe rate per stellar mass",
+        )
+    elif i == 1:
+        processed.associate_y(
+            SNuM,
+            scatter=SNuM_err,
+            comoving=False,
+            description="SNII rate per stellar mass",
+        )
     processed.associate_citation(citation, bibcode)
     processed.associate_name(name)
     processed.associate_comment(comment)
