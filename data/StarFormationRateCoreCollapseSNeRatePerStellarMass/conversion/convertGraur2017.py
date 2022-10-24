@@ -34,9 +34,9 @@ for i in range(0, len(input_filename_array)):
     comment = "LOSS [$z \\approx 0.2$]"
     citation = "Graur et al. (2017)"
     bibcode = "2017ApJ...837..120G"
-    if i==0:
+    if i == 0:
         name = "Star Formation Rates-SE SN Rate per Stellar Mass"
-    elif i==1:
+    elif i == 1:
         name = "Star Formation Rates-SNII Rate per Stellar Mass"
     plot_as = "points"
     redshift = 0.2
@@ -65,13 +65,19 @@ for i in range(0, len(input_filename_array)):
     processed.associate_x(
         SFR, scatter=SFR_err, comoving=True, description="Star Formation rate"
     )
-    if i==0:
+    if i == 0:
         processed.associate_y(
-            SNuM, scatter=SNuM_err, comoving=False, description="SE SNe rate per stellar mass"
+            SNuM,
+            scatter=SNuM_err,
+            comoving=False,
+            description="SE SNe rate per stellar mass",
         )
-    elif i==1:
+    elif i == 1:
         processed.associate_y(
-            SNuM, scatter=SNuM_err, comoving=False, description="SNII rate per stellar mass"
+            SNuM,
+            scatter=SNuM_err,
+            comoving=False,
+            description="SNII rate per stellar mass",
         )
     processed.associate_citation(citation, bibcode)
     processed.associate_name(name)
