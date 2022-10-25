@@ -11,7 +11,6 @@ with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
 input_filename = "../raw/Shen2020.txt"
-delimiter = None
 
 output_filename_base = "Shen2020_"
 output_directory = "../"
@@ -22,9 +21,7 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 
 # Read the data (only those columns we need here)
-raw = np.genfromtxt(
-    input_filename, dtype=None, usecols=(0, 1, 2, 3, 4, 5)
-)  # np.loadtxt(input_filename, delimiter=delimiter, dtype = ('str','float','float','float','float','float'),usecols=(0, 1, 2, 3, 4, 5))
+raw = np.genfromtxt(input_filename, dtype=None, usecols=(0, 1, 2, 3, 4, 5))
 
 wavelength_band = np.array([raw[j][0].decode("utf-8") for j in range(len(raw))])
 redshifts = np.array([raw[j][1] for j in range(len(raw))])
@@ -54,17 +51,10 @@ x_scatter = unyt.unyt_array((L - L_low, L_high - L))
 y_scatter = unyt.unyt_array((Phi - Phi_low, Phi_high - Phi_low))
 
 wavelength_band_types = ["hard_X_ray", "soft_X_ray", "B_band", "UV", "mid_IR"]
-citations = [
-    "Shen+ (2020), hard_X_rays",
-    "Shen+ (2020), soft_X_rays",
-    "Shen+ (2020), B_band",
-    "Shen+ (2020), UV",
-    "Shen+ (2020), mid_IR",
-]
+citations = [f"Shen+ (2020), {band}" for band in wavelength_band_types]
 redshift_list = [round((i + 1) * 0.2, 2) for i in range(30) if i != 27]
 redshift_list.append(6.6)
 redshift_list.append(7.0)
-
 
 # Let's write 5 different files for each wavelength type.
 for i in range(np.size(wavelength_band_types)):
@@ -88,17 +78,15 @@ for i in range(np.size(wavelength_band_types)):
 
     # Loop over all data in terms of redshift
     for z in redshift_list:
+        mask = (wavelength_band == wavelength_band_types[i]) & (redshifts == z)
+
         processed = ObservationalData()
         processed.associate_x(
-            L[(wavelength_band == wavelength_band_types[i]) & (redshifts == z)],
+            L[mask],
             scatter=np.array(
                 [
-                    x_scatter[0][
-                        (wavelength_band == wavelength_band_types[i]) & (redshifts == z)
-                    ],
-                    x_scatter[1][
-                        (wavelength_band == wavelength_band_types[i]) & (redshifts == z)
-                    ],
+                    x_scatter[0][mask],
+                    x_scatter[1][mask],
                 ]
             )
             * unyt.erg
@@ -107,15 +95,11 @@ for i in range(np.size(wavelength_band_types)):
             description="AGN bolometric luminosity derived from the given band (see name of file) ",
         )
         processed.associate_y(
-            Phi[(wavelength_band == wavelength_band_types[i]) & (redshifts == z)],
+            Phi[mask],
             scatter=np.array(
                 [
-                    y_scatter[0][
-                        (wavelength_band == wavelength_band_types[i]) & (redshifts == z)
-                    ],
-                    y_scatter[1][
-                        (wavelength_band == wavelength_band_types[i]) & (redshifts == z)
-                    ],
+                    y_scatter[0][mask],
+                    y_scatter[1][mask],
                 ]
             )
             / unyt.Mpc ** 3,
@@ -129,10 +113,7 @@ for i in range(np.size(wavelength_band_types)):
         multi_z.associate_dataset(processed)
 
     output_path = (
-        f"{output_directory}/"
-        + output_filename_base
-        + wavelength_band_types[i]
-        + "_Data.hdf5"
+        f"{output_directory}/{output_filename_base}{wavelength_band_types[i]}_Data.hdf5"
     )
 
     if os.path.exists(output_path):
