@@ -9,20 +9,16 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename_array = [
-    "../raw/Smith2012_active.txt",
-    "../raw/Smith2012_passive.txt",
-]
-output_filename_array = [
-    "Smith2012_active.hdf5",
-    "Smith2012_passive.hdf5",
+variations = [
+    ("passive", "passive only"),
+    ("active", "active only"),
 ]
 
-for i in range(0, len(input_filename_array)):
+for file_prefix, comments in variations:
 
-    input_filename = input_filename_array[i]
+    input_filename = f"../raw/Smith2012_{file_prefix}.txt"
 
-    output_filename = output_filename_array[i]
+    output_filename = f"Smith2012_{file_prefix}.hdf5"
     output_directory = "../"
 
     if not os.path.exists(output_directory):
@@ -31,10 +27,7 @@ for i in range(0, len(input_filename_array)):
     processed = ObservationalData()
     raw = np.loadtxt(input_filename)
 
-    if i == 0:
-        comment = "SDSS-II SN Survey [$0.05<z<0.25$, active only]"
-    elif i == 1:
-        comment = "SDSS-II SN Survey [$0.05<z<0.25$, passive only]"
+    comment = f"SDSS-II SN Survey [$0.05<z<0.25$, {comments}]"
     citation = "Smith et al. (2012)"
     bibcode = "2012ApJ...755...61S"
     name = "Stellar mass-SNIa Rate"
