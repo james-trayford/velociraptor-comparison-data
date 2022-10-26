@@ -18,8 +18,6 @@ output_directory = "../"
 if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
-processed = ObservationalData()
-
 # Read the data (only those columns we need here)
 raw = np.genfromtxt(input_filename, dtype=None, usecols=(0, 1, 2, 3, 4, 5))
 
@@ -55,6 +53,9 @@ citations = [f"Shen+ (2020), {band}" for band in wavelength_band_types]
 redshift_list = [round((i + 1) * 0.2, 2) for i in range(30) if i != 27]
 redshift_list.append(6.6)
 redshift_list.append(7.0)
+bibcode = "2020ApJ.892.17D"
+name = "AGN Bolometric Luminosity Function"
+plot_as = "points"
 
 # Let's write 5 different files for each wavelength type.
 for i in range(np.size(wavelength_band_types)):
@@ -65,9 +66,6 @@ for i in range(np.size(wavelength_band_types)):
         + " band."
     )
     citation = citations[i]
-    bibcode = "2020ApJ.892.17D"
-    name = "AGN Bolometric Luminosity Function"
-    plot_as = "points"
 
     multi_z = MultiRedshiftObservationalData()
     multi_z.associate_citation(citation, bibcode)
@@ -81,6 +79,7 @@ for i in range(np.size(wavelength_band_types)):
         mask = (wavelength_band == wavelength_band_types[i]) & (redshifts == z)
 
         processed = ObservationalData()
+
         processed.associate_x(
             L[mask],
             scatter=np.array(
