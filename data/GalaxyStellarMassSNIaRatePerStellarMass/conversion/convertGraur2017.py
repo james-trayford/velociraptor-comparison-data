@@ -9,22 +9,17 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename_array = [
-    "../raw/Graur_2017_all.txt",
-    "../raw/Graur_2017_passive.txt",
-    "../raw/Graur_2017_active.txt",
-]
-output_filename_array = [
-    "Graur2017.hdf5",
-    "Graur2017_passive.hdf5",
-    "Graur2017_active.hdf5",
+variations = [
+    ("all", "", ""),
+    ("passive", "_passive", ", passive only"),
+    ("active", "_active", ", active only"),
 ]
 
-for i in range(0, len(input_filename_array)):
+for file_prefix, save_prefix, comments in variations:
 
-    input_filename = input_filename_array[i]
+    input_filename = f"../raw/Graur_2017_{file_prefix}.txt"
 
-    output_filename = output_filename_array[i]
+    output_filename = f"Graur2017{save_prefix}.hdf5"
     output_directory = "../"
 
     if not os.path.exists(output_directory):
@@ -32,11 +27,7 @@ for i in range(0, len(input_filename_array)):
 
     processed = ObservationalData()
     raw = np.loadtxt(input_filename)
-    comment = "LOSS [$z \\approx 0.2$]"
-    if i == 1:
-        comment = "LOSS [$z \\approx 0.2$, passive only]"
-    elif i == 2:
-        comment = "LOSS [$z \\approx 0.2$, active only]"
+    comment = f"LOSS [$z \\approx 0.2${comments}]"
     citation = "Graur et al. (2017)"
     bibcode = "2017ApJ...837..120G"
     name = "Stellar mass-SNIa Rate per Stellar Mass"

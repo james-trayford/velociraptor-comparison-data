@@ -15,7 +15,6 @@ variations = [
     ("active", "_active", ", active only"),
 ]
 
-
 for file_prefix, save_prefix, comments in variations:
 
     input_filename = f"../raw/Graur_2015_{file_prefix}.txt"
