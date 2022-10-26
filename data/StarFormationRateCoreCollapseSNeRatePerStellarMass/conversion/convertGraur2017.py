@@ -21,7 +21,6 @@ for file_prefix, description in variations:
     output_filename = f"Graur2017_{file_prefix}.hdf5"
     output_directory = "../"
 
-
     if not os.path.exists(output_directory):
         os.mkdir(output_directory)
 
