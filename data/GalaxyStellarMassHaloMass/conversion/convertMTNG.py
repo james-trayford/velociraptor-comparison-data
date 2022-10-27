@@ -9,12 +9,14 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-# Cosmologies
+# Cosmology
 h_sim = cosmology.h
+Omega_b = cosmology.Ob0
+Omega_m = cosmology.Om0
 
-input_filename = "../raw/mtng_gsmf.txt"
+input_filename = "../raw/mtng_hmsm.txt"
 
-output_filename = "MillenniumTNG.hdf5"
+output_filename = "MillenniumTNG_ratio.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -23,26 +25,32 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-Mstar = raw[:, 0] * unyt.Solar_Mass
-Phi = raw[:, 1] * unyt.Mpc ** (-3)
+M_200 = raw[:, 0] * unyt.Solar_Mass
+ratio = raw[:, 1] * unyt.dimensionless
+ratio *= Omega_b / Omega_m
 
 # Meta-data
-comment = "Data extracted from fig. 2 of the paper."
+comment = ()
 citation = "Pakmor et al. (2022) (MTNG)"
 bibcode = "2022arXiv221010060P"
-name = "GSMF from Millennium-TNG (Fig. 2)"
-redshift = 0.0
+name = "Stellar mass - halos mass relation from Millennium-TNG (Fig. 2)"
 plot_as = "line"
+redshift = 0.0
+h = h_sim
 
 # Write everything
+processed = ObservationalData()
 processed.associate_x(
-    Mstar, scatter=None, comoving=True, description="Galaxy Stellar Mass"
+    M_200,
+    scatter=None,
+    comoving=False,
+    description="Halo Mass ($M_{200, {\rm crit}}$)",
 )
 processed.associate_y(
-    Phi,
+    ratio,
     scatter=None,
     comoving=True,
-    description="Phi (GSMF)",
+    description="Galaxy Stellar Mass / Halo Mass ($M_* / M_{200, {\rm crit}}$)",
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
