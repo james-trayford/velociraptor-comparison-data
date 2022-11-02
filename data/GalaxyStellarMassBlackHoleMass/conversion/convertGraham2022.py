@@ -27,7 +27,7 @@ log_M_offset = 0.05
 log_M_bh, log_M_bh_err, log_M_star, log_M_star_err, Gal_type = [], [], [], [], []
 with open(input_filename, "r") as file:
     rows = file.readlines()
-    for num, row in enumerate(rows):
+    for row in rows:
         try:
             elements = row.split(" ")
             gal_type, bh_mass_and_err, stellar_mass_and_err = (
