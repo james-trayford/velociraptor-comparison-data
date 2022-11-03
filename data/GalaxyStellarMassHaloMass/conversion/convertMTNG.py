@@ -11,8 +11,8 @@ with open(sys.argv[1], "r") as handle:
 
 # Cosmology
 h_sim = cosmology.h
-Omega_b = cosmology.Ob0
-Omega_m = cosmology.Om0
+Omega_b = 0.0486  # Cosmology assumed by the M-TNG model
+Omega_m = 0.3089  # Cosmology assumed by the M-TNG model
 
 input_filename = "../raw/mtng_hmsm.txt"
 
