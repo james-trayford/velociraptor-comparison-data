@@ -46,7 +46,7 @@ BH_mass_scatter = unyt.unyt_array([BH_mass - BH_mass_lo, BH_mass_hi - BH_mass])
 sSFR_limit = unyt.unyt_quantity(1e-11, units="1 / year")
 
 mask_SF = sSFR >= sSFR_limit
-mask_NSF = sSFR < sSFR_limit
+mask_NSF = np.logical_not(mask_SF)
 
 bibcode = "2017ApJ...844..170T"
 name = "Black hole mass - Stellar mass relation"
@@ -56,19 +56,16 @@ redshift_lower, redshift_upper = -0.1, 3.1
 redshift = 0.0
 h = h_sim
 
-for i, output_filename, text in zip(
-    [0, 1], output_filenames, ["sSFR > 10^-11", "sSFR < 10^-11"]
+for output_filename, text, mask in zip(
+    output_filenames, ["log sSFR > -11", "log sSFR < -11"], [mask_SF, mask_NSF]
 ):
 
-    if i == 0:
-        mask = mask_SF
-    else:
-        mask = mask_NSF
     num_galaxies = np.sum(mask)
 
     # Meta-data
     comment = (
-        f"Selection of local galaxies with {text}. " f"No cosmology correction needed."
+        f"Selection of local galaxies ({num_galaxies} objects) with {text} yr^-1. "
+        "No cosmology correction needed."
     )
     citation = f"Terrazas (2017) ({text})"
 
