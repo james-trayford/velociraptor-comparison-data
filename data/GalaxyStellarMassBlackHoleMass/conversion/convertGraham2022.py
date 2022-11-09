@@ -75,7 +75,7 @@ for galaxy_type, output_filename in zip(galaxy_types, output_filenames):
         f" The whole sample consists of 73 ETGs plus 31 LTGs, coming from the larger sample of 84 ETGs "
         f" (Sahu et al. 2019) and 43 LTGs (Davis et al. 2019)."
     )
-    citation = f"Graham (2022) ({galaxy_type})"
+    citation = f"Graham & Sahu (2022) ({galaxy_type})"
     bibcode = "2022arXiv220914526G"
     name = f"Black hole mass - stellar mass relation ({galaxy_type} galaxies)"
     plot_as = "points"
