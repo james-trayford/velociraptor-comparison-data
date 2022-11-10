@@ -64,7 +64,7 @@ while icmd < len(cmds):
                 print(
                     f'Script {wdir} -> "{cmd}" failed.\nReturn code {handle.returncode}.'
                 )
-                exit()
+                exit(1)
             # Update the general return code
             general_return_code = max(general_return_code, handle.returncode)
             # Launch the next script
