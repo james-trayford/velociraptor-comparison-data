@@ -52,7 +52,7 @@ def load_file_and_split_by_z(raw_file_name):
     z_bins_arr = []
     gsmf_arr = []
     for isl, lines in enumerate(split_lines):
-        redshift_regex = re.search("(\d.\d)<z<(\d.\d)", lines[0])
+        redshift_regex = re.search(r"(\d.\d)<z<(\d.\d)", lines[0])
         redshift_range = [
             float(redshift_regex.group(1)),
             float(redshift_regex.group(2)),

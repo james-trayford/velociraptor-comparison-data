@@ -58,7 +58,6 @@ zhis = np.sort(list(set(z_hi)))
 for i in range(zs.size):
     bdx = z_lo == z_lo[i]
     output_path = f"{output_directory}/{output_filename.format(stringify_z(zs[i]))}"
-    print(output_path)
 
     processed.associate_x(
         oabundance[bdx],

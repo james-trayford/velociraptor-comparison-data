@@ -25,12 +25,13 @@ labels = []
 inc = 0
 
 # find all the sub headers in the file (tthey contain a ':')
-for line in open(input_filename):
-    if re.findall(r"\:", line):
-        # store sub-head lines and survey names
-        lines.append(inc)
-        labels.append(line.split(":")[0])
-    inc += 1
+with open(input_filename, "r") as handle:
+    for line in handle:
+        if re.findall(r"\:", line):
+            # store sub-head lines and survey names
+            lines.append(inc)
+            labels.append(line.split(":")[0])
+        inc += 1
 lines.append(inc)
 
 x_all = []

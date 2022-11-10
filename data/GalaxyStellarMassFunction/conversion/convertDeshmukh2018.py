@@ -29,7 +29,7 @@ def parse_latex_value(latex_string):
 
     latex_string: The string to parse
     """
-    values = re.findall("(?:-|\+)?(\d+.\d+|cdots)", latex_string)
+    values = re.findall(r"(?:-|\+)?(\d+.\d+|cdots)", latex_string)
     ret = []
     for v in values:
         # Missing data gets replaced with NaNs
@@ -66,7 +66,7 @@ def load_file_and_split_by_z(raw_file_name):
     z_bins_arr = []
     gsmf_arr = []
     for isl, lines in enumerate(split_lines):
-        z_bins_arr.append(float(re.search("(\d.\d) <or=", lines[0]).group(1)))
+        z_bins_arr.append(float(re.search(r"(\d.\d) <or=", lines[0]).group(1)))
         # find the lines containing the actual data
         data_line_nos = [
             i for i, line in enumerate(lines) if line != "" and line[0].isdigit()
