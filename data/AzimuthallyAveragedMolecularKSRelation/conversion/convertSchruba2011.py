@@ -54,7 +54,7 @@ Obs_H2 = (sigma_H2) / 1.36  # a factor of 1.36 to account for heavy elements
 
 Obs_SFR = sigma_SFR
 
-mask_positive = (Obs_H2 > 0.0) & (Obs_SFR > 0.0)
+mask_positive = np.logical_and(Obs_H2 > 0.0, Obs_SFR > 0.0)
 Obs_H2 = Obs_H2[mask_positive]
 Obs_SFR = Obs_SFR[mask_positive]
 
