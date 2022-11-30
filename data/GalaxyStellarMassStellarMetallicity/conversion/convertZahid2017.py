@@ -39,7 +39,7 @@ Z_std_do, _, _ = stats.binned_statistic(
     M_star, Z_star, statistic=lambda x: np.percentile(x, 16.0), bins=mass_bins
 )
 
-M_star = 10 ** mass_bins * unyt.Solar_Mass
+M_star = 10 ** mass_bin_centers * unyt.Solar_Mass
 Z_star = Z_median * unyt.dimensionless
 # Define the scatter as offset from the mean value
 y_scatter = (
@@ -56,7 +56,7 @@ comment = (
 citation = "Zahid et al. (2017) (SDSS)"
 bibcode = "2017ApJ...847...18Z"
 name = "Stellar mass - Stellar metallicity relation"
-plot_as = "line"
+plot_as = "points"
 redshift = 0.08
 h = h_sim
 

@@ -35,7 +35,7 @@ comment = (
 citation = "Kudritzki et al. (2016) (SDSS)"
 bibcode = "2016ApJ...829...70K"
 name = "Stellar mass - Stellar metallicity relation"
-plot_as = "line"
+plot_as = "points"
 redshift = 0.1
 h = h_sim
 
