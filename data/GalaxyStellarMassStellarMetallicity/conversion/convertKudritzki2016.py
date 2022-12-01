@@ -32,7 +32,7 @@ comment = (
     "h-correction. The metallicity is expressed in units of solar metallicity, using Z=0.0142. "
     f"This has been corrected to use Z_solar={solar_metallicity}. "
 )
-citation = "Kudritzki et al. (2016) (SDSS)"
+citation = "Kudritzki et al. (2016)"
 bibcode = "2016ApJ...829...70K"
 name = "Stellar mass - Stellar metallicity relation"
 plot_as = "points"
