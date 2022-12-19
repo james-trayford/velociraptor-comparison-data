@@ -35,12 +35,13 @@ comment = (
     "Data obtained from Yates et al. (2021). No need for "
     "h-correction. The metallicity is expressed in units of solar metallicity, using Z=0.0142. "
     f"This has been corrected to use Z_solar={solar_metallicity}. "
+    "This dataset corresponds to mass-weighted stellar metallicity within 3 arcsec for disc star-forming galaxies at z = 0."
 )
 citation = "Yates et al. (2021, MaNGA)"
 bibcode = "2021MNRAS...503...4474Y"
 name = "Stellar mass - Stellar metallicity relation"
 plot_as = "points"
-redshift = 0.1
+redshift = 0.0
 h = h_sim
 
 # Write everything
