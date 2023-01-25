@@ -69,6 +69,8 @@ def Phi_all_galaxies():
         Phi_scatter = unyt.unyt_array(
             (Phi_minus[mask], Phi_plus[mask]), units=unyt.Mpc ** (-3)
         )
+        # Mask out negative scatter (a very small per cent of the data)
+        Phi_scatter[Phi_scatter < 0.0] = 0.0
 
         # Compute \Delta z
         redshift_lower, redshift_upper = [z - dz_lower, z + dz_upper]
@@ -158,6 +160,8 @@ def Phi_passive_galaxies():
         Phi_scatter = unyt.unyt_array(
             (Phi_minus[mask], Phi_plus[mask]), units=unyt.Mpc ** (-3)
         )
+        # Mask out negative scatter (a very small per cent of the data)
+        Phi_scatter[Phi_scatter < 0.0] = 0.0
 
         # Compute \Delta z
         redshift_lower, redshift_upper = [z - dz_lower, z + dz_upper]

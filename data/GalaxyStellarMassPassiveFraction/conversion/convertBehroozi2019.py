@@ -68,6 +68,8 @@ def passive_fractions():
         QF_scatter = unyt.unyt_array(
             (QF_minus[mask], QF_plus[mask]), units="dimensionless"
         )
+        # Mask out negative scatter (a very small per cent of the data)
+        QF_scatter[QF_scatter < 0.0] = 0.0
 
         # Compute \Delta z
         redshift_lower, redshift_upper = [z - dz_lower, z + dz_upper]
@@ -160,6 +162,8 @@ def passive_fractions_centrals():
         QF_scatter = unyt.unyt_array(
             (QF_minus[mask], QF_plus[mask]), units="dimensionless"
         )
+        # Mask out negative scatter (a very small per cent of the data)
+        QF_scatter[QF_scatter < 0.0] = 0.0
 
         # Compute \Delta z
         redshift_lower, redshift_upper = [z - dz_lower, z + dz_upper]

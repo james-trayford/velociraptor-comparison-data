@@ -177,6 +177,8 @@ def StellarMass_vs_HaloMass():
 
         # Define scatter
         y_scatter = unyt.unyt_array((M_star - M_16, M_84 - M_star))
+        # Mask out negative scatter (a very small per cent of the data)
+        y_scatter[y_scatter < 0.0] = 0.0
 
         processed.associate_x(
             M_BN98 * unyt.Solar_Mass,
@@ -252,6 +254,8 @@ def StellarMassHaloMassRatios_vs_HaloMass():
         y_scatter = unyt.unyt_array(
             ((M_star - M_16) / M_BN98, (M_84 - M_star) / M_BN98)
         )
+        # Mask out negative scatter (a very small per cent of the data)
+        y_scatter[y_scatter < 0.0] = 0.0
 
         processed.associate_x(
             M_BN98 * unyt.Solar_Mass,
@@ -328,6 +332,8 @@ def StellarMassHaloMassRatios_vs_StellarMass():
         y_scatter = unyt.unyt_array(
             ((M_star - M_16) / M_BN98, (M_84 - M_star) / M_BN98)
         )
+        # Mask out negative scatter (a very small per cent of the data)
+        y_scatter[y_scatter < 0.0] = 0.0
 
         processed.associate_x(
             M_star * unyt.Solar_Mass,
