@@ -28,7 +28,11 @@ raw = np.loadtxt(
     input_filename, delimiter=delimiter, usecols=[q, half_mass, R_1, log_mass]
 )
 
-comment = f"Assuming Chabrier IMF (2003), and a standard LCDM cosmology with H=70km/s/Mpc and O_L = 0.7. h-corrected for SWIFT using cosmology: {cosmology.name}. The correction to the stellar masses given in the paper's erratum is applied here."
+comment = (
+    "Assuming Chabrier IMF (2003), and a standard LCDM cosmology with H=70km/s/Mpc "
+    "and O_L = 0.7. Supplied h-free so no corrections have been made."
+    "The correction to the stellar masses given in the paper's erratum is applied here."
+)
 citation = "Trujillo et al. (2020)"
 bibcode = "2020MNRAS.493...87T"
 name = "Galaxy Stellar Mass-Galaxy Size"
