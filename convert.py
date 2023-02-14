@@ -36,7 +36,7 @@ conversion_scripts = sorted(glob.glob("data/*/conversion/*.py"))
 cmds = []
 for script_path in conversion_scripts:
     wdir, script = os.path.split(script_path)
-    cmd = f"python3 {script} ../../../cosmology.py"
+    cmd = f"python3 -W error -W ignore::UserWarning {script} ../../../cosmology.py"
     cmds.append((cmd, wdir))
 
 # Create NPROC empty slots
@@ -64,6 +64,7 @@ while icmd < len(cmds):
                 print(
                     f'Script {wdir} -> "{cmd}" failed.\nReturn code {handle.returncode}.'
                 )
+                exit(1)
             # Update the general return code
             general_return_code = max(general_return_code, handle.returncode)
             # Launch the next script

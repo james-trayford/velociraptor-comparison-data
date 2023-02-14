@@ -68,7 +68,6 @@ zindex = np.digitize(z, zbins[1:], right=True)
 for i in range(zcens.size):
     bdx = zindex == i
     output_path = f"{output_directory}/{output_filename.format(stringify_z(zcens[i]))}"
-    print(output_path)
 
     processed.associate_x(
         M[bdx],

@@ -52,7 +52,7 @@ def load_file_and_split_by_z(raw_file_name):
     gsmf_arr = []
     for isl, lines in enumerate(split_lines):
         z_bins_arr[isl] = list(
-            map(float, re.search("z_(\d.\d)_(\d.\d)", lines[0]).groups())
+            map(float, re.search(r"z_(\d.\d)_(\d.\d)", lines[0]).groups())
         )
         gsmf_arr.append(np.loadtxt(lines, usecols=range(4)))
 

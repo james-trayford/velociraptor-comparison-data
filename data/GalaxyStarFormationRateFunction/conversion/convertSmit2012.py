@@ -20,21 +20,6 @@ def pairwise(iterable):
     return zip(a, b)
 
 
-def parse_latex_value(latex_string):
-    """
-    Take a LaTeX markup in the form ${value}_{-ve error}^{+ve error}$ and extract the
-    numeric data from it.
-
-    latex_string: The string to parse
-    """
-    values = re.findall("(\d+.\d+)", latex_string)
-    ret = []
-    for v in values:
-        # Missing data gets replaced with NaNs
-        ret.append(float(v))
-    return ret
-
-
 def load_file_and_split_by_z(raw_file_name):
     """
     Read the data file and do all the mucking around needed to extract a list of the
@@ -58,7 +43,7 @@ def load_file_and_split_by_z(raw_file_name):
         split_lines.append(lines[l1:l2])
 
     z_bins_arr = [
-        float(re.match("#z ~ (\d)", lines[lno]).group(1))
+        float(re.match(r"#z ~ (\d)", lines[lno]).group(1))
         for lno in header_line_nos[:-1]
     ]
     uv_lf_arr = []

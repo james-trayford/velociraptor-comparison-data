@@ -51,7 +51,7 @@ def load_file_and_split_by_z(raw_file_name):
     z_bins_arr = []
     gsmf_arr = []
     for isl, lines in enumerate(split_lines):
-        z_bins_arr.append(float(re.search("z=(\d)", lines[0]).group(1)))
+        z_bins_arr.append(float(re.search(r"z=(\d)", lines[0]).group(1)))
         # find the lines containing the actual data
         data = np.loadtxt(lines)
         gsmf_arr.append(data)

@@ -44,11 +44,11 @@ def load_file_and_split_by_z(raw_file_name):
     with open(raw_file_name, "r") as f:
         lines = f.readlines()
     # count lines that start with comment (#) or are blank
-    n_header_lines = sum(re.match("#.+|^\s*$", l) is not None for l in lines)
+    n_header_lines = sum(re.match(r"#.+|^\s*$", l) is not None for l in lines)
 
     z_ranges = lines[4]
     # Each range of redshifts is separated by two or more spaces
-    z_ranges = re.split("#?\s{2,}", z_ranges)[1:]
+    z_ranges = re.split(r"#?\s{2,}", z_ranges)[1:]
     z_bins_arr = []
     for z_rge in z_ranges:
         z_bins_arr.append(list(map(float, z_rge.split("<")[::2])))
@@ -62,7 +62,7 @@ def load_file_and_split_by_z(raw_file_name):
 
     for ism, l in enumerate(lines[n_header_lines:]):
         # The GSMF values for each redshift bin are separated by two or more spaces
-        parts = re.split("#?\s{2,}", l)
+        parts = re.split(r"#?\s{2,}", l)
         # The first number on each line is the stellar mass bin
         mass_bins_arr[ism] = float(parts[0])
 

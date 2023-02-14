@@ -62,6 +62,10 @@ Obs_Hneutral = Obs_HI + Obs_H2
 
 Obs_SFR = sigma_SFR
 
+mask_positive = (Obs_Hneutral > 0.0) & (Obs_SFR > 0.0)
+Obs_Hneutral = Obs_Hneutral[mask_positive]
+Obs_SFR = Obs_SFR[mask_positive]
+
 binned_data = bin_data_general(
     np.log10(Obs_Hneutral), np.log10(Obs_SFR), array_of_interest
 )

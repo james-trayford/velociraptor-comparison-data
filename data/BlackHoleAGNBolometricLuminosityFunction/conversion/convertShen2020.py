@@ -19,9 +19,11 @@ if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
 # Read the data (only those columns we need here)
-raw = np.genfromtxt(input_filename, dtype=None, usecols=(0, 1, 2, 3, 4, 5))
+raw = np.genfromtxt(
+    input_filename, dtype=None, usecols=(0, 1, 2, 3, 4, 5), encoding="utf-8"
+)
 
-wavelength_band = np.array([raw[j][0].decode("utf-8") for j in range(len(raw))])
+wavelength_band = np.array([raw[j][0] for j in range(len(raw))])
 redshifts = np.array([raw[j][1] for j in range(len(raw))])
 
 L = np.array([10 ** raw[j][2] for j in range(len(raw))]) * unyt.erg / unyt.s

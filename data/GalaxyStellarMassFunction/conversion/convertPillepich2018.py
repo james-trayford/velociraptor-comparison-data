@@ -28,7 +28,7 @@ def load_file(file_name):
     nhead = len(header)
 
     # the last line of the header gives the redshift bins the GSMF is tabulated at
-    z_str = re.findall("z=(\d.\d)", header[-1])
+    z_str = re.findall(r"z=(\d.\d)", header[-1])
     z_bins = np.array([float(zs) for zs in z_str])
 
     raw_data = np.loadtxt(lines[nhead:])
