@@ -29,21 +29,21 @@ redshift = 0.1
 h_obs = 0.7
 h = cosmology.h
 
-SFR = unyt.unyt_array(10**raw.T[0], units="1/gigayear")
-SNuM = unyt.unyt_array(10**raw.T[3], units="yr**(-1) * Msun**(-1)")
+SFR = unyt.unyt_array(10 ** raw.T[0], units="1/gigayear")
+SNuM = unyt.unyt_array(10 ** raw.T[3], units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        10**raw.T[3] - 10**raw.T[4],
-        10**raw.T[5] - 10**raw.T[3],
+        10 ** raw.T[3] - 10 ** raw.T[4],
+        10 ** raw.T[5] - 10 ** raw.T[3],
     ],
     units="yr**(-1) * Msun**(-1)",
 )
 
 SFR_err = unyt.unyt_array(
     [
-        10**raw.T[0]-10**raw.T[1],
-        10**raw.T[2]-10**raw.T[0],
+        10 ** raw.T[0] - 10 ** raw.T[1],
+        10 ** raw.T[2] - 10 ** raw.T[0],
     ],
     units="1/gigayear",
 )
