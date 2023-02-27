@@ -65,4 +65,3 @@ if os.path.exists(output_path):
     os.remove(output_path)
 
 processed.write(filename=output_path)
-
