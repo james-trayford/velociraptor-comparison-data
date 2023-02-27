@@ -9,9 +9,9 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename = "../raw/SNIa_rate_vs_SFR_Smith2012.txt"
+input_filename = "../raw/SNIa_rate_vs_SFR_Sullivan2006.txt"
 
-output_filename = "Smith2012.hdf5"
+output_filename = "Sullivan2006.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -20,12 +20,12 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-comment = "SDSS-II SN Survey [$0.05<z<0.25$]"
-citation = "Smith et al. (2012)"
-bibcode = "2012ApJ...755...61S"
+comment = "SNLS [$0.2<z<0.75$]"
+citation = "Sullivan et al. (2006)"
+bibcode = "2006ApJ...648..868S"
 name = "Star Formation Rates-SNIa Rate per Stellar Mass"
 plot_as = "points"
-redshift = 0.15
+redshift = 0.2
 h_obs = 0.7
 h = cosmology.h
 
