@@ -9,9 +9,9 @@ import sys
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename = "../raw/SNIa_rate_vs_SFR_Smith2012.txt"
+input_filename = "../raw/SNIa_rate_vs_sSFR_Mannucci_2005.txt"
 
-output_filename = "Smith2012.hdf5"
+output_filename = "Mannucci2005.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -20,38 +20,36 @@ if not os.path.exists(output_directory):
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
-comment = "SDSS-II SN Survey [$0.05<z<0.25$]"
-citation = "Smith et al. (2012)"
-bibcode = "2012ApJ...755...61S"
-name = "Star Formation Rates-SNIa Rate per Stellar Mass"
+comment = "SN catalog from C99 [$Z=0.1$]"
+citation = "Mannucci et al. (2005)"
+bibcode = "2005A&A...433..807M"
+name = "Specific Star Formation Rates-SNIa Rate per Stellar Mass"
 plot_as = "points"
-redshift = 0.15
+redshift = 0.1
 h_obs = 0.7
 h = cosmology.h
 
-SFR = unyt.unyt_array(10 ** raw.T[0], units="Msun/year")
-SNuM = unyt.unyt_array(10 ** raw.T[1], units="yr**(-1)")
+SFR = unyt.unyt_array(10 ** raw.T[0], units="1/gigayear")
+SNuM = unyt.unyt_array(10 ** raw.T[3], units="yr**(-1) * Msun**(-1)")
 
 SNuM_err = unyt.unyt_array(
     [
-        10 ** raw.T[1] - 10 ** raw.T[2],
-        10 ** raw.T[3] - 10 ** raw.T[1],
+        10 ** raw.T[3] - 10 ** raw.T[4],
+        10 ** raw.T[5] - 10 ** raw.T[3],
     ],
-    units="yr**(-1)",
+    units="yr**(-1) * Msun**(-1)",
 )
-
-dSFR = 0.2
 
 SFR_err = unyt.unyt_array(
     [
-        10 ** (raw.T[0]) - 10 ** (raw.T[0] - dSFR),
-        10 ** (raw.T[0] + dSFR) - 10 ** (raw.T[0]),
+        10 ** raw.T[0] - 10 ** raw.T[1],
+        10 ** raw.T[2] - 10 ** raw.T[0],
     ],
-    units="Msun/year",
+    units="1/gigayear",
 )
 
 processed.associate_x(
-    SFR, scatter=SFR_err, comoving=True, description="Star Formation rate"
+    SFR, scatter=SFR_err, comoving=True, description="Specific Star Formation rate"
 )
 processed.associate_y(
     SNuM, scatter=SNuM_err, comoving=False, description="SNIa rate per stellar mass"
