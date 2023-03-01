@@ -1,0 +1,8 @@
+# cosmic supernovae type Ia rate density from Melinder et al. (2012)
+#   cosmology is H0=70, OmegaM=0.3 OmegaL=0.7
+#   Uses a Salpeter IMF  
+#   all values are without factor 1e-5
+# cancell h^3 in r_\nu!
+#   z   r_\nu   err_up  err_d   stat_up     stat_down
+0.3     32.9    30.8    -17.8   19.8        -14.5
+0.7     64.0    53.0    -31.2   36.5        -21.1
