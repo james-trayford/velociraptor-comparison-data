@@ -55,7 +55,10 @@ processed.associate_x(
     Mstar, scatter=Mstar_err, comoving=True, description="Galaxy Stellar Mass"
 )
 processed.associate_y(
-    SNIa_rate, scatter=SNIa_err, comoving=False, description="SNIa rate per stellar mass"
+    SNIa_rate,
+    scatter=SNIa_err,
+    comoving=False,
+    description="SNIa rate per stellar mass",
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
