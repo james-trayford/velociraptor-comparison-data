@@ -11,6 +11,7 @@ with open(sys.argv[1], "r") as handle:
 
 variations = [
     ("vol_limited", "_vol_limited", "volume limited"),
+    ("full", "_full", "full survey")
 ]
 
 for file_prefix, save_prefix, comments in variations:
@@ -26,9 +27,9 @@ for file_prefix, save_prefix, comments in variations:
     processed = ObservationalData()
     raw = np.loadtxt(input_filename)
 
-    comment = f"LOSS [$z \\approx 0.075${comments}]"
-    citation = "Graur et al. (2015)"
-    bibcode = "2015MNRAS.450..905G"
+    comment = f"ASAS-SN [$z \\approx 0.075${comments}]"
+    citation = "Brown et al. (2019)"
+    bibcode = "2019MNRAS.484.3785B"
     name = "Stellar mass-SNIa Rate per Stellar Mass"
     plot_as = "points"
     redshift = 0.075
@@ -46,9 +47,6 @@ for file_prefix, save_prefix, comments in variations:
         units="yr**(-1) * Msun**(-1)",
     )
 
-    print(raw.T[0] -raw.T[1])
-    print(raw.T[2] - raw.T[0])
-
     Mstar_err = unyt.unyt_array(
         [
             1e10 * ( 10**raw.T[0] - 10**raw.T[1]),
@@ -56,7 +54,6 @@ for file_prefix, save_prefix, comments in variations:
         ],
         units="Msun",
     )
-    print(Mstar_err)
 
     processed.associate_x(
         Mstar, scatter=Mstar_err, comoving=True, description="Galaxy stellar mass"
