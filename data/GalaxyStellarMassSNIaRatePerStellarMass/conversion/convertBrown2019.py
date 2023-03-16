@@ -11,7 +11,7 @@ with open(sys.argv[1], "r") as handle:
 
 variations = [
     ("vol_limited", "_vol_limited", "volume limited"),
-    ("full", "_full", "full survey")
+    ("full", "_full", "full survey"),
 ]
 
 for file_prefix, save_prefix, comments in variations:
@@ -36,21 +36,21 @@ for file_prefix, save_prefix, comments in variations:
     h_obs = 0.7
     h = cosmology.h
 
-    Mstar = unyt.unyt_array(1e10 * 10**raw.T[0], units="Msun")
+    Mstar = unyt.unyt_array(1e10 * 10 ** raw.T[0], units="Msun")
     SNuM = unyt.unyt_array(raw.T[3] * 2e-13, units="yr**(-1) * Msun**(-1)")
 
     SNuM_err = unyt.unyt_array(
         [
-            (raw.T[3] - raw.T[4])  * 2e-13,
-            (raw.T[5] - raw.T[3])  * 2e-13,
+            (raw.T[3] - raw.T[4]) * 2e-13,
+            (raw.T[5] - raw.T[3]) * 2e-13,
         ],
         units="yr**(-1) * Msun**(-1)",
     )
 
     Mstar_err = unyt.unyt_array(
         [
-            1e10 * ( 10**raw.T[0] - 10**raw.T[1]),
-            1e10 * ( 10**raw.T[2] - 10**raw.T[0]),
+            1e10 * (10 ** raw.T[0] - 10 ** raw.T[1]),
+            1e10 * (10 ** raw.T[2] - 10 ** raw.T[0]),
         ],
         units="Msun",
     )
