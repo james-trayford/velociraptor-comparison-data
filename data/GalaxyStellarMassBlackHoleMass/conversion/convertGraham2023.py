@@ -13,10 +13,10 @@ with open(sys.argv[1], "r") as handle:
 # Cosmology
 h_sim = cosmology.h
 
-input_filename = "../raw/Graham2022.txt"
+input_filename = "../raw/Graham2023.txt"
 delimiter = " "
 
-output_filenames = ["Graham2022_S.hdf5", "Graham2022_ESS0.hdf5", "Graham2022_E.hdf5"]
+output_filenames = ["Graham2023_S.hdf5", "Graham2023_ESS0.hdf5", "Graham2023_E.hdf5"]
 galaxy_types = ["S", "ES/S0", "E"]
 output_directory = "../"
 
@@ -75,8 +75,8 @@ for galaxy_type, output_filename in zip(galaxy_types, output_filenames):
         f" The whole sample consists of 73 ETGs plus 31 LTGs, coming from the larger sample of 84 ETGs "
         f" (Sahu et al. 2019) and 43 LTGs (Davis et al. 2019)."
     )
-    citation = f"Graham & Sahu (2022) ({galaxy_type})"
-    bibcode = "2022arXiv220914526G"
+    citation = f"Graham & Sahu (2023) ({galaxy_type})"
+    bibcode = "2023MNRAS.518.2177G"
     name = f"Black hole mass - stellar mass relation ({galaxy_type} galaxies)"
     plot_as = "points"
     # We purposely make this data show up not only a z=0 but also at higher z
