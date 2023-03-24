@@ -42,9 +42,9 @@ SNIa_err = unyt.unyt_array(
     units="yr * yr**(-1)",
 )
 
-SNIa_rate = SNIa_rate / (1. + SNIa_rate)
+SNIa_rate = SNIa_rate / (1.0 + SNIa_rate)
 
-SNIa_err = SNIa_err / (1. + SNIa_rate)
+SNIa_err = SNIa_err / (1.0 + SNIa_rate)
 
 dMstar = 0.25 / 2.0
 Mstar_err = unyt.unyt_array(
