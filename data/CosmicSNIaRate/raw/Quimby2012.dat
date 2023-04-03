@@ -4,4 +4,4 @@
 #   all values are without factor 1e-5
 # cancell h^3 in r_\nu!
 #   z   r_\nu   err_up  err_d   stat_up     stat_down
-0.0    3.0      1.5     -1.5    0.0         0.0
+0.075   2.81    0.35    -0.32   0.0         0.0
