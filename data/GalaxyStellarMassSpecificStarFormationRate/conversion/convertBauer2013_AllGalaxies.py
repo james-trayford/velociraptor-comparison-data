@@ -35,7 +35,7 @@ h = cosmology.h
 
 log_M = raw.T[0]
 M = unyt.unyt_array(10 ** (log_M), units=unyt.Solar_Mass)
-sSFR = unyt.unyt_array(10 ** raw.T[5], units=1 / unyt.year)
+sSFR = unyt.unyt_array(10 ** raw.T[4], units=1 / unyt.year)
 
 processed.associate_x(
     M, scatter=None, comoving=False, description="Galaxy Stellar Mass"
