@@ -1,0 +1,7 @@
+# cosmic star formation rate density from Khusanova et al. (2021)
+#   based on Almao radio observations from the ALPINE survey
+#   cosmology is H0=70.0, OmegaM=0.30
+#   Uses a Chabrier IMF
+#   z   log10 sfrd (Msol/yr/Mpc^3)   sfrderror_low sfrderror_high
+4.5  -1.28  0.36  0.38
+5.5  -1.38  0.28  0.36
