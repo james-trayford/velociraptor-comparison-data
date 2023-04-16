@@ -1,0 +1,10 @@
+# Table 2. The evolution of star-formation in GAMA galaxies. The sample is split into four redshift bins and the slope and
+# normalisation of the SFR-M∗ relation is measured. The SFRD is calculated at epoch and its error is measured using the
+# Cosmic Variance (CV) prescription of Driver & Robotham (2010).
+#
+# (1 Redshift low) (2 Redshift high) (3 Volume x 1e3) (4 CV) (5 Slope) (6 Normalisation (log10[M∗/Msun] = 10)) (7 SFRD)
+# (1 z) (2 z)  (3 Mpc**-3 (h/0.7)**3) (4 %) (5 log − log) (6 log10[Msun yr**−1]) (7 Msun yr**−1 Mpc**-3 (h/0.7)**3)
+0 0.1 1339 0.13 0.66 0.003 0.08 0.003 0.0258 0.00335
+0.1 0.155 3453 0.11 0.59 0.004 0.14 0.002 0.0409 0.0045
+0.17 0.24 10442 0.08 0.50 0.004 0.24 0.002 0.0438 0.00351
+0.24 0.35 30872 0.05 0.44 0.003 0.39 0.002 0.0419 0.00209
