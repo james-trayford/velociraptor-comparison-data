@@ -106,6 +106,9 @@ for i in range(np.shape(raw)[0]):
         log10Mstar=log10Mstar,
     )
 
+    # `Move' Mstar to the cosmology of the simulation (Mstar \propto D_Lum ** 2)
+    Mstar = Mstar * (h_sim / h_obs) ** -2
+
     # Create a single observational-data instance at redshift z
     processed = ObservationalData()
 
@@ -116,8 +119,8 @@ for i in range(np.shape(raw)[0]):
     # Define y values as a unyt array
     sSFR = unyt.unyt_array(SFR / Mstar, units="1/yr")
 
-    # Define x values as a unyt array, also correct for cosmology (Mstar \propto D_L**2)
-    Mstar_Msun = unyt.unyt_array(Mstar * (h_sim / h_obs) ** -2, units="Msun")
+    # Define x values as a unyt array
+    Mstar_Msun = unyt.unyt_array(Mstar, units="Msun")
 
     processed.associate_x(
         Mstar_Msun,
