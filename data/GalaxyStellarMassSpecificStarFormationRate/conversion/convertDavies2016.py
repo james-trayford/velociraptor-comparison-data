@@ -63,8 +63,10 @@ comment = (
     "Uses GAMA II equatorial dataset with redshifts from z=0 to 0.35. "
     "Plots fitting relations to the actual data in four redshift bins, "
     " which are defined using a normalization and a slope. "
-    "The fits correspond to active galaxies only. Star-forming galaxies are defined based on a u−r cut of 1.4."
-    "The fitting range is valid approximately within 9.25 < log10[M*/Msun] < 11. "
+    "The fits correspond to active galaxies only.The authors fit a line to the peak of the blue population and the "
+    "trough between blue and red populations in the u − r colour distribution. Galaxies which lie below the trough are "
+    "classed as star forming."
+    "The fitting range is valid within 9.25 < log10[M*/Msun] < 12. "
     "Cosmology: H0 = 70 kms-1 Mpc-1, Omega_lambda = 0.7 and Omega_m = 0.3."
 )
 citation = "Davies et al. (2016) (GAMA, SF)"
@@ -86,7 +88,7 @@ if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
 # Define stellar masses for the fitting relations from Davies et al. (2016)
-Mstar = np.logspace(9.25, 11.0, 20)
+Mstar = np.logspace(9.25, 11.5, 20)
 log10Mstar = np.log10(Mstar)
 
 for i in range(np.shape(raw)[0]):
@@ -106,9 +108,6 @@ for i in range(np.shape(raw)[0]):
         log10Mstar=log10Mstar,
     )
 
-    # `Move' Mstar to the cosmology of the simulation (Mstar \propto D_Lum ** 2)
-    Mstar = Mstar * (h_sim / h_obs) ** -2
-
     # Create a single observational-data instance at redshift z
     processed = ObservationalData()
 
@@ -119,8 +118,10 @@ for i in range(np.shape(raw)[0]):
     # Define y values as a unyt array
     sSFR = unyt.unyt_array(SFR / Mstar, units="1/yr")
 
-    # Define x values as a unyt array
-    Mstar_Msun = unyt.unyt_array(Mstar, units="Msun")
+    # Define x values as a unyt array. Also, apply the h-correction factor to Mstar
+    # (Mstar \propto D_Lum ** 2 \propto 1/h**2). Note that the dependence on h for sSFR
+    # is expected to cancel out.
+    Mstar_Msun = unyt.unyt_array(Mstar * (h_sim / h_obs) ** -2, units="Msun")
 
     processed.associate_x(
         Mstar_Msun,
