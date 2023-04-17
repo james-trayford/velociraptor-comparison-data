@@ -48,6 +48,10 @@ def SFR_vs_Mstar_relation(norm, norm_err, slope, slope_err, log10Mstar):
     return SFR, delta_SFR_m, delta_SFR_p
 
 
+# Cosmologies
+h_obs = 0.7
+h_sim = cosmology.h
+
 input_filename = "../raw/Davies2016.txt"
 processed = ObservationalData()
 raw = np.loadtxt(input_filename)
@@ -61,7 +65,6 @@ comment = (
     " which are defined using a normalization and a slope. "
     "The fits correspond to active galaxies only. Star-forming galaxies are defined based on a u−r cut of 1.4."
     "The fitting range is valid approximately within 9.25 < log10[M*/Msun] < 11. "
-    "No h-correction is required. "
     "Cosmology: H0 = 70 kms-1 Mpc-1, Omega_lambda = 0.7 and Omega_m = 0.3."
 )
 citation = "Davies et al. (2016) (GAMA, SF)"
@@ -106,14 +109,18 @@ for i in range(np.shape(raw)[0]):
     # Create a single observational-data instance at redshift z
     processed = ObservationalData()
 
-    # Define scatter
+    # Define y scatter as a unyt array
     sSFR_scatter = unyt.unyt_array(
         (delta_SFR_m / Mstar, delta_SFR_p / Mstar), units="1/yr"
     )
+    # Define y values as a unyt array
     sSFR = unyt.unyt_array(SFR / Mstar, units="1/yr")
 
+    # Define x values as a unyt array, also correct for cosmology (Mstar \propto D_L**2)
+    Mstar_Msun = unyt.unyt_array(Mstar * (h_sim / h_obs) ** -2, units="Msun")
+
     processed.associate_x(
-        Mstar * unyt.Msun,
+        Mstar_Msun,
         scatter=None,
         comoving=False,
         description="Galaxy Stellar Mass",
