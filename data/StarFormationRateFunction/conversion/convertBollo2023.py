@@ -15,22 +15,24 @@ processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
 comment = (
-    r"H\alpha luminosity function derived from a large sample of Lyman break galaxies around z =4.5 over "
+    r"H\alpha luminosity function derived from a large sample of Lyman break galaxies around z=4.5 over "
     r"the GOODS-South and North fields. Uses Chabrier (2003) initial mass function. Stellar population models are "
-    r" from Bruzual & Charlot (2003). Assumes metallicity of 0.2 Zsolar."
+    r"from Bruzual & Charlot (2003). Assumes metallicity of 0.2 Zsolar. "
+    r"The cosmological parameters in this work are H0 = 70 kms−1 Mpc−1, Omega_m = 0.3, and Omega_lambda = 0.7."
 )
 citation = "Bollo et al. (2023)"
 bibcode = "2023arXiv230405034B"
 name = "Cosmic Star Formation Rate Density function around z=4.5"
 plot_as = "points"
 
+h_obs = 0.7
+h_sim = cosmology.h
+
 log10SFR = raw[:, 0]  # in units of Msun/yr
-Phi_SFR, delta_Phi_SFR_m, delta_Phi_SFR_p = (
-    raw[:, 1],
-    raw[:, 2],
-    raw[:, 3],
-)  # in units of 10−3 Mpc−3
-SFR = 10.0 ** log10SFR
+Phi_SFR = raw[:, 1] * (h_sim / h_obs) ** 3  # in units of 10−3 Mpc−3
+delta_Phi_SFR_m = raw[:, 2] * (h_sim / h_obs) ** 3  # in units of 10−3 Mpc−3
+delta_Phi_SFR_p = raw[:, 3] * (h_sim / h_obs) ** 3  # in units of 10−3 Mpc−3
+SFR = (10.0 ** log10SFR) * (h_sim / h_obs) ** -2
 
 SFR = unyt.unyt_array(SFR, units="Msun/yr")
 Phi_SFR_scatter = unyt.unyt_array(
