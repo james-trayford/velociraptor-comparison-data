@@ -1,0 +1,9 @@
+# Table 4 from Bollo et al. 2023
+# Values of the SFR Function at z ~ 4.5
+# log SFR, \Phi SFR, Err \Phi SFR minus, Err \Phi SFR plus
+# (Msun yr-1), (10−3 Mpc−3), (10−3 Mpc−3), (10−3 Mpc−3)
+1.125 2.45 1.030 1.46
+1.375 0.92 0.530 0.73
+1.625 0.41 0.300 0.82
+1.875 0.15 0.149 0.18
+2.125 0.12 0.090 0.46
