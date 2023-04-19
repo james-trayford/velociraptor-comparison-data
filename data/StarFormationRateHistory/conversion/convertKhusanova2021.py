@@ -45,7 +45,7 @@ def cosmic_star_formation_history_khusanova():
     # convert from log10(SFRD) to SFRD and carry the uncertainties
     SFR_minus = 10.0 ** (SFR - SFR_stderr_low)
     SFR_plus = 10.0 ** (SFR + SFR_stderr_high)
-    SFR = 10.0**SFR
+    SFR = 10.0 ** SFR
     SFR_scatter = unyt.unyt_array(
         (SFR - SFR_minus, SFR_plus - SFR), units="Msun/yr/Mpc**3"
     )
