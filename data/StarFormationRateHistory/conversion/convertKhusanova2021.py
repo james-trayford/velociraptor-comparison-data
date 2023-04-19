@@ -59,7 +59,7 @@ def cosmic_star_formation_history_khusanova():
         description="Cosmic average star formation rate density",
     )
 
-    processed.associate_redshift(z)
+    processed.associate_redshift(np.mean(z))
     processed.associate_plot_as(plot_as)
 
     output_path = f"{output_directory}/{output_filename}"
