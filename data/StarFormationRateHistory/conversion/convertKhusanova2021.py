@@ -11,7 +11,7 @@ import sys
 
 def cosmic_star_formation_history_khusanova():
     # Meta-data
-    name = f"Star formation rate density from Enia et al. (2022)"
+    name = "Star formation rate density from Khusanova et al. (2021)"
     comment = (
         "Uses the Chabrier initial mass function. " "Cosmology: H0=70.0, OmegaM=0.30."
     )
