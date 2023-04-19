@@ -51,7 +51,9 @@ def cosmic_star_formation_history_khusanova():
     )
     SFR = unyt.unyt_array(SFR, units="Msun/yr/Mpc**3")
 
-    processed.associate_x(a_bin, comoving=False, description="Cosmic scale factor")
+    processed.associate_x(
+        a_bin, scatter=None, comoving=False, description="Cosmic scale factor"
+    )
     processed.associate_y(
         SFR,
         scatter=SFR_scatter,
