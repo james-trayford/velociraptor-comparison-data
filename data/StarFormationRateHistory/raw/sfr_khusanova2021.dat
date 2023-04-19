@@ -4,4 +4,4 @@
 #   Uses a Chabrier IMF
 #   z   log10 sfrd (Msol/yr/Mpc^3)   sfrderror_low sfrderror_high
 4.5  -1.28  0.36  0.38
-5.5  -1.38  0.28  0.36
+5.5  -1.60  0.28  0.36
