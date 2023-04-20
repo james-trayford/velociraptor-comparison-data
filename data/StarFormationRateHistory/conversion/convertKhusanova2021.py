@@ -1,6 +1,5 @@
 from velociraptor.observations.objects import (
     ObservationalData,
-    MultiRedshiftObservationalData,
 )
 
 import unyt
