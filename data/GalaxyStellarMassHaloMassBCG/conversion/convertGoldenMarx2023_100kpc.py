@@ -25,9 +25,15 @@ Mstar_100kpc_log = data[:, 7]
 Mstar_100kpc = (10 ** Mstar_100kpc_log) * unyt.Solar_Mass
 Mstar_100kpc_scatter_log = data[:, 8]
 
-Mstar_100kpc_scatter_low = (10 ** Mstar_100kpc_log - 10 ** (Mstar_100kpc_log - Mstar_100kpc_scatter_log)) * unyt.Solar_Mass
-Mstar_100kpc_scatter_high = (10 ** (Mstar_100kpc_log + Mstar_100kpc_scatter_log) - 10 ** Mstar_100kpc_log) * unyt.Solar_Mass
-Mstar_100kpc_scatter = unyt.unyt_array((Mstar_100kpc_scatter_low, Mstar_100kpc_scatter_high), units = unyt.Solar_Mass)
+Mstar_100kpc_scatter_low = (
+    10 ** Mstar_100kpc_log - 10 ** (Mstar_100kpc_log - Mstar_100kpc_scatter_log)
+) * unyt.Solar_Mass
+Mstar_100kpc_scatter_high = (
+    10 ** (Mstar_100kpc_log + Mstar_100kpc_scatter_log) - 10 ** Mstar_100kpc_log
+) * unyt.Solar_Mass
+Mstar_100kpc_scatter = unyt.unyt_array(
+    (Mstar_100kpc_scatter_low, Mstar_100kpc_scatter_high), units=unyt.Solar_Mass
+)
 
 # Meta-data
 comment = (
@@ -41,7 +47,7 @@ bibcode = "2023MNRAS.521..478G"
 name = "BCG stellar mass-halo mass relation at z=0.4"
 plot_as = "points"
 redshift = 0.4
-redshift_lower = 0.
+redshift_lower = 0.0
 redshift_upper = 0.8
 h = h_sim
 
@@ -51,7 +57,10 @@ processed.associate_x(
     M_200, scatter=None, comoving=True, description="Halo Mass ($M_{200, {\rm crit}}$)"
 )
 processed.associate_y(
-    Mstar_100kpc, scatter=Mstar_100kpc_scatter, comoving=True, description="Galaxy Stellar Mass"
+    Mstar_100kpc,
+    scatter=Mstar_100kpc_scatter,
+    comoving=True,
+    description="Galaxy Stellar Mass",
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)

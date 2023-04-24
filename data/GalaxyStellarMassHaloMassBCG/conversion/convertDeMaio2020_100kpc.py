@@ -36,7 +36,7 @@ bibcode = "2020MNRAS.491.3751D"
 name = "BCG stellar mass-halo mass relation at z=0.4"
 plot_as = "points"
 redshift = 0.4
-redshift_lower = 0.
+redshift_lower = 0.0
 redshift_upper = 0.5
 h = h_sim
 
