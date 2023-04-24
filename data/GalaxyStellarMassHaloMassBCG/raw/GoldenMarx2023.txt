@@ -1,0 +1,8 @@
+# Halo and stellar masses from Golden-Marx et al. (2023) (2023MNRAS.521..478G).
+# Stellar masses were converted from Salpeter to Chabrier through a division
+# by 1.72. Stellar masses were measured in 10, 30, 50 and 100 kpc apertures.
+# log10(M_200)    log10(M_BCG_10kpc)    log10_error(M_BCG_10kpc)    log10(M_BCG_30kpc)    log10_error(M_BCG_30kpc) log10(M_BCG_50kpc)    log10_error(M_BCG_50kpc)    log10(M_BCG_100kpc)    log10_error(M_BCG_100kpc)
+14.655      11.520      0.160      11.770      0.185      11.900      0.170      12.006      0.150      
+14.855      11.490      0.170      11.820      0.190      11.942      0.185      12.037      0.170      
+15.055      11.500      0.165      11.863      0.200      12.006      0.195      12.067      0.160      
+15.255      11.500      0.150      11.910      0.160      12.058      0.180      12.120      0.140      

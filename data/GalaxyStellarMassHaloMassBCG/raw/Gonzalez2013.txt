@@ -1,0 +1,18 @@
+# Halo and stellar masses from Gonzalez et al. (2013) (2013ApJ...778...14G).
+# Stellar mass and cosmology corrections were not needed. 
+# Halo masses were converted from an M_500 to M_200 definition by assuming
+# an NFW profile and concentration of c=5, which leads to a conversion 
+# factor of 1.29. Stellar masses were measured in a 50 kpc aperture.
+# log10(M_200)    log10(M_BCG_50kpc)
+14.253      11.835      
+14.266      11.811      
+14.282      11.825      
+14.440      11.977      
+14.632      11.765      
+14.639      11.926      
+14.661      11.893      
+14.659      11.845      
+14.793      11.985      
+14.820      11.915      
+14.847      11.925      
+14.996      11.955      

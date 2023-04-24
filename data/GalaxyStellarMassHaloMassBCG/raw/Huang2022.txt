@@ -1,0 +1,10 @@
+# Halo and stellar masses from Huang et al. (2022) (2022MNRAS.515.4722H).
+# Halo masses were converted from M_vir to M_200 definition by assuming 
+# an NFW profile and a concentration of c=5. This leads to a conversion 
+# factor of 0.87. Stellar masses were measured in 10, 30, 50 and 100 kpc 
+# apertures.
+# log10(M_200)    log10(M_BCG_10kpc)    log10_error(M_BCG_10kpc)    log10(M_BCG_30kpc)    log10_error(M_BCG_30kpc) log10(M_BCG_50kpc)    log10_error(M_BCG_50kpc)    log10(M_BCG_100kpc)    log10_error(M_BCG_100kpc)
+13.910      11.335      0.030      11.570      0.040      11.620      0.040      11.670      0.040      
+14.120      11.385      0.040      11.655      0.045      11.710      0.050      11.770      0.060      
+14.460      11.440      0.035      11.730      0.040      11.810      0.050      11.880      0.050      
+15.045      11.527      0.090      11.885      0.115      11.980      0.120      12.055      0.125      

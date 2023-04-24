@@ -1,0 +1,13 @@
+# Halo and stellar masses from Lin et al. (2017) (2017ApJ...851..139L).
+# Stellar mass and cosmology corrections were not needed.
+# Stellar masses were measured in a 25 kpc (radius) aperture. These were
+# converted to a 30 kpc selection by assuming that the profile of
+# sigma(R) * R^2 is, as a worst-case scenario, flat at these radii. This
+# leads to M(R) being proportional to R. The asumption of a flat profile is  
+# based on measurements of Kravstov et al. (2018) (2018AstL...44....8K). 
+# See their Fig. 1, which shows roughly flat or slightly rising profiles.
+# log10(M_200)    log10(M_BCG_30kpc)    log10_error(M_BCG_30kpc)
+14.320      11.528      0.190      
+14.415      11.633      0.152      
+14.479      11.636      0.135      
+14.567      11.637      0.165      
