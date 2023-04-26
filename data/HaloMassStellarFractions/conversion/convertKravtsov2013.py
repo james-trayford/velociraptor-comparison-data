@@ -23,23 +23,13 @@ if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
 # Cosmology correction factor
-correction_factor = h_sim / 0.7
+correction_factor = h_sim / 70.0
 
-# Data from table 1 from the paper, the non-BCG column
-M_500 = np.array([15.6, 10.30, 7, 5.34, 2.35, 1.86, 1.34, 0.46, 0.47]) * 1e14
-Mstar = (
-    np.array([12.22, 8.21, 5.28, 4.01, 1.89, 2.22, 1.77, 0.97, 0.47]) * 1e12
-    + np.array([3.12, 4.14, 3.06, 1.47, 0.79, 1.26, 1.09, 0.91, 1.38]) * 1e12
-)
-
-Mstarer = (
-    np.sqrt(
-        np.array([1.58, 1.05, 0.74, 0.75, 0.49, 0.47, 0.41, 0.29, 0.18]) ** 2
-        + np.array([0.36, 0.30, 0.30, 0.13, 0.05, 0.11, 0.06, 0.05, 0.14]) ** 2
-    )
-    * 1e12
-)
-
+# Data from table 1 from the paper, the BCG + non-BCG column
+raw_data = np.loadtxt("../raw/Kravtsov2013.txt")
+M_500 = raw_data[:, 0] * 1e14
+Mstar = raw_data[:, 1] * 1e12
+Mstarer = raw_data[:, 2] * 1e12
 
 f_star = Mstar / M_500
 f_starer = Mstarer / M_500

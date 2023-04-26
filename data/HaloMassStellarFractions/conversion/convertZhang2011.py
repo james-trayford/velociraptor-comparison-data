@@ -22,120 +22,16 @@ output_directory = "../"
 if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
-# Cosmology correction factor
+# Cosmology correction factor, IMF factor is to go to Chabrier (2003)
 correction_factor = h_sim / 0.7
+IMF_factor = 0.56
 
 # Data from table 1 and 2 from the paper, fstar includes the change to the mass due to IMF change as documented by Chiu+18
-
-M_500 = (
-    np.array(
-        [
-            6.37,
-            1.83,
-            1.91,
-            1.76,
-            0.50,
-            4.93,
-            3.44,
-            6.55,
-            3.41,
-            0.62,
-            14.70,
-            1.39,
-            1.45,
-            11.18,
-            7.36,
-            4.44,
-            2.69,
-            7.13,
-            3.03,
-        ]
-    )
-    * 1e14
-)
-
-M_500err = (
-    np.array(
-        [
-            1.00,
-            0.39,
-            0.58,
-            0.27,
-            0.14,
-            0.98,
-            0.66,
-            0.79,
-            0.63,
-            0.12,
-            2.61,
-            0.28,
-            0.34,
-            1.78,
-            1.25,
-            0.67,
-            0.42,
-            1.38,
-            0.75,
-        ]
-    )
-    * 1e14
-)
-
-f_star = (
-    np.array(
-        [
-            0.0115,
-            0.0240,
-            0.0239,
-            0.0247,
-            0.0233,
-            0.0143,
-            0.0217,
-            0.0201,
-            0.0182,
-            0.0259,
-            0.0065,
-            0.0254,
-            0.0268,
-            0.0065,
-            0.0114,
-            0.0154,
-            0.0177,
-            0.0095,
-            0.0169,
-        ]
-    )
-    * correction_factor ** (-1.5)
-    * 0.56
-)
-
-f_starer = (
-    np.array(
-        [
-            0.0012,
-            0.0039,
-            0.0039,
-            0.0028,
-            0.0040,
-            0.0017,
-            0.0026,
-            0.0018,
-            0.0022,
-            0.0031,
-            0.0007,
-            0.0030,
-            0.0035,
-            0.0006,
-            0.0011,
-            0.0015,
-            0.0017,
-            0.0011,
-            0.0023,
-        ]
-    )
-    * correction_factor ** (-1.5)
-    * 0.56
-)
+raw_data = np.loadtxt("../raw/Zhang2011.txt")
+M_500 = raw_data[:, 0] * 1e14 * correction_factor ** (-1)
+M_500err = raw_data[:, 1] * 1e14 * correction_factor ** (-1)
+f_star = raw_data[:, 2] * correction_factor ** (-1.5) * IMF_factor
+f_starer = raw_data[:, 2] * correction_factor ** (-1.5) * IMF_factor
 
 # Convert to proper units
 M_500 = unyt.unyt_array(M_500, units="Msun")

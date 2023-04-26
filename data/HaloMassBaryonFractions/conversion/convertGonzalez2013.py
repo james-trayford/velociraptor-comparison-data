@@ -22,103 +22,22 @@ output_directory = "../"
 if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
-# Cosmology correction factor
+# correction factors, IMF correction is to go to Chabries (2003)
 correction_factor = h_sim / 0.702
+b_HSE = 0.74302868
+IMF_factor = 0.76
 
 # Data from table 2 from the paper, fstar includes the change to the mass due to IMF change as documented by Chiu+18
-M_500 = np.array(
-    [2.26, 5.15, 0.95, 3.46, 3.59, 0.99, 0.95, 3.23, 2.26, 2.41, 2.37, 1.45]
-) * correction_factor ** (-1)
+raw_data = np.loadtxt("../raw/Gonzalez2013.txt")
 
-M_500err = np.array(
-    [0.19, 0.42, 0.10, 0.32, 0.28, 0.11, 0.10, 0.19, 0.23, 0.18, 0.24, 0.21]
-) * correction_factor ** (-1)
-
-
-f_star = (
-    np.array(
-        [
-            0.024,
-            0.013,
-            0.028,
-            0.017,
-            0.013,
-            0.030,
-            0.041,
-            0.022,
-            0.023,
-            0.023,
-            0.022,
-            0.020,
-        ]
-    )
-    * correction_factor ** (-1.5)
-    * 0.76
-)
-
-f_starer = (
-    np.array(
-        [
-            0.002,
-            0.001,
-            0.003,
-            0.002,
-            0.002,
-            0.004,
-            0.005,
-            0.002,
-            0.003,
-            0.003,
-            0.003,
-            0.003,
-        ]
-    )
-    * correction_factor ** (-1.5)
-    * 0.76
-)
-
-Gonzales_fbar = (
-    np.array(
-        [
-            0.112,
-            0.143,
-            0.118,
-            0.143,
-            0.138,
-            0.097,
-            0.152,
-            0.155,
-            0.133,
-            0.143,
-            0.110,
-            0.095,
-        ]
-    )
-    * correction_factor ** (-1.5)
-    - 0.24 * f_star
-)
-
+M_500 = raw_data[:, 0] * 1e14 * correction_factor ** (-1) / b_HSE
+M_500err = raw_data[:, 1] * 1e14 * correction_factor ** (-1) / b_HSE
+f_star = raw_data[:, 2] * correction_factor ** (-1.5)
+f_starer = raw_data[:, 3] * correction_factor ** (-1.5)
+Gonzales_fbar = raw_data[:, 4] * correction_factor ** (-1.5)(1 - IMF_factor) * f_star
 Gonzales_fbarer = (
-    np.array(
-        [
-            0.012,
-            0.012,
-            0.014,
-            0.020,
-            0.011,
-            0.011,
-            0.015,
-            0.009,
-            0.013,
-            0.010,
-            0.011,
-            0.013,
-        ]
-    )
-    * correction_factor ** (-1.5)
-    - 0.24 * f_starer
+    raw_data[:, 5] * correction_factor ** (-1.5) * (1 - IMF_factor) * f_starer
 )
-
 
 # Convert to proper units
 M_500 = unyt.unyt_array(M_500, units="Msun")
