@@ -23,7 +23,7 @@ if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
 # Cosmology correction factor
-correction_factor = h_sim / 70.2
+correction_factor = h_sim / 0.702
 
 # Data from table 2 from the paper, fstar includes the change to the mass due to IMF change as documented by Chiu+18
 M_500 = np.array(
