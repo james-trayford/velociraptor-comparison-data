@@ -23,7 +23,7 @@ if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
 # Cosmology correction factor
-correction_factor = h_sim / 70.0
+correction_factor = h_sim / 0.7
 
 # Data from table 1 from the paper, the non-BCG column
 M_500 = np.array([15.6, 10.30, 7, 5.34, 2.35, 1.86, 1.34, 0.46, 0.47]) * 1e14
