@@ -32,18 +32,17 @@ raw_data = np.loadtxt("../raw/Gonzalez2013.txt")
 
 M_500 = raw_data[:, 0] * 1e14 * correction_factor ** (-1) / b_HSE
 M_500err = raw_data[:, 1] * 1e14 * correction_factor ** (-1) / b_HSE
+
 f_star = raw_data[:, 2] * correction_factor ** (-1.5)
 f_starer = raw_data[:, 3] * correction_factor ** (-1.5)
-Gonzales_fbar = raw_data[:, 4] * correction_factor ** (-1.5)(1 - IMF_factor) * f_star
-Gonzales_fbarer = (
-    raw_data[:, 5] * correction_factor ** (-1.5) * (1 - IMF_factor) * f_starer
-)
+f_bar = raw_data[:, 4] * correction_factor ** (-1.5) - (1 - IMF_factor) * f_star
+f_bar_err = raw_data[:, 5] * correction_factor ** (-1.5) - (1 - IMF_factor) * f_starer
 
 # Convert to proper units
 M_500 = unyt.unyt_array(M_500, units="Msun")
 M_500_err = unyt.unyt_array(M_500err, units="Msun")
-fb_500 = unyt.unyt_array(f_star, units="dimensionless")
-error_fb_500_p = unyt.unyt_array(f_starer, units="dimensionless")
+fb_500 = unyt.unyt_array(f_bar, units="dimensionless")
+error_fb_500_p = unyt.unyt_array(f_bar_err, units="dimensionless")
 error_fb_500_m = error_fb_500_p
 
 # Normalise by the cosmic mean
@@ -70,7 +69,7 @@ processed.associate_x(
     M_500, scatter=x_scatter, comoving=True, description="Halo mass (M_500)"
 )
 processed.associate_y(
-    fb_500, scatter=y_scatter, comoving=True, description="Stellar fraction (<R_500)"
+    fb_500, scatter=y_scatter, comoving=True, description="Baryon fraction (<R_500)"
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)

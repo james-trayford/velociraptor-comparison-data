@@ -1,4 +1,4 @@
-# Data from Table 2 of Gonzales et al
+# Data from Table 2 of Gonzales et al 2013
 # h = 0.702
 # M500 [1e14 Msun], M500 err [1e14 Msun], fstar, fstar err
 2.259999999999999787e+00 1.900000000000000022e-01 2.400000000000000050e-02 2.000000000000000042e-03

@@ -24,14 +24,15 @@ if not os.path.exists(output_directory):
 
 # Cosmology correction factor, IMF factor is to go to Chabrier (2003)
 correction_factor = h_sim / 0.7
-IMF_factor = 0.56
+IMF_factor = 0.58
 
-# Data from table 1 and 2 from the paper, fstar includes the change to the mass due to IMF change as documented by Chiu+18
+# Data from table 1 and 2 from the paper, fstar includes the change
+# to the mass due to IMF change as documented by Chiu+18
 raw_data = np.loadtxt("../raw/Zhang2011.txt")
 M_500 = raw_data[:, 0] * 1e14 * correction_factor ** (-1)
 M_500err = raw_data[:, 1] * 1e14 * correction_factor ** (-1)
 f_star = raw_data[:, 2] * correction_factor ** (-1.5) * IMF_factor
-f_starer = raw_data[:, 2] * correction_factor ** (-1.5) * IMF_factor
+f_starer = raw_data[:, 3] * correction_factor ** (-1.5) * IMF_factor
 
 # Convert to proper units
 M_500 = unyt.unyt_array(M_500, units="Msun")

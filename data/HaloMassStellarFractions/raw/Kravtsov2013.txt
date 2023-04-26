@@ -1,4 +1,4 @@
-# Data from Table one of Kravtsov (2013), summing BCG + nonBCG from Mstar
+# Data from Table one of Kravtsov et al (2013), summing contributions from BCG and nonBCG to obtain Mstar
 # h = 0.70
 # M500 [1e14 Msun], Mstar [1e12 Msun], Mstar err [1e12 Msun]
 1.559999999999999964e+01 1.533999999999999986e+01 1.620493751916372016e+00

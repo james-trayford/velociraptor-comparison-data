@@ -25,14 +25,16 @@ if not os.path.exists(output_directory):
 # correction factors, IMF correction is to go to Chabries (2003)
 correction_factor = h_sim / 0.7
 b_HSE = 0.74302868
-IMF_factor = 0.56
+IMF_factor = 0.58
 
 # Data from table 1 from the paper, fstar includes the change to the mass due to IMF change as documented by Chiu+18
 raw_data = np.loadtxt("../raw/Zhang2011.txt")
 M_500 = raw_data[:, 0] * 1e14
 M_500err = raw_data[:, 1] * 1e14
+
 fstar = raw_data[:, 2] * correction_factor ** (-1.5) * IMF_factor
 fstar_err = raw_data[:, 3] * correction_factor ** (-1.5) * IMF_factor
+
 Mstar = fstar * M_500
 Mstarer = Mstar * np.sqrt((fstar_err / fstar) ** 2 + (M_500 / M_500err) ** 2)
 Mgas = raw_data[:, 4] * 1e13
@@ -81,7 +83,7 @@ processed.associate_x(
     M_500, scatter=x_scatter, comoving=True, description="Halo mass (M_500)"
 )
 processed.associate_y(
-    fb_500, scatter=y_scatter, comoving=True, description="Stellar fraction (<R_500)"
+    fb_500, scatter=y_scatter, comoving=True, description="Baryon fraction (<R_500)"
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
