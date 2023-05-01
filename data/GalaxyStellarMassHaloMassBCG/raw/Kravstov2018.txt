@@ -1,9 +1,10 @@
-# Halo and stellar masses from Kravstov et al. (2018) (2018AstL...44....8K).
-# Stellar mass and cosmology corrections were not needed. 
-# Halo masses were converted from an M_500 to M_200 definition by assuming
-# an NFW profile and concentration of c=5, which leads to a conversion 
-# factor of 1.29.
-# Stellar masses were measured in 30, 50 and 100 kpc apertures.
+# Halo and stellar masses from Kravstov et al. (2018)
+# (2018AstL...44....8K). Halo masses are defined using the critical
+# overdensity definition. Stellar mass and cosmology corrections are not
+# needed. Halo masses were converted from an M_500 to M_200 (critical
+# overdensity) definition by assuming an NFW profile and concentration of
+# c=5, which leads to a conversion factor of 1.29. Stellar masses were
+# measured in 30, 50 and 100 kpc projected apertures.
 # log10(M_200)    log10(M_BCG_30kpc)    log10(M_BCG_50kpc)    log10(M_BCG_100kpc)
 15.303      11.740      11.907      12.163      
 15.123      12.044      12.208      12.455      

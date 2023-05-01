@@ -1,8 +1,11 @@
-# Halo and stellar masses from Gonzalez et al. (2013) (2013ApJ...778...14G).
-# Stellar mass and cosmology corrections were not needed. 
-# Halo masses were converted from an M_500 to M_200 definition by assuming
-# an NFW profile and concentration of c=5, which leads to a conversion 
-# factor of 1.29. Stellar masses were measured in a 50 kpc aperture.
+# Halo and stellar masses from Gonzalez et al. (2013)
+# (2013ApJ...778...14G). Stellar mass and cosmology corrections are not
+# needed. Halo masses are defined using the critical overdensity
+# definition. Stellar mass and cosmology corrections are not
+# needed. Halo masses were converted from an M_500 to M_200 (critical
+# overdensity) definition by assuming an NFW profile and concentration of
+# c=5, which leads to a conversion factor of 1.29. Stellar masses were
+# measured in 50 kpc projected apertures.
 # log10(M_200)    log10(M_BCG_50kpc)
 14.253      11.835      
 14.266      11.811      

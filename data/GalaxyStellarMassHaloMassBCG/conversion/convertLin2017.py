@@ -37,10 +37,11 @@ Mstar_30kpc_scatter = unyt.unyt_array(
 
 # Meta-data
 comment = (
-    "Halo and stellar masses from Lin et al. (2017) (2017ApJ...851..139L)."
-    "Stellar mass and cosmology corrections were not needed."
-    "Stellar masses were measured in a 25 kpc (radius) aperture. These were"
-    "converted to a 30 kpc selection by assuming that the profile of "
+    "Halo and stellar masses from Lin et al. (2017) (2017ApJ...851..139L). "
+    "Halo masses are defined using the critical overdensity (factor 200) "
+    "definition. Stellar mass and cosmology corrections are not needed."
+    "Stellar masses were measured in a 25 kpc (radius) projected aperture. "
+    "These were converted to a 30 kpc selection by assuming that the profile "
     "sigma(R) * R^2 is, as a worst-case scenario, flat at these radii. This "
     "leads to M(R) being proportional to R. The asumption of a flat profile "
     "is based on measurements of Kravstov et al. (2018) (2018AstL...44....8K)."

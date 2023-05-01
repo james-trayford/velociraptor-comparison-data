@@ -15,12 +15,6 @@ h_sim = cosmology.h
 data = np.loadtxt("../raw/GoldenMarx2023.txt")
 
 # Meta-data
-comment = (
-    "Halo and stellar masses from Golden-Marx et al. (2023) "
-    "(2023MNRAS.521..478G). Stellar masses were converted from Salpeter to "
-    "Chabrier through a division by 1.72. Stellar masses were measured in 10, "
-    "30, 50 and 100 kpc apertures."
-)
 citation = "Golden-Marx et al. (2023)"
 bibcode = "2023MNRAS.521..478G"
 name = "BCG stellar mass-halo mass relation at z=0.4"
@@ -35,10 +29,18 @@ if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
 apertures = [10, 30, 50, 100]  # kpc
-    
+
 # Write a separate file for each aperture
 for x, aperture in enumerate(apertures):
     output_filename = f"GoldenMarx2023_{aperture}kpc.hdf5"
+    comment = (
+        "Halo and stellar masses from Golden-Marx et al. (2023) "
+        "(2023MNRAS.521..478G). Halo masses are obtained from SZ measurements "
+        "and are defined using the (factor 200) critical overdensit definition. "
+        "Stellar masses were converted from Salpeter to Chabrier through a "
+        f"division by 1.72. Stellar masses were measured in {aperture} "
+        "kpc projected apertures."
+    )
 
     M_200 = (10 ** data[:, 0]) * unyt.Solar_Mass
 

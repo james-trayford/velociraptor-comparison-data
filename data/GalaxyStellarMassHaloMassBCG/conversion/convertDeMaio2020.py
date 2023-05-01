@@ -15,14 +15,6 @@ h_sim = cosmology.h
 data = np.loadtxt("../raw/DeMaio2020.txt")
 
 # Meta-data
-comment = (
-    "Halo and stellar masses from DeMaio et al. (2020) (2020MNRAS.491.3751D). "
-    "Stellar mass and cosmology corrections were not needed. "
-    "Halo masses were converted from an M_500 to M_200 definition by assuming "
-    "an NFW profile and concentration of c=5, which leads to a conversion "
-    "factor of 1.29. "
-    "Stellar masses were measured in 10, 50 and 100 kpc apertures. "
-)
 citation = "DeMaio et al. (2020)"
 bibcode = "2020MNRAS.491.3751D"
 name = "BCG stellar mass-halo mass relation at z=0.4"
@@ -41,6 +33,15 @@ apertures = [10, 50, 100]  # kpc
 # Write a separate file for each aperture
 for x, aperture in enumerate(apertures):
     output_filename = f"DeMaio2020_{aperture}kpc.hdf5"
+    comment = (
+        "Halo and stellar masses from DeMaio et al. (2020) (2020MNRAS.491.3751D). "
+        "Halo masses are defined using the critical overdensity definition. "
+        "Stellar mass and cosmology corrections are not needed. Halo masses were "
+        "converted from an M_500 to M_200 (critical overdensity) definition by "
+        "assuming an NFW profile and concentration of c=5, which leads to a "
+        f"conversion factor of 1.29. Stellar masses were measured in {aperture} "
+        " kpc projected apertures."
+    )
 
     M_200 = (10 ** data[:, 0]) * unyt.Solar_Mass
     Mstar = (10 ** data[:, 1 + x]) * unyt.Solar_Mass

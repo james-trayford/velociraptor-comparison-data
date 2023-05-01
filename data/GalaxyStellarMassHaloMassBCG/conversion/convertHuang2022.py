@@ -15,13 +15,6 @@ h_sim = cosmology.h
 data = np.loadtxt("../raw/Huang2022.txt")
 
 # Meta-data
-comment = (
-    "Halo and stellar masses from Huang et al. (2022) (2022MNRAS.515.4722H). "
-    "Halo masses were converted from M_vir to M_200 definition by assuming "
-    "an NFW profile and a concentration of c=5. This leads to a conversion "
-    "factor of 0.87. Stellar masses were measured in 10, 30, 50 and 100 kpc "
-    "apertures. "
-)
 citation = "Huang et al. (2022)"
 bibcode = "2022MNRAS.515.4722H"
 name = "BCG stellar mass-halo mass relation at z=0.4"
@@ -40,6 +33,13 @@ apertures = [10, 30, 50, 100]  # kpc
 # Write a separate file for each aperture
 for x, aperture in enumerate(apertures):
     output_filename = f"Huang2022_{aperture}kpc.hdf5"
+    comment = (
+        "Halo and stellar masses from Huang et al. (2022) (2022MNRAS.515.4722H). "
+        "Halo masses were converted from M_vir (Bryan-Norman 1998 definition) to "
+        "M_200 (critical overdensity definition) by assuming an NFW profile and a "
+        "concentration of c=5. This leads to a conversion factor of 0.87. Stellar "
+        f"masses were measured in {aperture} kpc projected apertures. "
+    )
 
     M_200 = (10 ** data[:, 0]) * unyt.Solar_Mass
 

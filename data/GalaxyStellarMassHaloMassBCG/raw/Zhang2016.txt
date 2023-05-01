@@ -1,44 +1,10 @@
 # Halo and stellar masses from Zhang et al. (2016) (2016ApJ...816...98Z)
-# Stellar mass and cosmology corrections were not needed.
-# Stellar masses were measured in a 32 kpc aperture, so they are used to
-# compare with 30 kpc apertures from the simulations.
-# log10(M_200)    log10(M_BCG_32kpc)
-14.720      11.775      
-14.440      11.545      
-14.250      11.365      
-13.920      11.675      
-13.830      11.425      
-14.510      11.695      
-14.260      11.255      
-14.000      11.175      
-13.690      11.525      
-13.860      11.545      
-14.040      11.335      
-14.040      11.455      
-14.040      11.545      
-14.410      11.765      
-13.620      11.565      
-14.180      11.625      
-14.000      11.295      
-14.420      11.605      
-14.040      11.205      
-14.030      11.605      
-14.090      11.395      
-14.570      11.555      
-13.980      11.525      
-14.020      11.595      
-14.460      11.295      
-14.840      12.175      
-15.120      11.795      
-13.860      11.245      
-14.290      10.975      
-13.830      11.425      
-13.980      11.355      
-14.320      11.605      
-14.160      11.275      
-13.860      11.705      
-14.210      11.695      
-14.420      11.505      
-13.820      11.415      
-14.370      11.825      
-14.200      11.375      
+# Halo masses are defined using the critical overdensity (factor 200) 
+# definition. Stellar mass and cosmology corrections are not needed.
+# Stellar masses were measured in a 32 kpc projected aperture, so they are
+# used to compare with 30 kpc projected apertures from the simulations.
+# log10(M_200)    log10(M_BCG_32kpc)    log10_error(M_BCG_32kpc)
+13.825      11.510      0.183      
+14.175      11.520      0.258      
+14.450      11.570      0.283      
+14.960      11.770      0.236      
