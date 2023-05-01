@@ -30,14 +30,15 @@ plot_as = "points"
 redshift = 0.15
 h = h_sim
 
-# Write a separate file for each aperture
-apertures = [30, 50, 100]
-for x in range(3):
-    output_filename = f"Kravstov2018_{apertures[x]}.hdf5"
-    output_directory = "../"
+output_directory = "../"
+if not os.path.exists(output_directory):
+    os.mkdir(output_directory)
 
-    if not os.path.exists(output_directory):
-        os.mkdir(output_directory)
+apertures = [30, 50, 100]  # kpc
+
+# Write a separate file for each aperture
+for x, aperture in enumerate(apertures):
+    output_filename = f"Kravstov2018_{aperture}kpc.hdf5"
 
     M_200 = (10 ** data[:, 0]) * unyt.Solar_Mass
     Mstar = (10 ** data[:, 1 + x]) * unyt.Solar_Mass
