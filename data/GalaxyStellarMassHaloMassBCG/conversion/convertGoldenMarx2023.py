@@ -30,15 +30,15 @@ redshift_lower = 0.0
 redshift_upper = 0.8
 h = h_sim
 
+output_directory = "../"
+if not os.path.exists(output_directory):
+    os.mkdir(output_directory)
+
+apertures = [10, 30, 50, 100]  # kpc
+    
 # Write a separate file for each aperture
-apertures = [10, 30, 50, 100]
-for x in range(4):
-
-    output_filename = f"GoldenMarx2023_{apertures[x]}.hdf5"
-    output_directory = "../"
-
-    if not os.path.exists(output_directory):
-        os.mkdir(output_directory)
+for x, aperture in enumerate(apertures):
+    output_filename = f"GoldenMarx2023_{aperture}kpc.hdf5"
 
     M_200 = (10 ** data[:, 0]) * unyt.Solar_Mass
 
