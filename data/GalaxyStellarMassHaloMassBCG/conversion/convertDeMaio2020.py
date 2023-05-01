@@ -32,14 +32,15 @@ redshift_lower = 0.0
 redshift_upper = 0.5
 h = h_sim
 
-# Write a separate file for each aperture
-apertures = [10, 50, 100]
-for x in range(3):
-    output_filename = f"DeMaio2020_{apertures[x]}.hdf5"
-    output_directory = "../"
+output_directory = "../"
+if not os.path.exists(output_directory):
+    os.mkdir(output_directory)
 
-    if not os.path.exists(output_directory):
-        os.mkdir(output_directory)
+apertures = [10, 50, 100]  # kpc
+
+# Write a separate file for each aperture
+for x, aperture in enumerate(apertures):
+    output_filename = f"DeMaio2020_{aperture}kpc.hdf5"
 
     M_200 = (10 ** data[:, 0]) * unyt.Solar_Mass
     Mstar = (10 ** data[:, 1 + x]) * unyt.Solar_Mass
