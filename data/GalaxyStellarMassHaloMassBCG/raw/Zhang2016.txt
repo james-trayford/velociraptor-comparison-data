@@ -1,0 +1,10 @@
+# Halo and stellar masses from Zhang et al. (2016) (2016ApJ...816...98Z)
+# Halo masses are defined using the critical overdensity (factor 200) 
+# definition. Stellar mass and cosmology corrections are not needed.
+# Stellar masses were measured in a 32 kpc projected aperture, so they are
+# used to compare with 30 kpc projected apertures from the simulations.
+# log10(M_200)    log10(M_BCG_32kpc)    log10_error(M_BCG_32kpc)
+13.825      11.510      0.183      
+14.175      11.520      0.258      
+14.450      11.570      0.283      
+14.960      11.770      0.236      
