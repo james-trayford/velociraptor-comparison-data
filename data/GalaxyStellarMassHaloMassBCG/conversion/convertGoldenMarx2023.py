@@ -36,10 +36,13 @@ for x, aperture in enumerate(apertures):
     comment = (
         "Halo and stellar masses from Golden-Marx et al. (2023) "
         "(2023MNRAS.521..478G). Halo masses are obtained from SZ measurements "
-        "and are defined using the (factor 200) critical overdensit definition. "
-        "Stellar masses were converted from Salpeter to Chabrier through a "
-        f"division by 1.72. Stellar masses were measured in {aperture} "
-        "kpc projected apertures."
+        "and are defined using the (factor 200) mean overdensity definition. "
+        "They are then converted to a (factor 200) critical overdensity "
+        "definition by assuming an NFW profile, a concentration of c=5 and "
+        "matter density parameter Omega_m=0.3. Stellar masses were "
+        "converted from Salpeter to Chabrier through a division by 1.72. "
+        "Stellar masses division by 1.72. Stellar masses were measured in "
+        f"{aperture} kpc projected apertures."
     )
 
     M_200 = (10 ** data[:, 0]) * unyt.Solar_Mass
