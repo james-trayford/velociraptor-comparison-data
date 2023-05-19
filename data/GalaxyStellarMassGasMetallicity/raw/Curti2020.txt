@@ -1,6 +1,6 @@
-# The relationships between stellar mass and gas-phase metallicity from Curti et al. (2020)
+# The relationship between stellar mass and gas-phase metallicity from Curti et al. (2020)
 # The raw data is taken directly from Fig. 3 of the paper.
-# Log Mstar [Msun], Gas metallicity 12 + log(O/H), Symmetric error on Gas metallicity Delta 12 + log(O/H)
+# Log Mstar [Msun], Gas metallicity 12 + log(O/H), Symmetric error on Gas metallicity Delta 12 + log(O/H).
 7.5000 8.0423 0.2297
 7.6500 8.0658 0.1719
 7.8001 8.3065 0.2016

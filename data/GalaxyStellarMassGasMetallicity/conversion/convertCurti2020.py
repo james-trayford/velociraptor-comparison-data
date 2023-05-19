@@ -15,7 +15,7 @@ processed = ObservationalData()
 raw = np.loadtxt(input_filename)
 
 comment = (
-    "The relationships between stellar mass and gas-phase metallicity "
+    "The relationship between stellar mass and gas-phase metallicity "
     "in the local Universe for SDSS galaxies. "
     "Uses Chabrier (2003) initial mass function. "
     "Uses the Solar metallicity of 12 + log(O/H)_Sun = 8.69. "
@@ -25,7 +25,7 @@ comment = (
 )
 citation = "Curti et al. (2020)"
 bibcode = "2020MNRAS.491..944C"
-name = f"Galaxy Stellar Mass - Gas Metallicity"
+name = "Galaxy Stellar Mass - Gas Metallicity"
 plot_as = "points"
 redshift = 0.1
 
@@ -44,7 +44,7 @@ processed.associate_y(
     metal,
     scatter=metal_error,
     comoving=False,
-    description="Galaxy Gas Metallicity (3 kpc aperture)",
+    description="Galaxy Gas Metallicity",
 )
 processed.associate_citation(citation, bibcode)
 processed.associate_name(name)
