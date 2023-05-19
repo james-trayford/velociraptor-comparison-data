@@ -29,11 +29,11 @@ M_BH_log = data[:, 2]
 M_BH_log_error = data[:, 3]
 
 sigma_scatter_low = (
-    10 ** sigma_log - 10 ** (sigma_log - sigma_log_error)
-) * unyt.kilometer / unyt.s
+    (10 ** sigma_log - 10 ** (sigma_log - sigma_log_error)) * unyt.kilometer / unyt.s
+)
 sigma_scatter_high = (
-    10 ** (sigma_log + sigma_log_error) - 10 ** sigma_log
-) * unyt.kilometer / unyt.s
+    (10 ** (sigma_log + sigma_log_error) - 10 ** sigma_log) * unyt.kilometer / unyt.s
+)
 sigma_scatter = unyt.unyt_array(
     (sigma_scatter_low, sigma_scatter_high), units=unyt.kilometer / unyt.s
 )
@@ -51,10 +51,10 @@ M_BH_scatter = unyt.unyt_array(
 # Meta-data
 comment = (
     "Measured stellar velocity dispersion - black hole mass relation from "
-    "Saglia et al. (2016) (2016ApJ...818...47S). The black hole masses were "
-    "determined from dynamical measurements, while the line-of-sight velocity "
-    "dispersions are weighted (by surface brightness) averages within "
-    "projected apertures equal to the half-light radius."
+    "Table 1 of Saglia et al. (2016) (2016ApJ...818...47S). The black hole "
+    "masses were determined from dynamical measurements, while the "
+    "line-of-sight dispersions are weighted (by surface brightness) averages "
+    "within projected apertures equal to the half-light radius. "
 )
 citation = "Saglia et al. (2016)"
 bibcode = "2016ApJ...818...47S"
@@ -66,7 +66,10 @@ h = h_sim
 # Write everything
 processed = ObservationalData()
 processed.associate_x(
-    sigma, scatter=sigma_scatter, comoving=True, description="Stellar velocity dispersion ($R_{\rm e}$ aperture)"
+    sigma,
+    scatter=sigma_scatter,
+    comoving=True,
+    description="Stellar velocity dispersion ($R_{\rm e}$ aperture)",
 )
 processed.associate_y(
     M_BH,

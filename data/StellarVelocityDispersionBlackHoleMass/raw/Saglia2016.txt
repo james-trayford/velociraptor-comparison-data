@@ -1,8 +1,10 @@
-# Measured stellar velocity dispersion - black hole mass relation from "
-# Saglia et al. (2016) (2016ApJ...818...47S). The black hole masses were "
-# determined from dynamical measurements, while the line-of-sight velocity "
-# dispersions are weighted (by surface brightness) averages within "
-# projected apertures equal to the half-light radius."
+# Measured stellar velocity dispersion - black hole mass relation from 
+# Table 1 of Saglia et al. (2016) (2016ApJ...818...47S). The black hole 
+# masses were determined from dynamical measurements, while the 
+# line-of-sight dispersions are weighted (by surface brightness) averages 
+# within projected apertures equal to the half-light radius.
+# The velocity dispersions are in units of km/s, while the masses are in
+# units of M_sun.
 # log10(sigma)    log10_err(sigma)    log10(M_BH)    log10_err(M_BH)
 2.021      0.084      6.633      0.048      
 1.898      0.017      6.057      0.105      
