@@ -21,7 +21,9 @@ comment = (
     "Uses the Solar metallicity of 12 + log(O/H)_Sun = 8.69. "
     "The data focuses on star forming galaxies. "
     "No conversion w.r.t solar metallicity value is needed. "
-    "Uses cosmology assuming the parameters presented by Planck Collaboration et al. (2016)"
+    "Uses cosmology assuming the parameters presented by Planck Collaboration et al. (2016). "
+    "To measure the gas metallicity, a combination of different strong line diagnostics is used, "
+    "assuming the Te-based calibrations presented in Curti et al. (2017)."
 )
 citation = "Curti et al. (2020)"
 bibcode = "2020MNRAS.491..944C"
