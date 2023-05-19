@@ -3,9 +3,7 @@ from velociraptor.observations.objects import ObservationalData
 import unyt
 import numpy as np
 import os
-import re
 import sys
-import itertools as it
 
 ORIGINAL_H = 0.7
 
@@ -32,9 +30,9 @@ comment = (
     f"data, h-corrected for SWIFT using Cosmology: {cosmology.name}."
 )
 
-citation = "Jones et al. (2018), z = 0"
+citation = "Jones et al. (2018, ALFALFA)"
 bibcode = "2018MNRAS.477....2J"
-name = "HIMF from ALFALFA at z=0"
+name = "HI mass function from ALFALFA at z=0"
 plot_as = "points"
 redshift = 0.0
 h = cosmology.h
