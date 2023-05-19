@@ -1,0 +1,15 @@
+# The HI mass function from the MeerKAT telescope's data based on 276 direct detections from
+# the MIGHTEE Survey Early Science data covering redshifts 0 < z < 0.084 reported in
+# Ponomareva et al (2023). The raw data points are taken directly from Figure 3 in
+# Ponomareva et al (2023).
+# Log10 Mstar [Msun], Log10 HI Phi [(1/hMpc)**3], Phi Err+ [(1/hMpc)**3], Phi Err- [(1/hMpc)**3]
+8.0439 -1.8203 0.3430 5.0000
+8.3435 -1.7187 0.2795 0.9655
+8.6431 -1.4011 0.1652 0.2922
+8.9427 -1.6552 0.1652 0.2795
+9.2448 -1.7568 0.1397 0.2541
+9.5444 -2.0744 0.1525 0.2160
+9.8440 -2.0617 0.1397 0.2287
+10.1436 -2.4682 0.1397 0.2795
+10.4432 -3.1034 0.2160 0.5082
+10.7428 -3.8022 0.3557 3.0000
