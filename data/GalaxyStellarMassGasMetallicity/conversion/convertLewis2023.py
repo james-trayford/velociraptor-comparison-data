@@ -29,7 +29,8 @@ comment = (
     "The data includes only star-forming galaxies. "
     "No conversion w.r.t solar metallicity value is needed. "
     "Uses four emission lines ([O ii]l3727, Hgamma, Hbeta, and [O iii]l5007) to identify AGN, "
-    "determine nebular extinction, and calculate gas-phase metallicity."
+    "determine nebular extinction, and calculate gas-phase metallicity. "
+    "The authors use cosmology with h = 0.7, Omegam = 0.3, and OmegaL = 0.7."
 )
 citation = "Lewis et al. (2023, LEGA-C+DEEP2)"
 bibcode = "2023arXiv230412343L"
@@ -53,8 +54,6 @@ Metallicity = compute_12_plus_log_O_over_H(
 )
 Mstar = unyt.unyt_array(Mstar, units=unyt.Msun)
 Metallicity = unyt.unyt_array(Metallicity, units=unyt.dimensionless)
-
-print(Metallicity)
 
 processed.associate_x(
     Mstar, scatter=None, comoving=False, description="Galaxy Stellar Mass"
