@@ -8,17 +8,20 @@ import os
 import sys
 
 
-def cosmic_star_formation_history_khusanova():
+def cosmic_star_formation_history_сochrane():
     # Meta-data
-    name = "Star formation rate density from Khusanova et al. (2021)"
+    name = "Star formation rate density from Cochrane et al. (2023)"
     comment = (
-        "Uses the Chabrier initial mass function. " "Cosmology: H0=70.0, OmegaM=0.30."
+        "The cosmic star formation history over 0 < z < 4, using deep, radio continuum observations of "
+        "The Low Frequency Array Two Metre Sky Survey."
+        "Uses the Chabrier initial mass function. "
+        "Cosmology: H0=70.0, OmegaM=0.30."
     )
 
-    citation = "Khusanova et al. (2021)"
-    bibcode = "2021A&A...649A.152K"
+    citation = "Cochrane et al. (2023, LOFAR)"
+    bibcode = "2023MNRAS.tmp.1548C"
     plot_as = "points"
-    output_filename = "Khusanova2021.hdf5"
+    output_filename = "Cochrane2023.hdf5"
     output_directory = "../"
 
     # Create observational data instance
@@ -31,27 +34,21 @@ def cosmic_star_formation_history_khusanova():
     if not os.path.exists(output_directory):
         os.mkdir(output_directory)
 
-    # Load raw Khusanova2021 data
-    data = np.loadtxt(f"../raw/sfr_khusanova2021.dat")
+    # Load raw Cochrane2023 data
+    data = np.loadtxt(f"../raw/sfr_cochrane2023.dat")
 
     # Fetch the fields we need
-    z = data[:, 0]
-    SFR, SFR_stderr_low, SFR_stderr_high = data[:, 1], data[:, 2], data[:, 3]
-
+    z_m, z_p = data[:, 0], data[:, 1]
+    z = 0.5 * (z_m + z_p)
     a = 1.0 / (1.0 + z)
+    a = unyt.unyt_array(a, units="dimensionless")
 
-    a_bin = unyt.unyt_array(a, units="dimensionless")
-    # convert from log10(SFRD) to SFRD and carry the uncertainties
-    SFR_minus = 10.0 ** (SFR - SFR_stderr_low)
-    SFR_plus = 10.0 ** (SFR + SFR_stderr_high)
-    SFR = 10.0 ** SFR
-    SFR_scatter = unyt.unyt_array(
-        (SFR - SFR_minus, SFR_plus - SFR), units="Msun/yr/Mpc**3"
-    )
+    SFR, SFR_err = data[:, 7], data[:, 8]  # Msun / yr / Mpc**3
+    SFR_scatter = unyt.unyt_array((SFR_err, SFR_err), units="Msun/yr/Mpc**3")
     SFR = unyt.unyt_array(SFR, units="Msun/yr/Mpc**3")
 
     processed.associate_x(
-        a_bin, scatter=None, comoving=False, description="Cosmic scale factor"
+        a, scatter=None, comoving=False, description="Cosmic scale factor"
     )
     processed.associate_y(
         SFR,
@@ -75,5 +72,5 @@ def cosmic_star_formation_history_khusanova():
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-# Generate, format and save the Khusanova2021 data
-cosmic_star_formation_history_khusanova()
+# Generate, format and save the Cochrane et al. 2023
+cosmic_star_formation_history_сochrane()
