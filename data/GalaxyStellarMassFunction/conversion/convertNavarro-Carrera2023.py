@@ -2,7 +2,6 @@ from velociraptor.observations.objects import (
     ObservationalData,
     MultiRedshiftObservationalData,
 )
-from astropy.cosmology import WMAP9 as cosmology_paper
 import unyt
 import numpy as np
 import os
