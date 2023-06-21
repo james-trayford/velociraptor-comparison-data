@@ -1,0 +1,11 @@
+# Table 4 from Navarro-Carrera et al. (2023)
+# The galaxy stellar mass function at redshift z=4, computed with the 1/Vmax method.
+# log10(M/Msun) bin left (column 1) and right (column 2) edge; \phi [Mpc−3dex−1]x1e4 (column 3) and its error (column 4)
+7.75 8.00 155 39
+8.00 8.25 105 27
+8.25 8.50 74 19
+8.50 8.75 49 14
+8.75 9.00 35 11
+9.00 9.25 24 8
+9.25 9.50 7 5
+9.50 9.75 8 4
