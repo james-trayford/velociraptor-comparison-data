@@ -15,7 +15,8 @@ def cosmic_star_formation_history_сochrane():
         "The cosmic star formation history over 0 < z < 4, using deep, radio continuum observations of "
         "The Low Frequency Array Two Metre Sky Survey."
         "Uses the Chabrier initial mass function. "
-        "Cosmology: H0=70.0, OmegaM=0.30."
+        "Cosmology: H0=70.0, OmegaM=0.30. "
+        "No cosmological corrections were applied during the conversion of the raw data."
     )
 
     citation = "Cochrane et al. (2023, LOFAR)"
