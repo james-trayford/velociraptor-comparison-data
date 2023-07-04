@@ -23,7 +23,7 @@ if not os.path.exists(output_directory):
 # Read the data
 raw = np.loadtxt(input_filename, usecols=[1, 2, 3], skiprows=6)
 M_star = 10 ** raw[:, 2] * unyt.Solar_Mass
-select = np.where(raw[:, 2] > 0)[0] # Some missing data
+select = np.where(raw[:, 2] > 0)[0]  # Some missing data
 M_star = M_star[select]
 alpha_Fe = raw[select, 0]
 error_alpha_Fe = raw[select, 1]
@@ -54,7 +54,6 @@ for element in element_list:
     plot_as = "points"
     redshift = 0.1
     h = h_sim
-
 
     # Write everything
     processed = ObservationalData()
