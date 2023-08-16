@@ -1,5 +1,5 @@
 #
-# H2 mass function at z=0 from XCOLDGASS, grabbed from Fletcher et al. (2020). Assumes h=0.7
+# H2 mass function at z=0 from XCOLDGASS, grabbed from Fletcher et al. (2021). Assumes h=0.7
 #
 # Columns are:
 # x [log10 MH2/Msun] | y [log10 phi/(Mpc ^-3)] | y low err. bound [col. 2] | y high err bound [col. 2] |

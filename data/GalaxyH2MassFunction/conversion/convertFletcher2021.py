@@ -16,8 +16,8 @@ ORIGINAL_H = 0.7
 with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
-input_filename = "../raw/Fletcher2020.txt"
-output_filename = "Fletcher2020.hdf5"
+input_filename = "../raw/Fletcher2021.txt"
+output_filename = "Fletcher2021.hdf5"
 output_directory = "../"
 
 if not os.path.exists(output_directory):
@@ -28,7 +28,7 @@ data = np.genfromtxt(input_filename, comments="#")
 processed = ObservationalData()
 
 comment = (
-    "Fletcher et al. (2020). Estimated for xCOLD GASS survey at z=0"
+    "Fletcher et al. (2021). Estimated for xCOLD GASS survey at z=0"
     f"data, h-corrected for SWIFT using Cosmology: {cosmology.name}."
 )
 
