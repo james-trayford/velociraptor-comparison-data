@@ -28,13 +28,13 @@ data = np.genfromtxt(input_filename, comments="#")
 processed = ObservationalData()
 
 comment = (
-    "Fletcher et al. (2020). Estimated for ALFALFA survey at z=0"
+    "Fletcher et al. (2020). Estimated for xCOLD GASS survey at z=0"
     f"data, h-corrected for SWIFT using Cosmology: {cosmology.name}."
 )
 
-citation = "Fletcher et al. (2020), z = 0"
-bibcode = "2020arXiv200204959F"
-name = "H2MF from ALFALFA at z=0"
+citation = "Fletcher et al. (2021)"
+bibcode = "2021MNRAS.501..411F"
+name = "H2MF from xCOLD GASS at z=0"
 plot_as = "points"
 redshift = 0.0
 h = cosmology.h
