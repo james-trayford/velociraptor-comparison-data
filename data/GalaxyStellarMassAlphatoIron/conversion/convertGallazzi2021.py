@@ -28,7 +28,14 @@ M_star = 10 ** raw[:, 0] * unyt.Solar_Mass * h_sim ** -2
 # From Grevesse + (1991) to Asplund+ (2009)
 
 O_over_H_Gr91 = 8.91
-Fe_over_H_Gr91 = 7.67
+
+# We don't take the Fe_over_H_Gr91 value of 7.67 from Grevesse + (1991), which was used
+# in Gallazzi et al. (2021) because we are confident that that value wasn't correct
+# and instead we need to use a more recent value, which is defined in the following.
+# line. We are currently waiting for a confirmation from Gallazzi that we should indeed
+# use 7.48, as opposed to 7.67.
+Fe_over_H_Gr91 = 7.48
+
 Mg_over_H_Gr91 = 7.58
 
 O_over_H_Asplund09 = 8.69
@@ -64,7 +71,7 @@ for element in element_list:
         "Data obtained assuming a Chabrier IMF and h=0.7. "
         f"h-corrected for SWIFT using cosmology: {cosmology.name}. "
         "The metallicity is expressed as [alpha/Fe]. Note that alpha does not stand for Oxygen. "
-        "Gallazi et al. adopt a semi-empirical estimate of [alpha/Fe] building on the work of Gallazzi et al. (2006). "
+        "Gallazzi et al. adopt a semi-empirical estimate of [alpha/Fe] building on the work of Gallazzi et al. (2006). "
         "For each galaxy they measure the index ratio Mgb/Fe. "
         "The error bars given the 16th and 84th percentile of the distribution. "
         f"This has been corrected to use Z_solar={solar_metallicity} (Asplund+ 2009)"
