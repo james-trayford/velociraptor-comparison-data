@@ -17,7 +17,11 @@ z_list = [0.2, 0.5, 1, 1.5, 2, 3]
 
 output_filename = "Leja_2020.hdf5"
 output_directory = "../"
-comment = f"Uses panchromatic SED models that infer systematically higher masses and lower star formation rates than standard approaches. h-corrected for SWIFT using cosmology: {cosmology_paper.name}. It suses Chabrier (2003) initial mass function"
+comment = (
+    f"Uses panchromatic SED models that infer systematically higher masses and lower star formation rates "
+    f"than standard approaches. h-corrected for SWIFT using cosmology: {cosmology_paper.name}. "
+    f"It uses Chabrier (2003) initial mass function"
+)
 citation = "Leja et al. (2020)"
 bibcode = "2020ApJ...893..111L"
 name = "Continuity GSMF from Leja (2020)"
@@ -84,7 +88,7 @@ def phi_z(z0):
             draws[par] = samp.squeeze()
 
     # Generate Schechter functions.
-    logm = np.linspace(8, 12, 100)[:, None]  # log(M) grid
+    logm = np.linspace(8, 12, 30)[:, None]  # log(M) grid
     phi1 = schechter(
         logm, draws["logphi1"], draws["logmstar"], draws["alpha1"]  # primary component
     )
@@ -125,12 +129,20 @@ for z, redshifts in zip(z_list, input_redshifts):
 
     log_M = m + 2 * np.log10(h_paper / h)
     M = 10 ** (log_M) * unyt.Solar_Mass
+
     Phi = phi * (h / h_paper) ** 3 * unyt.Mpc ** (-3)
+    Delta_Phi_p = err_p * (h / h_paper) ** 3 * unyt.Mpc ** (-3) - Phi
+    Delta_Phi_m = Phi - err_m * (h / h_paper) ** 3 * unyt.Mpc ** (-3)
 
     processed.associate_x(
         M, scatter=None, comoving=True, description="Galaxy Stellar Mass"
     )
-    processed.associate_y(Phi, scatter=None, comoving=True, description="Phi (GSMF)")
+    processed.associate_y(
+        Phi,
+        scatter=unyt.unyt_array([Delta_Phi_m, Delta_Phi_p]),
+        comoving=True,
+        description="Phi (GSMF)",
+    )
     processed.associate_redshift(redshift, redshift_lower, redshift_upper)
     processed.associate_plot_as(plot_as)
 
