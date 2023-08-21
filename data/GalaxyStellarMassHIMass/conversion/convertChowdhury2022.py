@@ -25,9 +25,10 @@ citation = "Chowdhury et al. (2022)"
 comment = (
     "Average HI mass versus stellar mass relation at 0.74<z<1.45 for star-forming galaxies in two "
     "different stellar mass bins. The data was obtained with Giant Metrewave Radio Telescope (GMRT), "
-    "based stacking of HI 21cm signals from different galaxies. "
+    "based on stacking of HI 21cm signals from different galaxies. "
     "In total, there are 11,419 main-sequence galaxies. "
-    "Corrected for h (the authors use h=0.7)."
+    "Corrected for h (the authors use h=0.7). "
+    "Chabrier (2003) initial mass function is used, so no correction is needed."
 )
 bibcode = "2022ApJ...931L..34C"
 name = "Galaxy HI mass vs stellar mass relation at z=1.1"
