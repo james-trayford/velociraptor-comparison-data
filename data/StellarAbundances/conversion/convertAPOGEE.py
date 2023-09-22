@@ -5,7 +5,6 @@ import numpy as np
 import os
 import sys
 import h5py
-from astropy.io import fits
 
 # Exec the master cosmology file passed as first argument
 with open(sys.argv[1], "r") as handle:
