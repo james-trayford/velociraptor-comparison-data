@@ -10,8 +10,8 @@ with open(sys.argv[1], "r") as handle:
 
 input_filename = "../raw/APOGEE_data.hdf5"
 apogee_dataset = h5py.File(input_filename, "r")
-GalR = apogee_dataset['GalR'][:]
-Galz = apogee_dataset['Galz'][:]
+GalR = apogee_dataset["GalR"][:]
+Galz = apogee_dataset["Galz"][:]
 
 output_directory = "../"
 
@@ -22,16 +22,16 @@ element_list = np.array(["C", "MG", "O", "N", "OH", "OHMGFE"])
 
 for element in element_list:
 
-    FE_H = apogee_dataset['FE_H'][:]
+    FE_H = apogee_dataset["FE_H"][:]
 
     output_filename = "APOGEE_data_{0}.hdf5".format(element)
 
     if element == "OH":
-        O_FE = apogee_dataset['O_FE'][:]
+        O_FE = apogee_dataset["O_FE"][:]
         O_H = O_FE + FE_H
     elif element == "OHMGFE":
-        MG_FE = apogee_dataset['MG_FE'][:]
-        O_FE = apogee_dataset['O_FE'][:]
+        MG_FE = apogee_dataset["MG_FE"][:]
+        O_FE = apogee_dataset["O_FE"][:]
         O_H = O_FE + FE_H
     else:
         el_FE = apogee_dataset[f"{element}_FE"][:]
@@ -126,9 +126,9 @@ for element in element_list:
         os.remove(output_path)
 
     ## Output in file
-    with h5py.File(output_path, 'w') as data_file:
+    with h5py.File(output_path, "w") as data_file:
 
-        Header = data_file.create_group('Header')
+        Header = data_file.create_group("Header")
 
         Header.attrs["Description"] = np.string_(description)
         Header.attrs["Citation"] = np.string_(citation)
@@ -144,6 +144,10 @@ for element in element_list:
         dataset.attrs["Description"] = np.string_(ylabel)
 
         dataset = data_file.create_dataset("GalR", data=GalR)
-        dataset.attrs["Description"] = np.string_("Galactocentric radial distance. Unit: [kpc].")
+        dataset.attrs["Description"] = np.string_(
+            "Galactocentric radial distance. Unit: [kpc]."
+        )
         dataset = data_file.create_dataset("Galz", data=Galz)
-        dataset.attrs["Description"] = np.string_("Galactocentric azimuthal distance. Unit: [kpc].")
+        dataset.attrs["Description"] = np.string_(
+            "Galactocentric azimuthal distance. Unit: [kpc]."
+        )
