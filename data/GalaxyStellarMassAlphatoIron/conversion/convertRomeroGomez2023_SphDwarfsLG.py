@@ -32,7 +32,7 @@ element_list = np.array(["MgFe", "OFe"])
 
 for element in element_list:
 
-    output_filename = "RomeroGomez2023_SphDwarfsLG_Data_" + element + ".hdf5"
+    output_filename = f"RomeroGomez2023_SphDwarfsLG_Data_{element}.hdf5"
 
     Z_median = alpha_Fe * unyt.dimensionless
     Z_lo = (alpha_Fe - error_alpha_Fe) * unyt.dimensionless
@@ -43,8 +43,8 @@ for element in element_list:
 
     # Meta-data
     comment = (
-        "The metallicity is expressed as [alpha/Fe]. Note that alpha does not stand for Oxygen. "
-        "Romero-Gomez et al. provides a data compilation of the alpha enhancement of Dwarf Galaxies in the Local Group. "
+        "Compilation of [alpha/Fe] values from the dwarf spherical galaxies in the Local Group. See table B2 of Romero-Gomez et al. (2023). "
+        "2023MNRAS.522..130R. The metallicity is expressed as [alpha/Fe]. Note that alpha does not stand for Oxygen. "
         f"The data has not been corrected to use Z_solar={solar_metallicity} (Asplund+ 2009), since it depends on the metallicity estimation of "
         f"individual galaxies."
     )

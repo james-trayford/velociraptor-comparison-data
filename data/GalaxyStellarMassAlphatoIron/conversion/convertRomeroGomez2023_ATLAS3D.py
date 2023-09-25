@@ -17,7 +17,8 @@ output_directory = "../"
 if not os.path.exists(output_directory):
     os.mkdir(output_directory)
 
-# Read the data
+# Read the data. Here the linear fit is taken from
+# Romero Gomez et al. (2023); Table C2; first row
 raw = np.arange(8, 12.25, 0.25)
 M_star = 10 ** raw * unyt.Solar_Mass
 Z_star = 0.04 * raw - 0.28
@@ -25,6 +26,11 @@ error_Z_star = 0.01 * raw + 0.09
 
 # Correction factor due to the difference in (X_O/X_Fe)_Sun
 # From Grevesse & Sauval (1998) to Asplund+ (2009)
+# Note: Romero-Gomez et al. (2023) re-analyze the spectra of
+# each ATLAS-3D galaxy using the MILES/Vazdekis stellar templates library.
+# MILES adopts the stellar libraries of Coelho et al. (2005), who
+# assume the solar abundances of Grevesse & Sauval (1998).
+# For more details see Vazdekis et al. (2015) (https://arxiv.org/pdf/1504.08032.pdf)
 
 O_H_Grevesse98 = 8.83
 Mg_H_Grevesse98 = 7.58
@@ -44,7 +50,7 @@ element_list = np.array(["MgFe", "OFe"])
 
 for element in element_list:
 
-    output_filename = "RomeroGomez2023_Data_" + element + ".hdf5"
+    output_filename = f"RomeroGomez2023_ATLAS3D_Data_{element}.hdf5"
     if element == "OFe":
         correction = O_Fe_Grevesse98 - O_over_Fe_Asplund09
 
