@@ -56,12 +56,12 @@ for element in element_list:
         x = O_H + O_over_H_GA07 - O_over_H_AS09
         xlabel = "[O/H]"
 
-        if element == element == "OHMGFE":
+        if element == "OHMGFE":
             MG_FE = apogee_dataset["MG_FE"][:]
             y = MG_FE + Mg_over_Fe_GA07 - Mg_over_Fe_AS09
             name = "[Mg/Fe] as a function of [O/H]".format(element)
             ylabel = "[Mg/Fe]"
-        else:  # OH
+        else:  # OFe
             y = O_FE + O_over_Fe_GA07 - O_over_Fe_AS09
             name = "[O/Fe] as a function of [O/H]".format(element)
             ylabel = "[O/Fe]"
