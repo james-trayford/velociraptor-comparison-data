@@ -55,7 +55,6 @@ for element in element_list:
         O_H = O_FE + FE_H
         x = O_H + O_over_H_GA07 - O_over_H_AS09
         xlabel = "[O/H]"
-
         if element == "OHMGFE":
             MG_FE = apogee_dataset["MG_FE"][:]
             y = MG_FE + Mg_over_Fe_GA07 - Mg_over_Fe_AS09
