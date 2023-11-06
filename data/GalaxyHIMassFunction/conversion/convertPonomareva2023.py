@@ -43,7 +43,7 @@ h = cosmology.h
 
 M = 10 ** data[:, 0] * (h / ORIGINAL_H) ** (-2) * unyt.Solar_Mass
 # no error in M_HI provided
-M_err = np.row_stack([M * 0.0] * 2) * M.units
+M_err = np.row_stack([M.value * 0.0] * 2) * M.units
 
 Phi = 10 ** data[:, 1] * (h / ORIGINAL_H) ** 3
 Phi_err_p = 10 ** (data[:, 1] + data[:, 2]) * (h / ORIGINAL_H) ** 3 - Phi
