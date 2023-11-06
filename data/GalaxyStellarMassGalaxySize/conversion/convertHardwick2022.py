@@ -39,8 +39,8 @@ for i, output_filename, label in zip(
     comment = (
         f"Galaxy stellar mass-size relation from the eXtended GALEX Arecibo SDSS Survey (xGASS) survey. "
         f"Contains approximately 1200 galaxies in the redshift range 0.01 < z < 0.05 with a flat distribution of stellar "
-        f"masses between 10**9 and 10**11.4 Msun. "
-        f"Shows are the median {label} galaxy size in mass bins of 0.2 dex."
+        f"masses between 10**9 and 10**11.5 Msun. "
+        f"Shows the median {label} galaxy size in stellar mass bins of 0.2 dex."
     )
 
     citation = f"Hardwick et al. (2022) [{label}]"
