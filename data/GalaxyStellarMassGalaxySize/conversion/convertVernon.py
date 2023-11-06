@@ -27,7 +27,7 @@ comment = (
     "Combination of various data sources, used for the calibration process "
     "in EAGLE-XL. Is h-free."
 )
-citation = "Calibration Data"
+citation = "Calibration Data for EAGLE-XL"
 bibcode = "None available"
 name = "Galaxy Stellar Mass-Galaxy Size"
 plot_as = "points"
