@@ -43,7 +43,7 @@ M = 10 ** data[:, 0] * (h / ORIGINAL_H) ** (-2) * unyt.Solar_Mass
 Phi = 10 ** data[:, 1] * (h / ORIGINAL_H) ** 3 * unyt.Mpc ** (-3)
 
 # no error in M_H2 provided
-M_err = np.row_stack([M * 0.0] * 2) * M.units
+M_err = np.row_stack([M.value * 0.0] * 2) * M.units
 
 Phi_err = np.abs(
     (10 ** data[:, [2, 3]] * (h / ORIGINAL_H) ** 3 * unyt.Mpc ** (-3)) - Phi[:, None]
