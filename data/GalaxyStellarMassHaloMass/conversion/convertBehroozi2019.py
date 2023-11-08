@@ -366,7 +366,7 @@ with open(sys.argv[1], "r") as handle:
     exec(handle.read())
 
 # Redshifts at which to plot the data
-redshifts = np.array([0.0, 0.2, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0])
+redshifts = np.array([0.0, 0.1, 0.2, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0])
 
 # Valid redshift ranges for each z from above
 Delta_z = 0.5 * (redshifts[1:] - redshifts[:-1])
