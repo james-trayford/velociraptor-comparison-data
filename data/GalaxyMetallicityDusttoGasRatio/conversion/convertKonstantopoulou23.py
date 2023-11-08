@@ -62,7 +62,7 @@ def read_tex_tables():
                 els = line.split("&")
                 inc = 0
                 for i in idxs:
-                    nums = els[i].split("$\pm$")
+                    nums = els[i].split("$\\pm$")
                     if len(nums) < 2:
                         # add value and error
                         dset[inc] = [*dset[inc], np.nan]
@@ -104,7 +104,6 @@ def process_for_redshift(zs, data):
 
             zcen = (zs[i + 1] + zs[i]) / 2
             redshift = zcen
-            print(redshift)
             combination.append(data[src][bdx, :])
         combdat = np.vstack(combination)
         combdat = combdat[~np.isnan(combdat).any(axis=-1)]
