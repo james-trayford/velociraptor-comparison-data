@@ -79,7 +79,7 @@ def process(zs, data):
     )
     citation = "Konstantopoulou et al. (2023)"
     bibcode = "10.48550/arXiv.2310.07709"
-    name = "Dust-to-metal ratio as a function of metallicity (represented as Oxygen abundance)"
+    name = "Dust-to-gas ratio as a function of metallicity (represented as Oxygen abundance)"
     plot_as = "points"
     h = cosmology.h
 
