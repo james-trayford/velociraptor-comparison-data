@@ -68,7 +68,6 @@ for i in range(zs.size):
         description="D2M",
     )
 
-    print(zs[i], zlos[i], zhis[i])
     processed.associate_redshift(zs[i], zlos[i], zhis[i])
     processed.associate_plot_as(plot_as)
     multi_z.associate_dataset(processed)
